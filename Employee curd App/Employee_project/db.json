@@ -44,17 +44,13 @@
       "id": 1655964460810,
       "firstName": "anuj",
       "lastName": "vyas",
-      "dob": "3/4/2000",
+      "dob": "2000/3/4",
       "employee_about": "i am anuj from khategaon",
       "gender": "Male",
       "role": {
         "role": "Developer"
       },
       "skills": [
-        {
-          "id": 3,
-          "skill": "React"
-        },
         {
           "id": 4,
           "skill": "Angular"
