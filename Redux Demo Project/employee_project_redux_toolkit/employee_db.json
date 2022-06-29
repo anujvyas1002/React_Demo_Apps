@@ -1,0 +1,615 @@
+{
+    "roles": [
+      {
+        "id": 1,
+        "role": "Developer"
+      },
+      {
+        "id": 2,
+        "role": "Tester"
+      },
+      {
+        "id": 3,
+        "role": "Manager"
+      },
+      {
+        "id": 4,
+        "role": "Team Leader"
+      }
+    ],
+    "skills": [
+      {
+        "id": 1,
+        "skill": "Java"
+      },
+      {
+        "id": 2,
+        "skill": "NodeJs"
+      },
+      {
+        "id": 3,
+        "skill": "React"
+      },
+      {
+        "id": 4,
+        "skill": "Angular"
+      },
+      {
+        "id": 5,
+        "skill": "Android"
+      }
+    ],
+    "employees": [
+      {
+        "id": 1655964460810,
+        "firstName": "anuj",
+        "lastName": "vyas",
+        "dob": "2000/3/4",
+        "employee_about": "i am anuj from khategaon",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 4,
+            "skill": "Angular"
+          }
+        ]
+      },
+      {
+        "id": 1655966206661,
+        "firstName": "Anand",
+        "lastName": "Vyas",
+        "dob": "5/3/1999",
+        "employee_about": "i am fullstack developer",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          },
+          {
+            "id": 2,
+            "skill": "NodeJs"
+          },
+          {
+            "id": 5,
+            "skill": "Android"
+          },
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1655966302115,
+        "firstName": "Vijay",
+        "lastName": "Mishra",
+        "dob": "5/5/2001",
+        "employee_about": "i am vijay",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 4,
+            "skill": "Angular"
+          }
+        ]
+      },
+      {
+        "id": 1655966382213,
+        "firstName": "Aayush",
+        "lastName": "Joshi",
+        "dob": "1/1/1999",
+        "employee_about": "i am manager",
+        "gender": "Male",
+        "role": {
+          "role": "Manager"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          },
+          {
+            "id": 2,
+            "skill": "NodeJs"
+          },
+          {
+            "id": 4,
+            "skill": "Angular"
+          }
+        ]
+      },
+      {
+        "id": 1655966443164,
+        "firstName": "yash",
+        "lastName": "soni",
+        "dob": "4/4/2001",
+        "employee_about": "i am yash",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          },
+          {
+            "id": 4,
+            "skill": "Angular"
+          },
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1655966527329,
+        "firstName": "Amit",
+        "lastName": "sahu",
+        "dob": "9/10/2001",
+        "employee_about": "i am team leader",
+        "gender": "Male",
+        "role": {
+          "role": "Team Leader"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          }
+        ]
+      },
+      {
+        "id": 1655967186217,
+        "firstName": "pragya",
+        "lastName": "sharma",
+        "dob": "1/1/2000",
+        "employee_about": "i am react developer",
+        "gender": "Female",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1655967235543,
+        "firstName": "Ankit",
+        "lastName": "Yadav",
+        "dob": "1/1/2001",
+        "employee_about": "i am tester",
+        "gender": "Male",
+        "role": {
+          "role": "Tester"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          },
+          {
+            "id": 2,
+            "skill": "NodeJs"
+          },
+          {
+            "id": 4,
+            "skill": "Angular"
+          },
+          {
+            "id": 5,
+            "skill": "Android"
+          },
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1655967315847,
+        "firstName": "kajal",
+        "lastName": "sharma",
+        "dob": "1/1/2009",
+        "employee_about": "i am kajal",
+        "gender": "Male",
+        "role": {
+          "role": "Manager"
+        },
+        "skills": [
+          {
+            "id": 4,
+            "skill": "Angular"
+          },
+          {
+            "id": 5,
+            "skill": "Android"
+          }
+        ]
+      },
+      {
+        "id": 1655967388217,
+        "firstName": "deepak",
+        "lastName": "vyas",
+        "dob": "1/1/1997",
+        "employee_about": "i am deepak",
+        "gender": "Male",
+        "role": {
+          "role": "Team Leader"
+        },
+        "skills": [
+          {
+            "id": 2,
+            "skill": "NodeJs"
+          }
+        ]
+      },
+      {
+        "id": 1655967490486,
+        "firstName": "rahul",
+        "lastName": "joshi",
+        "dob": "5/1/1999",
+        "employee_about": "i am rahul",
+        "gender": "Male",
+        "role": {
+          "role": "Tester"
+        },
+        "skills": [
+          {
+            "id": 5,
+            "skill": "Android"
+          },
+          {
+            "id": 4,
+            "skill": "Angular"
+          }
+        ]
+      },
+      {
+        "id": 1655967703915,
+        "firstName": "anshu",
+        "lastName": "triwedi",
+        "dob": "8/4/2001",
+        "employee_about": "i am anshu",
+        "gender": "Female",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 3,
+            "skill": "React"
+          },
+          {
+            "id": 1,
+            "skill": "Java"
+          }
+        ]
+      },
+      {
+        "id": 1655967752926,
+        "firstName": "neeraj",
+        "lastName": "yadav",
+        "dob": "5/5/2000",
+        "employee_about": "i am neeraj ",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          },
+          {
+            "id": 2,
+            "skill": "NodeJs"
+          }
+        ]
+      },
+      {
+        "id": 1655967794549,
+        "firstName": "lalit",
+        "lastName": "verma",
+        "dob": "5/5/2001",
+        "employee_about": "i am lalit",
+        "gender": "Male",
+        "role": {
+          "role": "Tester"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          },
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1655967851063,
+        "firstName": "devendra",
+        "lastName": "panwer",
+        "dob": "5/5/2002",
+        "employee_about": "i am devendra",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          },
+          {
+            "id": 3,
+            "skill": "React"
+          },
+          {
+            "id": 4,
+            "skill": "Angular"
+          }
+        ]
+      },
+      {
+        "id": 1655967936918,
+        "firstName": "Durgesh",
+        "lastName": "panwer",
+        "dob": "8/8/2002",
+        "employee_about": "i am manager",
+        "gender": "Male",
+        "role": {
+          "role": "Manager"
+        },
+        "skills": [
+          {
+            "id": 4,
+            "skill": "Angular"
+          }
+        ]
+      },
+      {
+        "id": 1655967999119,
+        "firstName": "aashish",
+        "lastName": "sharma",
+        "dob": "8/8/2001",
+        "employee_about": "i am aashish",
+        "gender": "Male",
+        "role": {
+          "role": "Tester"
+        },
+        "skills": [
+          {
+            "id": 4,
+            "skill": "Angular"
+          },
+          {
+            "id": 2,
+            "skill": "NodeJs"
+          },
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1655968043171,
+        "firstName": "yogesh",
+        "lastName": "dube",
+        "dob": "8/8/2007",
+        "employee_about": "i am yogesh",
+        "gender": "Male",
+        "role": {
+          "role": "Tester"
+        },
+        "skills": [
+          {
+            "id": 4,
+            "skill": "Angular"
+          }
+        ]
+      },
+      {
+        "id": 1655968095521,
+        "firstName": "anurag",
+        "lastName": "yadav",
+        "dob": "1/1/1999",
+        "employee_about": "i am anurag",
+        "gender": "Male",
+        "role": {
+          "role": "Tester"
+        },
+        "skills": [
+          {
+            "id": 2,
+            "skill": "NodeJs"
+          },
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1655968142995,
+        "firstName": "anshul",
+        "lastName": "vyas",
+        "dob": "1/1/2002",
+        "employee_about": "i am anshul",
+        "gender": "Male",
+        "role": {
+          "role": "Team Leader"
+        },
+        "skills": [
+          {
+            "id": 2,
+            "skill": "NodeJs"
+          },
+          {
+            "id": 3,
+            "skill": "React"
+          },
+          {
+            "id": 4,
+            "skill": "Angular"
+          },
+          {
+            "id": 5,
+            "skill": "Android"
+          }
+        ]
+      },
+      {
+        "id": 1655968205015,
+        "firstName": "abhishek",
+        "lastName": "sharma",
+        "dob": "1/1/2008",
+        "employee_about": "i am abhishek",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 4,
+            "skill": "Angular"
+          },
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1655968657974,
+        "firstName": "vishal",
+        "lastName": "mishra",
+        "dob": "2000/3/6",
+        "employee_about": "i am vishal",
+        "gender": "Male",
+        "role": {
+          "role": "Tester"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          },
+          {
+            "id": 2,
+            "skill": "NodeJs"
+          }
+        ]
+      },
+      {
+        "id": 1656047797719,
+        "firstName": "kaka",
+        "lastName": "kaak",
+        "dob": "2022/6/22",
+        "employee_about": "dfgh",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1656047861116,
+        "firstName": "fghj",
+        "lastName": "dfgh",
+        "dob": "2001/5/1",
+        "employee_about": "srdtgyhuj",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 1,
+            "skill": "Java"
+          }
+        ]
+      },
+      {
+        "id": 1656048887388,
+        "firstName": "anuj",
+        "lastName": "vyas",
+        "dob": "2022/6/24",
+        "employee_about": "klkjhtgr",
+        "gender": "Male",
+        "role": {
+          "role": "Tester"
+        },
+        "skills": [
+          {
+            "id": 3,
+            "skill": "React"
+          }
+        ]
+      },
+      {
+        "id": 1656048981450,
+        "firstName": "jhgf",
+        "lastName": "jkhgf",
+        "dob": "2020/12/24",
+        "employee_about": "jhgcf",
+        "gender": "Male",
+        "role": {
+          "role": "Manager"
+        },
+        "skills": [
+          {
+            "id": 4,
+            "skill": "Angular"
+          },
+          {
+            "id": 5,
+            "skill": "Android"
+          }
+        ]
+      },
+      {
+        "id": 1656477770841,
+        "firstName": "anshu",
+        "lastName": "yadav",
+        "dob": "2000/6/29",
+        "employee_about": "i am anshu",
+        "gender": "Male",
+        "role": {
+          "role": "Developer"
+        },
+        "skills": [
+          {
+            "id": 5,
+            "skill": "Android"
+          },
+          {
+            "id": 4,
+            "skill": "Angular"
+          }
+        ]
+      }
+    ]
+  }
