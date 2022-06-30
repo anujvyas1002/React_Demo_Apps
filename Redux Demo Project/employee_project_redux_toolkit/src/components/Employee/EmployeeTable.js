@@ -3,6 +3,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEmployees } from "../../store/employeeSlice";
 import { STATUSES } from "../../store/employeeSlice";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import Fab from '@mui/material/Fab';
+
 
 import {
   Table,
@@ -13,7 +17,6 @@ import {
   TableRow,
   Paper,
   TablePagination,
-  IconButton,
 } from "@mui/material";
 
 export const EmployeeTable = () => {
@@ -106,12 +109,18 @@ export const EmployeeTable = () => {
                       </TableCell>
                       <TableCell>{employee.employee_about}</TableCell>
                       <TableCell>
-                        <IconButton color="primary">
-                          {/* UpdateEmployee Component*/}
-                        </IconButton>
-                        <IconButton color="error">
-                          {/* RemoveEmployee Component */}
-                        </IconButton>
+                        {/* <IconButton color="primary"> */}
+                          {/* <EditIcon /> */}
+    
+                          <Fab size="small" color="secondary" aria-label="edit">
+                          <EditIcon />
+                        </Fab>
+                        {/* </IconButton> */}
+                       
+                        <Fab size="small" color="error" aria-label="remove">
+                        <DeleteIcon />
+                        </Fab>
+                       
                       </TableCell>
                     </TableRow>
                   ))}
