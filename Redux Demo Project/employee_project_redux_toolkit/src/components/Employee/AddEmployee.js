@@ -8,7 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { Button, NativeSelect, Stack, TextField } from "@mui/material";
+import { Button, NativeSelect, Stack, TextField ,Grid }from "@mui/material";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -25,6 +25,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     width:450,
   },
 }));
+
+
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -164,10 +166,7 @@ if (status === STATUSES.ERROR) {
   }
 
   return (
-    <div>
-     
-
-      
+    <div>  
       <Button
       sx={{ mt: "20px"}}
         variant="contained"
@@ -187,8 +186,9 @@ if (status === STATUSES.ERROR) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <form onSubmit={handleSubmit(onSubmit)}>
-            
-              <label htmlFor="firstName">First Name</label>
+      <Grid container spacing={1} >
+        <Grid item xs={6}>
+        <label htmlFor="firstName">First Name</label>
               <div className="form-group">
               <TextField
                 type="text"
@@ -215,8 +215,10 @@ if (status === STATUSES.ERROR) {
                 <div><small>{errors.firstName.message}</small></div>
               )}
             </div>
-
-            <label htmlFor="lastName">Last Name</label>
+        </Grid>
+       
+        <Grid item xs={6}>
+        <label htmlFor="lastName">Last Name</label>
             <div className="form-group">
               <TextField
                 type="text"
@@ -244,7 +246,91 @@ if (status === STATUSES.ERROR) {
               )}
             </div>
 
-            <label htmlFor="gender">Choose Your Gender</label>
+        </Grid>
+        
+      </Grid>
+
+      <div className="form-group">
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <label htmlFor="dob">Date of Birth</label>
+                <Stack spacing={3}>
+                  <DesktopDatePicker
+                    // label="For desktop"
+                    inputFormat="dd/MM/yyyy"
+                    className="form-control"
+                    value={selectedDate}
+                    {...register("dob", { required: "DOB is Required" })}
+                    onChange={(newValue) => {
+                      setSelectedDate(newValue);
+                    }}
+                    maxDate={new Date()}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Stack>
+              </LocalizationProvider>
+
+              {errors.dob && (
+                <div><small> {errors.dob.message}</small></div>
+              )}
+            </div> 
+
+            <Grid container spacing={1}>
+        <Grid item xs={6}>
+        <label htmlFor="employee_about">Employee About</label>
+            <div className="form-group">
+                <TextField
+                type="text"
+                className="form-control"
+                id="employee_about"
+                multiline
+                rows={2}
+                maxRows={4}
+                placeholder="Enter Your employee"
+                {...register("employee_about", {
+                  required: "Employee About is Required",
+                  minLength: {
+                    value: 3,
+                    message: "Enter your Minimum 3 characters"
+                  },
+                  maxLength: {
+                    value: 300,
+                    message: "Enter your Maximum 300 characters"
+                  }
+                })}
+              />
+              {errors.employee_about && (
+                <div className="text-danger">
+                  <small>
+                  {errors.employee_about.message}
+                  </small>
+                </div>
+              )}
+            </div>
+        </Grid>
+        <Grid item xs={6}>
+        <label htmlFor="role">Choose Your Roles</label>
+            <div className="form-group">
+              <NativeSelect
+                className="form-control"
+                id="role"
+                {...register("role", { required: "Role is Required" })}
+              >
+                <option value="">--- Select Your Roles ---</option>
+                {roles.map((role) => (
+                  <option key={role.id}>{role.role}</option>
+                ))}
+              </NativeSelect>
+              {errors.role && (
+                <div ><small> {errors.role.message}</small></div>
+              )}
+            </div>
+
+        </Grid>
+        </Grid>
+
+        <Grid container spacing={1}>
+          <Grid item xs={6}> 
+          <label htmlFor="gender">Choose Your Gender</label>
             <div className="form-group">
               <div className="form-check form-check-inline">
                 <input
@@ -288,81 +374,9 @@ if (status === STATUSES.ERROR) {
                 <div > <small>{errors.gender.message}</small></div>
               )}
             </div>
-
-          
-             <div className="form-group">
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <label htmlFor="dob">Date of Birth</label>
-                <Stack spacing={3}>
-                  <DesktopDatePicker
-                    // label="For desktop"
-                    inputFormat="dd/MM/yyyy"
-                    className="form-control"
-                    value={selectedDate}
-                    {...register("dob", { required: "DOB is Required" })}
-                    onChange={(newValue) => {
-                      setSelectedDate(newValue);
-                    }}
-                    maxDate={new Date()}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </Stack>
-              </LocalizationProvider>
-
-              {errors.dob && (
-                <div><small> {errors.dob.message}</small></div>
-              )}
-            </div> 
-
-
-            <label htmlFor="role">Choose Your Roles</label>
-            <div className="form-group">
-              <NativeSelect
-                className="form-control"
-                id="role"
-                {...register("role", { required: "Role is Required" })}
-              >
-                <option value="">--- Select Your Roles ---</option>
-                {roles.map((role) => (
-                  <option key={role.id}>{role.role}</option>
-                ))}
-              </NativeSelect>
-              {errors.role && (
-                <div ><small> {errors.role.message}</small></div>
-              )}
-            </div>
-            <label htmlFor="employee_about">Employee About</label>
-            <div className="form-group">
-                <TextField
-                type="text"
-                className="form-control"
-                id="employee_about"
-                multiline
-                rows={2}
-                maxRows={4}
-                placeholder="Enter Your employee"
-                {...register("employee_about", {
-                  required: "Employee About is Required",
-                  minLength: {
-                    value: 3,
-                    message: "Enter your Minimum 3 characters"
-                  },
-                  maxLength: {
-                    value: 300,
-                    message: "Enter your Maximum 300 characters"
-                  }
-                })}
-              />
-              {errors.employee_about && (
-                <div className="text-danger">
-                  <small>
-                  {errors.employee_about.message}
-                  </small>
-                </div>
-              )}
-            </div>
-
-            <label htmlFor="skills">Skills</label>
+          </Grid>
+          <Grid item xs={6}>
+          <label htmlFor="skills">Skills</label>
             <div className="form-control">
               {skills.map((skill) => (
                 <div className="form-check" key={skill.id}>
@@ -389,18 +403,18 @@ if (status === STATUSES.ERROR) {
                   </div>
                 )}
             </div>
+          </Grid>
+        </Grid>
 
             <hr></hr>
             <Button
               variant="contained"
-              className="float-end mt-2"
               color="primary"
               type="submit"
             >
               Create
             </Button>
             <Button
-              className="me-2 float-end mt-2"
               variant="outlined"
               onClick={handleClose}
             >

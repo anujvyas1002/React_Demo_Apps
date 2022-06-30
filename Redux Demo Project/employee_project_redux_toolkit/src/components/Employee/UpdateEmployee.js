@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { Button, NativeSelect, Stack, TextField } from "@mui/material";
+import { Button, NativeSelect, Stack, TextField, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
@@ -22,9 +22,8 @@ import { STATUSES } from "../../store/employeeSlice";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
-    width:450,
+    width: 450,
   },
- 
 }));
 
 const BootstrapDialogTitle = (props) => {
@@ -190,117 +189,75 @@ export const UpdateEmployee = () => {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-         Update Employee
+          Update Employee
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="firstName">First Name</label>
-            <div className="form-group">
-              <TextField
-                type="text"
-                className="form-control"
-                id="firstName"
-                placeholder="Enter Your First  Name"
-                {...register("firstName", {
-                  required: "First Name is Required",
-                  pattern: {
-                    value: /^[A-Za-z]+$/i,
-                    message: "Frist name is invaild",
-                  },
-                  minLength: {
-                    value: 3,
-                    message: "Enter your Minimum 3 characters",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Enter your Maximum 20 characters",
-                  },
-                })}
-              />
-              {errors.firstName && (
-                <div>
-                  <small>{errors.firstName.message}</small>
+            <Grid container spacing={1}>
+              <Grid item xs={6}>
+                <label htmlFor="firstName">First Name</label>
+                <div className="form-group">
+                  <TextField
+                    type="text"
+                    className="form-control"
+                    id="firstName"
+                    placeholder="Enter Your First  Name"
+                    {...register("firstName", {
+                      required: "First Name is Required",
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Frist name is invaild",
+                      },
+                      minLength: {
+                        value: 3,
+                        message: "Enter your Minimum 3 characters",
+                      },
+                      maxLength: {
+                        value: 20,
+                        message: "Enter your Maximum 20 characters",
+                      },
+                    })}
+                  />
+                  {errors.firstName && (
+                    <div>
+                      <small>{errors.firstName.message}</small>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </Grid>
 
-            <label htmlFor="lastName">Last Name</label>
-            <div className="form-group">
-              <TextField
-                type="text"
-                className="form-control"
-                id="lastName"
-                placeholder="Enter Your Last Name"
-                {...register("lastName", {
-                  required: "Last Name is Required",
-                  pattern: {
-                    value: /^[A-Za-z]+$/i,
-                    message: "Last name is invaild",
-                  },
-                  minLength: {
-                    value: 3,
-                    message: "Enter your Minimum 3 characters",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Enter your Maximum 20 characters",
-                  },
-                })}
-              />
-              {errors.lastName && (
-                <div>
-                  <small>{errors.lastName.message}</small>{" "}
+              <Grid item xs={6}>
+                <label htmlFor="lastName">Last Name</label>
+                <div className="form-group">
+                  <TextField
+                    type="text"
+                    className="form-control"
+                    id="lastName"
+                    placeholder="Enter Your Last Name"
+                    {...register("lastName", {
+                      required: "Last Name is Required",
+                      pattern: {
+                        value: /^[A-Za-z]+$/i,
+                        message: "Last name is invaild",
+                      },
+                      minLength: {
+                        value: 3,
+                        message: "Enter your Minimum 3 characters",
+                      },
+                      maxLength: {
+                        value: 20,
+                        message: "Enter your Maximum 20 characters",
+                      },
+                    })}
+                  />
+                  {errors.lastName && (
+                    <div>
+                      <small>{errors.lastName.message}</small>{" "}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-
-            <label htmlFor="gender">Choose Your Gender</label>
-            <div className="form-group">
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  id="male"
-                  value="Male"
-                  {...register("gender", { required: "Gender is Required" })}
-                />
-                <label className="form-check-label" htmlFor="male">
-                  Male
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  id="female"
-                  value="Female"
-                  name="gender"
-                  {...register("gender", { required: "Gender is Required" })}
-                />
-                <label className="form-check-label" htmlFor="female">
-                  Female
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  id="other"
-                  value="Other"
-                  {...register("gender", { required: "Gender is Required" })}
-                />
-                <label className="form-check-label" htmlFor="other">
-                  Other
-                </label>
-              </div>
-
-              {errors.gender && (
-                <div>
-                  {" "}
-                  <small>{errors.gender.message}</small>
-                </div>
-              )}
-            </div>
+              </Grid>
+            </Grid>
 
             <div className="form-group">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -328,77 +285,143 @@ export const UpdateEmployee = () => {
               )}
             </div>
 
-            <label htmlFor="role">Choose Your Roles</label>
-            <div className="form-group">
-              <NativeSelect
-                className="form-control"
-                id="role"
-                {...register("role", { required: "Role is Required" })}
-              >
-                <option value="">--- Select Your Roles ---</option>
-                {roles.map((role) => (
-                  <option key={role.id}>{role.role}</option>
-                ))}
-              </NativeSelect>
-              {errors.role && (
-                <div>
-                  <small> {errors.role.message}</small>
-                </div>
-              )}
-            </div>
-            <label htmlFor="employee_about">Employee About</label>
-            <div className="form-group">
-              <TextField
-                type="text"
-                className="form-control"
-                id="employee_about"
-                multiline
-                rows={2}
-                maxRows={4}
-                placeholder="Enter Your employee"
-                {...register("employee_about", {
-                  required: "Employee About is Required",
-                  minLength: {
-                    value: 3,
-                    message: "Enter your Minimum 3 characters",
-                  },
-                  maxLength: {
-                    value: 300,
-                    message: "Enter your Maximum 300 characters",
-                  },
-                })}
-              />
-              {errors.employee_about && (
-                <div className="text-danger">
-                  <small>{errors.employee_about.message}</small>
-                </div>
-              )}
-            </div>
-
-            <label htmlFor="skills">Skills</label>
-            <div className="form-control">
-              {skills.map((skill) => (
-                <div className="form-check" key={skill.id}>
-                  <input
-                    type="Checkbox"
-                    {...register("skills", { required: true })}
-                    id={skill.id}
-                    name="skills"
-                    value={skill}
-                    onChange={(e) => skillCheck(e, skill)}
+            <Grid container spacing={1}>
+              <Grid item xs={6}>
+                <label htmlFor="employee_about">Employee About</label>
+                <div className="form-group">
+                  <TextField
+                    type="text"
+                    className="form-control"
+                    id="employee_about"
+                    multiline
+                    rows={2}
+                    maxRows={4}
+                    placeholder="Enter Your employee"
+                    {...register("employee_about", {
+                      required: "Employee About is Required",
+                      minLength: {
+                        value: 3,
+                        message: "Enter your Minimum 3 characters",
+                      },
+                      maxLength: {
+                        value: 300,
+                        message: "Enter your Maximum 300 characters",
+                      },
+                    })}
                   />
-                  <label className="form-check-label" htmlFor={skill.id}>
-                    {skill.skill}
-                  </label>
+                  {errors.employee_about && (
+                    <div className="text-danger">
+                      <small>{errors.employee_about.message}</small>
+                    </div>
+                  )}
                 </div>
-              ))}
+              </Grid>
+              <Grid item xs={6}>
+                <label htmlFor="role">Choose Your Roles</label>
+                <div className="form-group">
+                  <NativeSelect
+                    className="form-control"
+                    id="role"
+                    {...register("role", { required: "Role is Required" })}
+                  >
+                    <option value="">--- Select Your Roles ---</option>
+                    {roles.map((role) => (
+                      <option key={role.id}>{role.role}</option>
+                    ))}
+                  </NativeSelect>
+                  {errors.role && (
+                    <div>
+                      <small> {errors.role.message}</small>
+                    </div>
+                  )}
+                </div>
+              </Grid>
+            </Grid>
 
-              {selectedSkills?.length < 1 && errors.skills?.type === "required" && (
-                <div>
-                  <small>Enter your Minimum 1 Skills</small>
+            <Grid container spacing={1}>
+              <Grid item xs={6}>
+                <label htmlFor="gender">Choose Your Gender</label>
+                <div className="form-group">
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      id="male"
+                      value="Male"
+                      {...register("gender", {
+                        required: "Gender is Required",
+                      })}
+                    />
+                    <label className="form-check-label" htmlFor="male">
+                      Male
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      id="female"
+                      value="Female"
+                      name="gender"
+                      {...register("gender", {
+                        required: "Gender is Required",
+                      })}
+                    />
+                    <label className="form-check-label" htmlFor="female">
+                      Female
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      id="other"
+                      value="Other"
+                      {...register("gender", {
+                        required: "Gender is Required",
+                      })}
+                    />
+                    <label className="form-check-label" htmlFor="other">
+                      Other
+                    </label>
+                  </div>
+
+                  {errors.gender && (
+                    <div>
+                      {" "}
+                      <small>{errors.gender.message}</small>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </Grid>
+              <Grid item xs={6}>
+                <label htmlFor="skills">Skills</label>
+                <div className="form-control">
+                  {skills.map((skill) => (
+                    <div className="form-check" key={skill.id}>
+                      <input
+                        type="Checkbox"
+                        {...register("skills", { required: true })}
+                        id={skill.id}
+                        name="skills"
+                        value={skill}
+                        onChange={(e) => skillCheck(e, skill)}
+                      />
+                      <label className="form-check-label" htmlFor={skill.id}>
+                        {skill.skill}
+                      </label>
+                    </div>
+                  ))}
+
+                  {selectedSkills?.length < 1 &&
+                    errors.skills?.type === "required" && (
+                      <div>
+                        <small>Enter your Minimum 1 Skills</small>
+                      </div>
+                    )}
+                </div>
+              </Grid>
+            </Grid>
 
             <hr></hr>
             <Button
@@ -424,4 +447,4 @@ export const UpdateEmployee = () => {
       <EditIcon onClick={handleShow} />
     </div>
   );
-}
+};
