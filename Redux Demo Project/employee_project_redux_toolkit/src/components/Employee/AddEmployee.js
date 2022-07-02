@@ -8,7 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { fetchEmployees } from "../../store/employeeSlice";
+// import { fetchEmployees } from "../../store/employeeSlice";
 
 import { Button, NativeSelect, Stack, TextField, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -82,15 +82,16 @@ export const AddEmployee = () => {
   const [selectedDate, setSelectedDate] = useState();
 
   const dispatch = useDispatch();
-  const { data: employees, skills, roles ,status } = useSelector((state) => state.employee);
+  const { skills, roles ,status } = useSelector((state) => state.employee);
   
 
   console.log(skills)
   console.log(roles)
 
-  React.useEffect(() => {
-    dispatch(fetchEmployees());
-  }, []);
+  // React.useEffect(() => {
+    //  dispatch(rolesData());
+    // dispatch(skillsData());
+  // }, []);
 
  
 
@@ -134,18 +135,12 @@ export const AddEmployee = () => {
   //Modal popup close
   const handleClose = () => setShow(false);
 
- 
-
   //Modal popup show
   const handleShow = () => {
     setShow(true);
     dispatch(rolesData());
-    dispatch(skillsData());
-
- console.log(employees)
+    dispatch(skillsData());  
   };
-  
-
   
   // Skillls Input filed condition
   function skillCheck(e, skill) {

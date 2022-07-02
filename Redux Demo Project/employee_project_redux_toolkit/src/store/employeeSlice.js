@@ -1,4 +1,3 @@
-import {  Put } from 'react-axios';
 import axios from "axios";
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
@@ -12,7 +11,7 @@ export const STATUSES = Object.freeze({
 const employeeSlice = createSlice({
     name: 'employee',
     initialState: {
-        data: [],
+        employees: [],
         status: STATUSES.IDLE,
         roles: [],
         skills: [],
@@ -31,7 +30,7 @@ const employeeSlice = createSlice({
                 state.status = STATUSES.LOADING;
             })
             .addCase(fetchEmployees.fulfilled, (state, action) => {
-                state.data = action.payload;
+                state.employees = action.payload;
                 state.status = STATUSES.IDLE;
             })
             .addCase(fetchEmployees.rejected, (state, action) => {
@@ -73,18 +72,29 @@ const employeeSlice = createSlice({
                 state.status = STATUSES.LOADING;
             })
             .addCase(updateEmployee.fulfilled, (state, action) => {
-                state.data = action.payload;
+                state.employees = action.payload;
                 state.status = STATUSES.IDLE;
             })
             .addCase(updateEmployee.rejected, (state, action) => {
                 state.status = STATUSES.ERROR;
+            })
+            .addCase(removeEmployee.pending, (state, action) => {
+                state.status = STATUSES.LOADING;
+            })
+            .addCase(removeEmployee.fulfilled, (state, action) => {
+                state.employees = action.payload;
+                state.status = STATUSES.IDLE;
+            })
+            .addCase(removeEmployee.rejected, (state, action) => {
+                state.status = STATUSES.ERROR;
             });
+            
     },
     
 });
 
 
-export const { setEmployees, setStatus, setAddEmployee, setUpdateEmployee,setSkillsData,setRolesData } = employeeSlice.actions;
+export const { setEmployees, setStatus,setSkillsData,setRolesData } = employeeSlice.actions;
 
 export default employeeSlice.reducer;
 
@@ -93,102 +103,46 @@ export default employeeSlice.reducer;
 
 // Thunks
 export const fetchEmployees = createAsyncThunk('employees/fetch', async () => {
-    const res = await fetch('http://localhost:3000/employees');
-    const data = res.json();
-    return data;
+    const res = await axios.get(`http://localhost:3000/employees`)
+        const data = res.data
+        console.log(data)
+        return data;
 });
-// export const fetchEmployees = createAsyncThunk('employees/fetch', async () => {
-//     axios.get(`http://localhost:3000/employees`).then((response) => {
-//         const data = response.data
-//         return data;
-//       });
-// });
-
-
-
-
-
 
 export const addEmployee = createAsyncThunk('employees/add', async (req) => {
-    console.log(req)
-    axios.post("http://localhost:3000/employees", req).then((response) => {
-        console.log(response)
-        return response.data;
-      });
-    
+    const res = await axios.post(`http://localhost:3000/employees`,req)
+    const data = res.data
+    console.log(data)
+    return data;
 });
-
-
-
-
- //skill data get Api call
- export const skillsData = createAsyncThunk('employees/skills', async () => {
-    axios.get(`http://localhost:3000/skills`).then((response) => {
-        console.log(response.data);
-        return response.data;
-    });
-  })
-  
-
-  //Role data get Api call
-  export const rolesData = createAsyncThunk('employees/roles', async () => {
-    axios.get(`http://localhost:3000/roles`).then((response) => {
-        console.log(response);
-        const roles = response.data;
-      return roles;
-    });
-  })
-
-
-
-// export const skillsData = createAsyncThunk('employees/skills', async () => {
-//     const res = await fetch('http://localhost:3000/skills');
-//     const data = await res.json();
-//     return data;
-// });
-
-// export const rolesData = createAsyncThunk('employees/roles', async () => {
-//     const res = await fetch('http://localhost:3000/roles');
-//     const data = await res.json();
-//     return data;
-// });
-  
-
-
-// export const addEmployee = createAsyncThunk('employees/add', async (req) => {
-//     console.log(req)
-//     const requestOptions = {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ req })
-//     };
-//     const response = await fetch('http://localhost:3000/employees', requestOptions);
-//     const data = await response.json();
-//     fetchEmployees();
-//     return data;
-    
-// });
-
-
-
-
-
-
-
-
-
-
 export const updateEmployee = createAsyncThunk('employees/update', async (id,req) => {
-    const res = await Put(`http://localhost:3000/employees/${id}`, req);
-    const data = await res.json();
+    const res = await axios.put(`http://localhost:3000/employees/${id}`, req)
+    const data = res.data
+    console.log(data)
+    return data;
+});
+export const removeEmployee = createAsyncThunk('employees/remove', async (id) => {
+    const res = await axios.delete(`http://localhost:3000/employees/${id}`)
+    const data = res.data
     console.log(data)
     return data;
 });
 
+export const rolesData = createAsyncThunk('employees/roles', async () => {
+    const res = await axios.get(`http://localhost:3000/roles`)
+        const data = res.data
+        console.log(data)
+        return data;
+});
+
+export const skillsData = createAsyncThunk('employees/skills', async () => {
+    const res = await axios.get(`http://localhost:3000/skills`)
+        const data = res.data
+        console.log(data)
+        return data;
+});
 
 
-
-  
 
 // export function fetchProducts() {
 //     return async function fetchProductThunk(dispatch, getState) {

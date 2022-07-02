@@ -18,6 +18,9 @@ import {
   Paper,
   TablePagination,
 } from "@mui/material";
+import { AddEmployee } from "./AddEmployee";
+import { RemoveEmployee } from "./RemoveEmployee";
+import { UpdateEmployee } from "./UpdateEmployee";
 
 export const EmployeeTable = () => {
   // handle for pagination data
@@ -27,7 +30,7 @@ export const EmployeeTable = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const dispatch = useDispatch();
-  const { data: employees, status } = useSelector((state) => state.employee);
+  const { employees, status } = useSelector((state) => state.employee);
 
 
   useEffect(() => {
@@ -66,7 +69,12 @@ export const EmployeeTable = () => {
 
   return (
     <>
+     <AddEmployee/>
       <div>
+       
+        <RemoveEmployee/>
+        <UpdateEmployee/>
+        
         <hr />
         {/* table */}
         <Paper sx={{ width: "100%", mb: 0 }}>
