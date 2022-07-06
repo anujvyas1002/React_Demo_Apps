@@ -9,7 +9,6 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import { Button, NativeSelect, Stack, TextField, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -66,13 +65,6 @@ export const UpdateEmployee = () => {
 
   // Modal state
   const [show, setShow] = useState(false);
-
-  //skills get state
-  const [skills, setSkills] = useState([]);
-
-  // roles get state
-  const [roles, setRoles] = useState([]);
-
   // selected Skill mantain state
   const [selectedSkills, setSelectedSkills] = useState();
 
@@ -80,7 +72,7 @@ export const UpdateEmployee = () => {
   const [selectedDate, setSelectedDate] = useState();
 
   const dispatch = useDispatch();
-  const { status } = useSelector((state) => state.employee);
+  const {skills, roles, status } = useSelector((state) => state.employee);
 
   // date format
   function formatDate(timestamp) {
@@ -107,7 +99,9 @@ export const UpdateEmployee = () => {
       skills: selectedSkills,
     };
     handleClose();
-    dispatch(updateEmployee(req));
+    dispatch(updateEmployee(req,
+      // id
+      ));
   };
 
   if (status === STATUSES.LOADING) {
@@ -118,14 +112,16 @@ export const UpdateEmployee = () => {
     return <h2>Something went wrong!</h2>;
   }
 
+  // if (status === STATUSES.IDLE) {
+  //   return console.log("IDLE MESSAGE");
+  // }
+
   //Modal popup Close
   const handleClose = () => setShow(false);
 
   //Modal popup show && setValue for input filed
   const handleShow = () => {
     setShow(true);
-    skillsData();
-    rolesData();
   };
 
   // Skills input filed Condition
@@ -140,43 +136,7 @@ export const UpdateEmployee = () => {
     setSelectedSkills(newSkills);
   }
 
-  // // UpdateEmployee Put Api call
-  // function UpdateEmployee(req) {
-  //   axios
-  //     .put(`http://localhost:3000/employees/${props.employee.id}`, req)
-  //     .then((response) => {
-  //       console.log(response)
-  //       if (response.status === 200) {
-  //         resetField("skills");
-  //         console.log("200 success");
-  //         props.fetchAllRecord();
-  //       } else if (response.status === 201) {
-  //         console.log("201 Created");
-  //       } else if (response.status === 400) {
-  //         console.log("400 Bad Request");
-  //       } else if (response.status === 404) {
-  //         console.log("404 Not Found");
-  //       } else if (response.status === 500) {
-  //         console.log("500 Internal Server Error");
-  //       } else {
-  //         console.log("other error");
-  //       }
-  //     });
-  // }
-
-  //Skills get Api call
-  function skillsData() {
-    axios.get(`http://localhost:3000/skills`).then((response) => {
-      setSkills(response.data);
-    });
-  }
-
-  //Roles get Api call
-  function rolesData() {
-    axios.get(`http://localhost:3000/roles`).then((response) => {
-      setRoles(response.data);
-    });
-  }
+ 
 
   return (
     <div>
@@ -220,7 +180,7 @@ export const UpdateEmployee = () => {
                   />
                   {errors.firstName && (
                     <div>
-                      <small>{errors.firstName.message}</small>
+                      <small style={{ color: 'red' }}>{errors.firstName.message}</small>
                     </div>
                   )}
                 </div>
@@ -252,7 +212,7 @@ export const UpdateEmployee = () => {
                   />
                   {errors.lastName && (
                     <div>
-                      <small>{errors.lastName.message}</small>{" "}
+                      <small style={{ color: 'red' }}>{errors.lastName.message}</small>{" "}
                     </div>
                   )}
                 </div>
@@ -280,7 +240,7 @@ export const UpdateEmployee = () => {
 
               {errors.dob && (
                 <div>
-                  <small> {errors.dob.message}</small>
+                  <small style={{ color: 'red' }}> {errors.dob.message}</small>
                 </div>
               )}
             </div>
@@ -311,7 +271,7 @@ export const UpdateEmployee = () => {
                   />
                   {errors.employee_about && (
                     <div className="text-danger">
-                      <small>{errors.employee_about.message}</small>
+                      <small style={{ color: 'red' }}>{errors.employee_about.message}</small>
                     </div>
                   )}
                 </div>
@@ -331,7 +291,7 @@ export const UpdateEmployee = () => {
                   </NativeSelect>
                   {errors.role && (
                     <div>
-                      <small> {errors.role.message}</small>
+                      <small style={{ color: 'red' }}> {errors.role.message}</small>
                     </div>
                   )}
                 </div>
@@ -389,7 +349,7 @@ export const UpdateEmployee = () => {
                   {errors.gender && (
                     <div>
                       {" "}
-                      <small>{errors.gender.message}</small>
+                      <small style={{ color: 'red' }}>{errors.gender.message}</small>
                     </div>
                   )}
                 </div>
@@ -416,7 +376,7 @@ export const UpdateEmployee = () => {
                   {selectedSkills?.length < 1 &&
                     errors.skills?.type === "required" && (
                       <div>
-                        <small>Enter your Minimum 1 Skills</small>
+                        <small style={{ color: 'red' }}>Enter your Minimum 1 Skills</small>
                       </div>
                     )}
                 </div>

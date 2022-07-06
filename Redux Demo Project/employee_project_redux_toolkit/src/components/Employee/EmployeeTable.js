@@ -1,12 +1,15 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEmployees } from "../../store/employeeSlice";
+import { fetchEmployees, removeEmployee } from "../../store/employeeSlice";
 import { STATUSES } from "../../store/employeeSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import Fab from '@mui/material/Fab';
+import Fab from "@mui/material/Fab";
 
+import { skillsData } from "../../store/employeeSlice";
+import { rolesData } from "../../store/employeeSlice";
 
 import {
   Table,
@@ -17,14 +20,19 @@ import {
   TableRow,
   Paper,
   TablePagination,
+  Grid,
+  Button,
 } from "@mui/material";
 import { AddEmployee } from "./AddEmployee";
-import { RemoveEmployee } from "./RemoveEmployee";
-import { UpdateEmployee } from "./UpdateEmployee";
+// import { RemoveEmployee } from "./RemoveEmployee";
+// import { UpdateEmployee } from "./UpdateEmployee";
 
 export const EmployeeTable = () => {
   // handle for pagination data
   const [page, setPage] = useState(0);
+
+  // handle model popup
+  const [show, setShow] = useState(false);
 
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -32,11 +40,23 @@ export const EmployeeTable = () => {
   const dispatch = useDispatch();
   const { employees, status } = useSelector((state) => state.employee);
 
-
   useEffect(() => {
     dispatch(fetchEmployees());
+    dispatch(rolesData());
+    dispatch(skillsData());
   }, []);
 
+  // //Modal popup close
+  // const handleClose = () => setShow(false);
+
+  // //Modal popup show
+  // const handleShow = () => {
+  //   setShow(true);
+  // };
+
+  const handleModel = () => {
+    setShow(!show);
+  };
 
   // pagination set new Page
   const handleChangePage = (event, newPage) => {
@@ -49,6 +69,10 @@ export const EmployeeTable = () => {
     setPage(0);
   };
 
+  const handleDelete = (id) => {
+    dispatch(removeEmployee(id));
+  };
+
   // date format
   function formatDate(timestamp) {
     var x = new Date(timestamp);
@@ -58,7 +82,6 @@ export const EmployeeTable = () => {
     return DD + "/" + MM + "/" + YYYY;
   }
 
-  
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;
   }
@@ -69,12 +92,25 @@ export const EmployeeTable = () => {
 
   return (
     <>
-     <AddEmployee/>
       <div>
-       
-        <RemoveEmployee/>
-        <UpdateEmployee/>
-        
+        <AddEmployee show={show}></AddEmployee>
+
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="center"
+        >
+          <Button
+            sx={{ mt: "10px" }}
+            variant="contained"
+            color="primary"
+            onClick={() => handleModel()}
+          >
+            Add Employee
+          </Button>
+        </Grid>
+
         <hr />
         {/* table */}
         <Paper sx={{ width: "100%", mb: 0 }}>
@@ -118,17 +154,18 @@ export const EmployeeTable = () => {
                       <TableCell>{employee.employee_about}</TableCell>
                       <TableCell>
                         {/* <IconButton color="primary"> */}
-                          {/* <EditIcon /> */}
-    
-                          <Fab size="small" color="secondary" aria-label="edit">
+                        {/* <EditIcon /> */}
+
+                        <Fab size="small" color="secondary" aria-label="edit">
                           <EditIcon />
                         </Fab>
                         {/* </IconButton> */}
-                       
+
                         <Fab size="small" color="error" aria-label="remove">
-                        <DeleteIcon />
+                          <DeleteIcon
+                            onClick={() => handleDelete(employee.id)}
+                          />
                         </Fab>
-                       
                       </TableCell>
                     </TableRow>
                   ))}

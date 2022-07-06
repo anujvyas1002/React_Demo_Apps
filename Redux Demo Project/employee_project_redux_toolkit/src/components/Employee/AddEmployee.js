@@ -18,8 +18,6 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee } from "../../store/employeeSlice";
-import { skillsData } from "../../store/employeeSlice";
-import { rolesData } from "../../store/employeeSlice";
 import { STATUSES } from "../../store/employeeSlice";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -82,18 +80,7 @@ export const AddEmployee = () => {
   const [selectedDate, setSelectedDate] = useState();
 
   const dispatch = useDispatch();
-  const { skills, roles ,status } = useSelector((state) => state.employee);
-  
-
-  console.log(skills)
-  console.log(roles)
-
-  // React.useEffect(() => {
-    //  dispatch(rolesData());
-    // dispatch(skillsData());
-  // }, []);
-
- 
+  const { skills, roles, status } = useSelector((state) => state.employee);
 
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;
@@ -102,6 +89,10 @@ export const AddEmployee = () => {
   if (status === STATUSES.ERROR) {
     return <h2>Something went wrong!</h2>;
   }
+
+  // if (status === STATUSES.IDLE) {
+  //   return console.log("IDLE MESSAGE");
+  // }
 
   // date format
   function formatDate(timestamp) {
@@ -138,10 +129,8 @@ export const AddEmployee = () => {
   //Modal popup show
   const handleShow = () => {
     setShow(true);
-    dispatch(rolesData());
-    dispatch(skillsData());  
   };
-  
+
   // Skillls Input filed condition
   function skillCheck(e, skill) {
     let newSkills = [...selectedSkills];
@@ -212,7 +201,9 @@ export const AddEmployee = () => {
                   />
                   {errors.firstName && (
                     <div>
-                      <small>{errors.firstName.message}</small>
+                      <small style={{ color: "red" }}>
+                        {errors.firstName.message}
+                      </small>
                     </div>
                   )}
                 </div>
@@ -244,7 +235,9 @@ export const AddEmployee = () => {
                   />
                   {errors.lastName && (
                     <div>
-                      <small>{errors.lastName.message}</small>{" "}
+                      <small style={{ color: "red" }}>
+                        {errors.lastName.message}
+                      </small>{" "}
                     </div>
                   )}
                 </div>
@@ -272,7 +265,7 @@ export const AddEmployee = () => {
 
               {errors.dob && (
                 <div>
-                  <small> {errors.dob.message}</small>
+                  <small style={{ color: "red" }}> {errors.dob.message}</small>
                 </div>
               )}
             </div>
@@ -303,7 +296,9 @@ export const AddEmployee = () => {
                   />
                   {errors.employee_about && (
                     <div className="text-danger">
-                      <small>{errors.employee_about.message}</small>
+                      <small style={{ color: "red" }}>
+                        {errors.employee_about.message}
+                      </small>
                     </div>
                   )}
                 </div>
@@ -323,7 +318,10 @@ export const AddEmployee = () => {
                   </NativeSelect>
                   {errors.role && (
                     <div>
-                      <small> {errors.role.message}</small>
+                      <small style={{ color: "red" }}>
+                        {" "}
+                        {errors.role.message}
+                      </small>
                     </div>
                   )}
                 </div>
@@ -381,7 +379,9 @@ export const AddEmployee = () => {
                   {errors.gender && (
                     <div>
                       {" "}
-                      <small>{errors.gender.message}</small>
+                      <small style={{ color: "red" }}>
+                        {errors.gender.message}
+                      </small>
                     </div>
                   )}
                 </div>
@@ -408,7 +408,9 @@ export const AddEmployee = () => {
                   {selectedSkills.length < 1 &&
                     errors.skills?.type === "required" && (
                       <div>
-                        <small>Enter your Minimum 1 Skills</small>
+                        <small style={{ color: "red" }}>
+                          Enter your Minimum 1 Skills
+                        </small>
                       </div>
                     )}
                 </div>
@@ -420,7 +422,7 @@ export const AddEmployee = () => {
               Create
             </Button>
             <Button variant="outlined" onClick={handleClose}>
-              Close
+              Closesmall
             </Button>
           </form>
         </DialogContent>

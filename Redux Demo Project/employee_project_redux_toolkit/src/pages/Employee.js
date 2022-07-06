@@ -6,6 +6,7 @@ export const Employee = () => {
   return (
     <div>
         {/* <AddEmployee/> */}
+
         <EmployeeTable/>
     </div>
   )

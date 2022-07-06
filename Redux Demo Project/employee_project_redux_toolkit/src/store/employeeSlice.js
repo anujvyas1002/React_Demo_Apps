@@ -123,6 +123,7 @@ export const updateEmployee = createAsyncThunk('employees/update', async (id,req
 });
 export const removeEmployee = createAsyncThunk('employees/remove', async (id) => {
     const res = await axios.delete(`http://localhost:3000/employees/${id}`)
+    console.log(res.status)
     const data = res.data
     console.log(data)
     return data;

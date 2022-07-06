@@ -41,23 +41,6 @@
   ],
   "employees": [
     {
-      "id": 1655964460810,
-      "firstName": "anuj",
-      "lastName": "vyas",
-      "dob": "2000/3/4",
-      "employee_about": "i am anuj from khategaon",
-      "gender": "Male",
-      "role": {
-        "role": "Developer"
-      },
-      "skills": [
-        {
-          "id": 4,
-          "skill": "Angular"
-        }
-      ]
-    },
-    {
       "id": 1655966206661,
       "firstName": "Anand",
       "lastName": "Vyas",
@@ -150,23 +133,6 @@
         {
           "id": 3,
           "skill": "React"
-        }
-      ]
-    },
-    {
-      "id": 1655966527329,
-      "firstName": "Amit",
-      "lastName": "sahu",
-      "dob": "9/10/2001",
-      "employee_about": "i am team leader",
-      "gender": "Male",
-      "role": {
-        "role": "Team Leader"
-      },
-      "skills": [
-        {
-          "id": 1,
-          "skill": "Java"
         }
       ]
     },
