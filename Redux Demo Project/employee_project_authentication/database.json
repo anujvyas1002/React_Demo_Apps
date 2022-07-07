@@ -1,0 +1,236 @@
+{
+  "users": [
+    {
+      "id": 1656939878672,
+      "firstName": "anuj",
+      "lastName": "uytr",
+      "contectNumber": "1234567890",
+      "role": "admin",
+      "password": "Anuj@123"
+    },
+    {
+      "id": 1657105249340,
+      "firstName": "anuj",
+      "lastName": "vyas",
+      "username": "anujv@gmail.com",
+      "contectNumber": "1234567890",
+      "role": "admin",
+      "password": "Anuj@123"
+    },
+    {
+      "id": 1657174941403,
+      "firstName": "ankit",
+      "lastName": "vyas",
+      "username": "anujv@gmail.com",
+      "contectNumber": "1234567890",
+      "role": "admin",
+      "password": "Anuj@123"
+    }
+  ],
+  "login": [
+    {
+      "id": 1656940077899,
+      "userName": "anujvy@gmail.com",
+      "password": "Anuj@123"
+    },
+    {
+      "id": 1657104713245,
+      "userName": "anujvy@gmail.com",
+      "password": "Anuj@1"
+    },
+    {
+      "id": 1657172566958,
+      "userName": "anujvy@gmail.com",
+      "password": "Anuj@123"
+    },
+    {
+      "id": 1657172678824,
+      "userName": "anujvy@gmail.com",
+      "password": "Anuj@123"
+    },
+    {
+      "id": 1657174990475,
+      "userName": "anujvy@gmail.com",
+      "password": "Anuj@123"
+    },
+    {
+      "id": 1657175184751,
+      "userName": "anujvy@gmail.com",
+      "password": "Anuj@123"
+    },
+    {
+      "id": 1657175407172,
+      "userName": "anujvy@gmail.com",
+      "password": "Anuj@123"
+    },
+    {
+      "id": 1657194306427,
+      "userName": "anujvy@gmail.com",
+      "password": "anuj@123"
+    },
+    {
+      "id": 1657198217049,
+      "userName": "anujvy@gmail.com",
+      "password": "Anuj@12"
+    },
+    {
+      "id": 1657201596976,
+      "email": "vishal.wandile@anka.co.in",
+      "password": "Anuj@123"
+    }
+  ],
+  "rolesData": [
+    {
+      "id": 1,
+      "role": "Developer"
+    },
+    {
+      "id": 2,
+      "role": "Tester"
+    },
+    {
+      "id": 3,
+      "role": "Manager"
+    },
+    {
+      "id": 4,
+      "role": "Team Leader"
+    }
+  ],
+  "skillsData": [
+    {
+      "id": 1,
+      "skill": "Java"
+    },
+    {
+      "id": 2,
+      "skill": "NodeJs"
+    },
+    {
+      "id": 3,
+      "skill": "React"
+    },
+    {
+      "id": 4,
+      "skill": "Angular"
+    },
+    {
+      "id": 5,
+      "skill": "Android"
+    }
+  ],
+  "employees": [
+    {
+      "id": 1655966206661,
+      "firstName": "Anand",
+      "lastName": "Vyas",
+      "dob": "5/3/1999",
+      "employee_about": "i am fullstack developer",
+      "gender": "Male",
+      "role": {
+        "role": "Developer"
+      },
+      "skills": [
+        {
+          "id": 1,
+          "skill": "Java"
+        },
+        {
+          "id": 3,
+          "skill": "React"
+        }
+      ]
+    },
+    {
+      "id": 1657007818120,
+      "firstName": "anuj",
+      "lastName": "vyas",
+      "dob": "2021/7/5",
+      "employee_about": "i am anuj",
+      "gender": "Female",
+      "role": {
+        "role": "Tester"
+      },
+      "skills": [
+        {
+          "id": 2,
+          "skill": "NodeJs"
+        },
+        {
+          "id": 4,
+          "skill": "Angular"
+        }
+      ]
+    },
+    {
+      "id": 1657194357024,
+      "firstName": "ankit",
+      "lastName": "vyas",
+      "dob": "2022/7/6",
+      "employee_about": "xyz",
+      "gender": "Male",
+      "role": {
+        "role": "Tester"
+      },
+      "skills": [
+        {
+          "id": 3,
+          "skill": "React"
+        },
+        {
+          "id": 5,
+          "skill": "Android"
+        }
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": 1657184794835,
+      "role": {
+        "role": "Developer"
+      },
+      "description": "i am developer"
+    },
+    {
+      "id": 1657184885926,
+      "role": {
+        "role": "Manager"
+      },
+      "description": "i am manager"
+    },
+    {
+      "id": 1657199947396,
+      "role": {
+        "role": "Developer"
+      },
+      "description": "i dev"
+    }
+  ],
+  "skills": [
+    {
+      "id": 1655966206661,
+      "description": "i am java developer",
+      "skills": [
+        {
+          "id": 1,
+          "skill": "Java"
+        },
+        {
+          "id": 3,
+          "skill": "React"
+        }
+      ]
+    },
+    {
+      "id": 1657193006813,
+      "skills": [
+        {
+          "id": 3,
+          "skill": "React"
+        }
+      ],
+      "description": "xyz"
+    }
+  ]
+}
