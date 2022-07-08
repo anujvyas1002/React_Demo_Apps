@@ -1,29 +1,23 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-
-import { Button, MenuItem, Stack, TextField, Grid } from "@mui/material";
+import {
+  Button,
+  NativeSelect,
+  Stack,
+  TextField,
+  Grid,
+  IconButton,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
-import EditIcon from "@mui/icons-material/Edit";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateEmployee } from "../../store/manageEmployeesSlice";
-import { STATUSES } from "../../store/manageEmployeesSlice";
-
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-    width: 450,
-  },
-}));
+import { updateEmployee, STATUSES } from "../../store/manageEmployeesSlice";
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -54,19 +48,28 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export const UpdateEmployee = () => {
+export const UpdateEmployee = (props) => {
   const {
     register,
     handleSubmit,
+    setValue,
+    resetField,
     formState: { errors, isDirty, isValid },
   } = useForm({
     mode: "onTouched",
   });
 
-  // Modal state
-  const [show, setShow] = useState(false);
+  setValue("id", props.employee.id);
+  setValue("firstName", props.employee.firstName);
+  setValue("lastName", props.employee.lastName);
+  setValue("dob", props.employee.dob);
+  setValue("role", props.employee.role.role);
+  setValue("gender", props.employee.gender);
+  setValue("employee_about", props.employee.employee_about);
+  setValue("skill", props.employee.skills);
+
   // selected Skill mantain state
-  const [selectedSkills, setSelectedSkills] = useState();
+  const [selectedSkills, setSelectedSkills] = useState(props.employee.skills);
 
   // SelectedDate mantain
   const [selectedDate, setSelectedDate] = useState();
@@ -100,7 +103,7 @@ export const UpdateEmployee = () => {
       role: { role: data.role },
       skills: selectedSkills,
     };
-    handleClose();
+    onClose();
     dispatch(
       updateEmployee(
         req
@@ -117,16 +120,15 @@ export const UpdateEmployee = () => {
     return <h2>Something went wrong!</h2>;
   }
 
-  // if (status === STATUSES.IDLE) {
-  //   return console.log("IDLE MESSAGE");
-  // }
-
-  //Modal popup Close
-  const handleClose = () => setShow(false);
-
-  //Modal popup show && setValue for input filed
-  const handleShow = () => {
-    setShow(true);
+  const onClose = () => {
+    props.onClose();
+    resetField("id");
+    resetField("firstName");
+    resetField("lastName");
+    resetField("dob");
+    resetField("role");
+    resetField("gender");
+    resetField("employee_about");
   };
 
   // Skills input filed Condition
@@ -143,164 +145,154 @@ export const UpdateEmployee = () => {
 
   return (
     <div>
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={show}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
-          onClose={handleClose}
-        >
-          Update Employee
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={1}>
-              <Grid item xs={6}>
-                <label htmlFor="firstName">First Name</label>
-                <div className="form-group">
-                  <TextField
-                    type="text"
-                    className="form-control"
-                    id="firstName"
-                    placeholder="Enter Your First  Name"
-                    {...register("firstName", {
-                      required: "First Name is Required",
-                      pattern: {
-                        value: /^[A-Za-z]+$/i,
-                        message: "Frist name is invaild",
-                      },
-                      minLength: {
-                        value: 3,
-                        message: "Enter your Minimum 3 characters",
-                      },
-                      maxLength: {
-                        value: 20,
-                        message: "Enter your Maximum 20 characters",
-                      },
-                    })}
-                  />
-                  {errors.firstName && (
-                    <Grid
-                    container
-                    alignItems="flex-start"
-                  >
-                      <small style={{ color: "red" }}>
-                        {errors.firstName.message}
-                      </small>
-                    </Grid>
-                  )}
-                </div>
-              </Grid>
-
-              <Grid item xs={6}>
-                <label htmlFor="lastName">Last Name</label>
-                <div className="form-group">
-                  <TextField
-                    type="text"
-                    className="form-control"
-                    id="lastName"
-                    placeholder="Enter Your Last Name"
-                    {...register("lastName", {
-                      required: "Last Name is Required",
-                      pattern: {
-                        value: /^[A-Za-z]+$/i,
-                        message: "Last name is invaild",
-                      },
-                      minLength: {
-                        value: 3,
-                        message: "Enter your Minimum 3 characters",
-                      },
-                      maxLength: {
-                        value: 20,
-                        message: "Enter your Maximum 20 characters",
-                      },
-                    })}
-                  />
-                  {errors.lastName && (
-                    <Grid
-                    container
-                    alignItems="flex-start"
-                  >
-                      <small style={{ color: "red" }}>
-                        {errors.lastName.message}
-                      </small>{" "}
-                   </Grid>
-                  )}
-                </div>
-              </Grid>
+      <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
+        Update Employee
+      </BootstrapDialogTitle>
+      <DialogContent dividers>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <label htmlFor="firstName">First Name</label>
+              <div className="form-group">
+                <TextField
+                  type="text"
+                  className="form-control"
+                  id="firstName"
+                  placeholder="Enter Your First  Name"
+                  {...register("firstName", {
+                    required: "First Name is Required",
+                    pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "Frist name is invaild",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "Enter your Minimum 3 characters",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Enter your Maximum 20 characters",
+                    },
+                  })}
+                />
+                {errors.firstName && (
+                  <Grid container alignItems="flex-start">
+                    <small style={{ color: "red" }}>
+                      {errors.firstName.message}
+                    </small>
+                  </Grid>
+                )}
+              </div>
             </Grid>
 
-            <div className="form-group">
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <label htmlFor="dob">Date of Birth</label>
-                <Stack spacing={3}>
-                  <DesktopDatePicker
-                    // label="For desktop"
-                    inputFormat="dd/MM/yyyy"
-                    className="form-control"
-                    value={selectedDate}
-                    {...register("dob", { required: "DOB is Required" })}
-                    onChange={(newValue) => {
-                      setSelectedDate(newValue);
-                    }}
-                    maxDate={new Date()}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </Stack>
-              </LocalizationProvider>
-
-              {errors.dob && (
-                <Grid
-                container
-                alignItems="flex-start"
-              >
-                  <small style={{ color: "red" }}> {errors.dob.message}</small>
-                </Grid>
-              )}
-            </div>
-
-            <Grid container spacing={1}>
-              <Grid item xs={6}>
-                <label htmlFor="employee_about">Employee About</label>
-                <div className="form-group">
-                  <TextField
-                    type="text"
-                    className="form-control"
-                    id="employee_about"
-                    multiline
-                    rows={1}
-                    maxRows={4}
-                    placeholder="Enter Your employee"
-                    {...register("employee_about", {
-                      required: "Employee About is Required",
-                      minLength: {
-                        value: 3,
-                        message: "Enter your Minimum 3 characters",
-                      },
-                      maxLength: {
-                        value: 300,
-                        message: "Enter your Maximum 300 characters",
-                      },
-                    })}
-                  />
-                  {errors.employee_about && (
-                    <Grid
-                    container
-                    alignItems="flex-start"
-                  >
-                      <small style={{ color: "red" }}>
-                        {errors.employee_about.message}
-                      </small>
-                    </Grid>
-                  )}
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <label htmlFor="role">Choose Your Roles</label>
-                <div className="form-group">
+            <Grid item xs={6}>
+              <label htmlFor="lastName">Last Name</label>
+              <div className="form-group">
                 <TextField
+                  type="text"
+                  className="form-control"
+                  id="lastName"
+                  placeholder="Enter Your Last Name"
+                  {...register("lastName", {
+                    required: "Last Name is Required",
+                    pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "Last name is invaild",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "Enter your Minimum 3 characters",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Enter your Maximum 20 characters",
+                    },
+                  })}
+                />
+                {errors.lastName && (
+                  <Grid container alignItems="flex-start">
+                    <small style={{ color: "red" }}>
+                      {errors.lastName.message}
+                    </small>{" "}
+                  </Grid>
+                )}
+              </div>
+            </Grid>
+          </Grid>
+
+          <div className="form-group">
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <label htmlFor="dob">Date of Birth</label>
+              <Stack spacing={3}>
+                <DesktopDatePicker
+                  // label="For desktop"
+                  inputFormat="dd/MM/yyyy"
+                  className="form-control"
+                  value={selectedDate}
+                  {...register("dob", { required: "DOB is Required" })}
+                  onChange={(newValue) => {
+                    setSelectedDate(newValue);
+                  }}
+                  maxDate={new Date()}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </Stack>
+            </LocalizationProvider>
+
+            {errors.dob && (
+              <Grid container alignItems="flex-start">
+                <small style={{ color: "red" }}> {errors.dob.message}</small>
+              </Grid>
+            )}
+          </div>
+
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <label htmlFor="employee_about">Employee About</label>
+              <div className="form-group">
+                <TextField
+                  type="text"
+                  className="form-control"
+                  id="employee_about"
+                  multiline
+                  rows={1}
+                  maxRows={4}
+                  placeholder="Enter Your employee"
+                  {...register("employee_about", {
+                    required: "Employee About is Required",
+                    minLength: {
+                      value: 3,
+                      message: "Enter your Minimum 3 characters",
+                    },
+                    maxLength: {
+                      value: 300,
+                      message: "Enter your Maximum 300 characters",
+                    },
+                  })}
+                />
+                {errors.employee_about && (
+                  <Grid container alignItems="flex-start">
+                    <small style={{ color: "red" }}>
+                      {errors.employee_about.message}
+                    </small>
+                  </Grid>
+                )}
+              </div>
+            </Grid>
+            <Grid item xs={6}>
+              <label htmlFor="role">Choose Your Roles</label>
+              <div className="form-group">
+                <NativeSelect
+                  className="form-control"
+                  fullWidth
+                  id="role"
+                  {...register("role", { required: "Role is Required" })}
+                >
+                  {roles.map((role) => (
+                    <option key={role.id}>{role.role}</option>
+                  ))}
+                </NativeSelect>
+                {/* <TextField
                     fullWidth
                     id="role"
                     className="form-control"
@@ -313,151 +305,142 @@ export const UpdateEmployee = () => {
                       {role.role}
                     </MenuItem>
                   ))}
-                </TextField>
-                  {errors.role && (
-                    <Grid
-                    container
-                    alignItems="flex-start"
-                  >
+                </TextField> */}
+                {errors.role && (
+                  <Grid container alignItems="flex-start">
+                    <small style={{ color: "red" }}>
+                      {" "}
+                      {errors.role.message}
+                    </small>
+                  </Grid>
+                )}
+              </div>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <label htmlFor="gender">Choose Your Gender</label>
+              <div className="form-group">
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    id="male"
+                    value="Male"
+                    {...register("gender", {
+                      required: "Gender is Required",
+                    })}
+                  />
+                  <label className="form-check-label" htmlFor="male">
+                    Male
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    id="female"
+                    value="Female"
+                    name="gender"
+                    {...register("gender", {
+                      required: "Gender is Required",
+                    })}
+                  />
+                  <label className="form-check-label" htmlFor="female">
+                    Female
+                  </label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    id="other"
+                    value="Other"
+                    {...register("gender", {
+                      required: "Gender is Required",
+                    })}
+                  />
+                  <label className="form-check-label" htmlFor="other">
+                    Other
+                  </label>
+                </div>
+
+                {errors.gender && (
+                  <Grid container alignItems="flex-start">
+                    {" "}
+                    <small style={{ color: "red" }}>
+                      {errors.gender.message}
+                    </small>
+                  </Grid>
+                )}
+              </div>
+            </Grid>
+            <Grid item xs={6}>
+              <label htmlFor="skills">Skills</label>
+              <div className="form-control">
+                {skills.map((skill) => (
+                  <div className="form-check" key={skill.id}>
+                    <input
+                      type="Checkbox"
+                      {...register("skills", { required: true })}
+                      id={skill.id}
+                      name="skills"
+                      value="skills"
+                      checked={
+                        selectedSkills.findIndex((o) => o.id === skill.id) !==
+                        -1
+                      }
+                      onChange={(e) => skillCheck(e, skill)}
+                    />
+                    <label className="form-check-label" htmlFor={skill.id}>
+                      {skill.skill}
+                    </label>
+                  </div>
+                ))}
+                {selectedSkills?.length < 1 &&
+                  errors.skills?.type === "required" && (
+                    <Grid container alignItems="flex-start">
                       <small style={{ color: "red" }}>
-                        {" "}
-                        {errors.role.message}
+                        Enter your Minimum 1 Skills
                       </small>
                     </Grid>
                   )}
-                </div>
-              </Grid>
+              </div>
             </Grid>
+          </Grid>
 
-            <Grid container spacing={1}>
-              <Grid item xs={6}>
-                <label htmlFor="gender">Choose Your Gender</label>
-                <div className="form-group">
-                  <div className="form-check form-check-inline">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      id="male"
-                      value="Male"
-                      {...register("gender", {
-                        required: "Gender is Required",
-                      })}
-                    />
-                    <label className="form-check-label" htmlFor="male">
-                      Male
-                    </label>
-                  </div>
-                  <div className="form-check form-check-inline">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      id="female"
-                      value="Female"
-                      name="gender"
-                      {...register("gender", {
-                        required: "Gender is Required",
-                      })}
-                    />
-                    <label className="form-check-label" htmlFor="female">
-                      Female
-                    </label>
-                  </div>
-                  <div className="form-check form-check-inline">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      id="other"
-                      value="Other"
-                      {...register("gender", {
-                        required: "Gender is Required",
-                      })}
-                    />
-                    <label className="form-check-label" htmlFor="other">
-                      Other
-                    </label>
-                  </div>
-
-                  {errors.gender && (
-                    <Grid
-                    container
-                    alignItems="flex-start"
-                  >
-                      {" "}
-                      <small style={{ color: "red" }}>
-                        {errors.gender.message}
-                      </small>
-                   </Grid>
-                  )}
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <label htmlFor="skills">Skills</label>
-                <div className="form-control">
-                  {skills.map((skill) => (
-                    <div className="form-check" key={skill.id}>
-                      <input
-                        type="Checkbox"
-                        {...register("skills", { required: true })}
-                        id={skill.id}
-                        name="skills"
-                        value={skill}
-                        onChange={(e) => skillCheck(e, skill)}
-                      />
-                      <label className="form-check-label" htmlFor={skill.id}>
-                        {skill.skill}
-                      </label>
-                    </div>
-                  ))}
-
-                  {selectedSkills?.length < 1 &&
-                    errors.skills?.type === "required" && (
-                      <Grid
-                        container
-                        alignItems="flex-start"
-                      >
-                        <small style={{ color: "red" }}>
-                          Enter your Minimum 1 Skills
-                        </small>
-                      </Grid>
-                    )}
-                </div>
-              </Grid>
-            </Grid>
-
-            <hr/>
-            <Grid
-              container
-              direction="row"
-              justifyContent="flex-end"
-              alignItems="flex-start"
-              spacing={0.5}
-            >
-              <Grid item>
-            <Button
-              variant="contained"
-              className="float-end mt-2"
-              color="primary"
-              disabled={!isDirty || !isValid}
-              type="submit"
-            >
-              Update
-            </Button>
+          <hr />
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="flex-start"
+            spacing={0.5}
+          >
+            <Grid item>
+              <Button
+                variant="contained"
+                className="float-end mt-2"
+                color="primary"
+                disabled={!isDirty || !isValid}
+                type="submit"
+              >
+                Update
+              </Button>
             </Grid>
             <Grid item>
-            <Button
-              className="me-2 float-end mt-2"
-              variant="outlined"
-              onClick={handleClose}
-            >
-              Close
-            </Button>
+              <Button
+                className="me-2 float-end mt-2"
+                variant="outlined"
+                onClick={onClose}
+              >
+                Close
+              </Button>
             </Grid>
-            </Grid>
-          </form>
-        </DialogContent>
-      </BootstrapDialog>
-
-      <EditIcon onClick={handleShow} />
+          </Grid>
+        </form>
+      </DialogContent>
     </div>
   );
 };

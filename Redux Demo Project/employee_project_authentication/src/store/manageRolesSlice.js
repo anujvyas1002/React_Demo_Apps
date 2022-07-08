@@ -13,7 +13,6 @@ const rolesSlice = createSlice({
   initialState: {
     status: STATUSES.IDLE,
     rolesData: [],
-    roles: [],
   },
   reducers: {
     // setProducts(state, action) {
@@ -29,7 +28,7 @@ const rolesSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(fetchRole.fulfilled, (state, action) => {
-        state.roles = action.payload;
+        state.rolesData = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(fetchRole.rejected, (state, action) => {
@@ -40,7 +39,7 @@ const rolesSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(addRole.fulfilled, (state, action) => {
-        state.roles = action.payload;
+        state.rolesData = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(addRole.rejected, (state, action) => {
@@ -50,7 +49,7 @@ const rolesSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(updateRole.fulfilled, (state, action) => {
-        state.roles = action.payload;
+        state.rolesData = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(updateRole.rejected, (state, action) => {
@@ -60,20 +59,10 @@ const rolesSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(removeRole.fulfilled, (state, action) => {
-        state.roles = action.payload;
-        state.status = STATUSES.IDLE;
-      })
-      .addCase(removeRole.rejected, (state, action) => {
-        state.status = STATUSES.ERROR;
-      })
-      .addCase(rolesData.pending, (state, action) => {
-        state.status = STATUSES.LOADING;
-      })
-      .addCase(rolesData.fulfilled, (state, action) => {
         state.rolesData = action.payload;
         state.status = STATUSES.IDLE;
       })
-      .addCase(rolesData.rejected, (state, action) => {
+      .addCase(removeRole.rejected, (state, action) => {
         state.status = STATUSES.ERROR;
       });
   },
@@ -85,34 +74,27 @@ export default rolesSlice.reducer;
 
 // Thunks
 export const fetchRole = createAsyncThunk("role/fetch", async () => {
-  const res = await axios.get(`http://localhost:3000/roles`);
+  const res = await axios.get(`http://localhost:3000/rolesData`);
   const data = res.data;
   console.log(data);
   return data;
 });
 
 export const addRole = createAsyncThunk("role/add", async (req) => {
-  const res = await axios.post(`http://localhost:3000/roles`, req);
+  const res = await axios.post(`http://localhost:3000/rolesData`, req);
   const data = res.data;
   console.log(data);
   return data;
 });
 export const updateRole = createAsyncThunk("role/update", async (id, req) => {
-  const res = await axios.put(`http://localhost:3000/roles/${id}`, req);
+  const res = await axios.put(`http://localhost:3000/rolesData/${id}`, req);
   const data = res.data;
   console.log(data);
   return data;
 });
 export const removeRole = createAsyncThunk("role/remove", async (id) => {
-  const res = await axios.delete(`http://localhost:3000/roles/${id}`);
+  const res = await axios.delete(`http://localhost:3000/rolesData/${id}`);
   console.log(res.status);
-  const data = res.data;
-  console.log(data);
-  return data;
-});
-
-export const rolesData = createAsyncThunk("rolesData/roles", async () => {
-  const res = await axios.get(`http://localhost:3000/rolesData`);
   const data = res.data;
   console.log(data);
   return data;

@@ -2,15 +2,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSkills, removeSkills } from "../../store/manageSkillsSlice";
-import { STATUSES } from "../../store/manageSkillsSlice";
+import { fetchSkills, STATUSES } from "../../store/manageSkillsSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
-
-import { skillsData } from "../../store/manageSkillsSlice";
-
 import {
+  Dialog,
+  Fab,
   Table,
   TableBody,
   TableCell,
@@ -18,26 +15,98 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Grid,
+  Button,
   TablePagination,
 } from "@mui/material";
 import { AddSkill } from "./AddSkill";
-// import { RemoveEmployee } from "./RemoveEmployee";
-// import { UpdateSkill } from "./UpdateSkill";
+import { UpdateSkill } from "./UpdateSkill";
+import RemoveSkill from "./RemoveSkill";
+import { styled } from "@mui/material/styles";
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+    width: 450,
+  },
+}));
 
 export const SkillTable = () => {
   // handle for pagination data
   const [page, setPage] = useState(0);
 
+  //state for open add users form
+  const [isAdd, setAdd] = useState(false);
+
+  //state for open remove users form
+  const [isRemove, setRemove] = useState(false);
+
+  //state for open edit Group form
+  const [isEdit, setEdit] = useState(false);
+
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const dispatch = useDispatch();
-  const { skills, status } = useSelector((state) => state.manageSkills);
+  const { skillsData, status } = useSelector((state) => state.manageSkills);
 
   useEffect(() => {
     dispatch(fetchSkills());
-    dispatch(skillsData());
   }, []);
+
+  const openConfirmBox = () => {
+    setRemove(true);
+  };
+
+  //close add new form
+  const onCloseConfirmBox = () => {
+    setRemove(false);
+  };
+
+  const onSaveRemoveTable = () => {
+    timerRef.current = window.setTimeout(() => {
+      setRemove(false);
+
+      dispatch(fetchSkills());
+    }, constants.TIMEOUT);
+  };
+
+  //on click of add employee
+  const openAddForm = () => {
+    setAdd(true);
+  };
+
+  //close add new form
+  const onCloseForm = () => {
+    setAdd(false);
+  };
+
+  //refresh table after save
+  const onSaveUpdateTable = () => {
+    timerRef.current = window.setTimeout(() => {
+      setAdd(false);
+      dispatch(fetchSkills());
+    }, constants.TIMEOUT);
+  };
+
+  //after edit refresh table
+  const onEditUpdateTable = () => {
+    timerRef.current = window.setTimeout(() => {
+      setEdit(false);
+
+      dispatch(fetchRole());
+    }, constants.TIMEOUT);
+  };
+
+  //on click of add group
+  const openEditForm = () => {
+    setEdit(true);
+  };
+
+  //close edit form
+  const onCloseEdit = () => {
+    setEdit(false);
+  };
 
   // pagination set new Page
   const handleChangePage = (event, newPage) => {
@@ -48,10 +117,6 @@ export const SkillTable = () => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const handleDelete = (id) => {
-    dispatch(removeSkills(id));
   };
 
   if (status === STATUSES.LOADING) {
@@ -65,8 +130,43 @@ export const SkillTable = () => {
   return (
     <>
       <div>
-        {/* <UpdateSkill /> */}
-        <AddSkill />
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="center"
+        >
+          <Button
+            sx={{ mt: "10px" }}
+            variant="contained"
+            onClick={openAddForm}
+            color="primary"
+            data-testid="addEmployeeBtn"
+          >
+            Add Skills
+          </Button>
+        </Grid>
+
+        <BootstrapDialog
+          onClose={onCloseForm}
+          aria-labelledby="customized-dialog-title"
+          open={isAdd}
+        >
+          <AddSkill
+            onSaveUpdateTable={onSaveUpdateTable}
+            onClose={onCloseForm}
+          ></AddSkill>
+        </BootstrapDialog>
+        <BootstrapDialog
+          onClose={onCloseEdit}
+          aria-labelledby="customized-dialog-title"
+          open={isEdit}
+        >
+          <UpdateSkill
+            onSaveUpdateTable={onEditUpdateTable}
+            onClose={onCloseEdit}
+          ></UpdateSkill>
+        </BootstrapDialog>
         <hr />
         {/* table */}
         <Paper sx={{ width: "100%", mb: 0 }}>
@@ -85,25 +185,32 @@ export const SkillTable = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {skills
+                {skillsData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((skills) => (
                     <TableRow
                       key={skills.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell>
-                        {skills.skills.map((skill, index) => (
-                          <div key={index}>{skill.skill}</div>
-                        ))}
-                      </TableCell>
+                      <TableCell>{skills.skill}</TableCell>
                       <TableCell>{skills.description}</TableCell>
                       <TableCell>
                         <Fab size="small" color="secondary" aria-label="edit">
-                          <EditIcon />
+                          <EditIcon onClick={openEditForm} />
                         </Fab>
                         <Fab size="small" color="error" aria-label="remove">
-                          <DeleteIcon onClick={() => handleDelete(skills.id)} />
+                          <Dialog
+                            open={isRemove}
+                            onClose={onCloseConfirmBox}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                          >
+                            <RemoveSkill
+                              onSaveRemoveTable={onSaveRemoveTable}
+                              onClose={onCloseConfirmBox}
+                            ></RemoveSkill>
+                          </Dialog>
+                          <DeleteIcon onClick={openConfirmBox} />
                         </Fab>
                       </TableCell>
                     </TableRow>
@@ -115,7 +222,7 @@ export const SkillTable = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={skills.length}
+            count={skillsData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

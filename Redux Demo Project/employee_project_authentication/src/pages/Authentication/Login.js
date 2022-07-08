@@ -1,26 +1,22 @@
 import React, { useRef } from "react";
-
-import { loginEmployee } from "../../store/authenticationSlice";
-
-import { Button, TextField, Grid } from "@mui/material";
+import { loginEmployee, STATUSES } from "../../store/authenticationSlice";
+import {
+  Button,
+  TextField,
+  Grid,
+  IconButton,
+  OutlinedInput,
+  InputAdornment,
+  Box,
+  Card,
+  CardContent,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
-
 import { useDispatch, useSelector } from "react-redux";
-
-import { STATUSES } from "../../store/authenticationSlice";
-
 import { Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-
-import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 
 export const Login = () => {
   const { login } = useAuth();
@@ -114,10 +110,7 @@ export const Login = () => {
                         })}
                       />
                       {errors.email && (
-                        <Grid
-                        container
-                        alignItems="flex-start"
-                      >
+                        <Grid container alignItems="flex-start">
                           <small style={{ color: "red" }}>
                             {errors.email.message}
                           </small>
@@ -164,10 +157,7 @@ export const Login = () => {
                         })}
                       />
                       {errors.password && (
-                        <Grid
-                        container
-                        alignItems="flex-start"
-                      >
+                        <Grid container alignItems="flex-start">
                           <small style={{ color: "red" }}>
                             {errors.password.message}
                           </small>{" "}

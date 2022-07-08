@@ -1,25 +1,25 @@
 import React, { useRef } from "react";
-
-import { registrationEmployee } from "../../store/authenticationSlice";
-
 import { Link as RouterLink } from "react-router-dom";
-
-import { Button, TextField, Grid, MenuItem } from "@mui/material";
-import { useForm } from "react-hook-form";
-
-import { useDispatch, useSelector } from "react-redux";
-
-import { STATUSES } from "../../store/authenticationSlice";
-
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-
-import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
+import {
+  Button,
+  TextField,
+  Grid,
+  MenuItem,
+  IconButton,
+  OutlinedInput,
+  InputAdornment,
+  Box,
+  Card,
+  CardContent,
+} from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useForm } from "react-hook-form";
+import {
+  registrationEmployee,
+  STATUSES,
+} from "../../store/authenticationSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Registration = () => {
   const {
@@ -61,10 +61,6 @@ export const Registration = () => {
   if (status === STATUSES.ERROR) {
     return <h2>Something went wrong!</h2>;
   }
-
-  // if (status === STATUSES.IDLE) {
-  //   return console.log("IDLE MESSAGE");
-  // }
 
   let req;
   //from data
@@ -121,15 +117,11 @@ export const Registration = () => {
                         })}
                       />
                       {errors.firstName && (
-                          <Grid
-                            container
-                            alignItems="flex-start"
-                          >
+                        <Grid container alignItems="flex-start">
                           <small style={{ color: "red" }}>
                             {errors.firstName.message}
                           </small>
-                          </Grid>
-                        
+                        </Grid>
                       )}
                     </div>
                   </Grid>
@@ -160,10 +152,7 @@ export const Registration = () => {
                         })}
                       />
                       {errors.lastName && (
-                        <Grid
-                        container
-                        alignItems="flex-start"
-                      >
+                        <Grid container alignItems="flex-start">
                           <small style={{ color: "red" }}>
                             {errors.lastName.message}
                           </small>{" "}
@@ -194,14 +183,11 @@ export const Registration = () => {
                         })}
                       />
                       {errors.email && (
-                        <Grid
-                        container
-                        alignItems="flex-start"
-                      >
+                        <Grid container alignItems="flex-start">
                           <small style={{ color: "red" }}>
                             {errors.email.message}
                           </small>
-                       </Grid>
+                        </Grid>
                       )}
                     </div>
                   </Grid>
@@ -228,15 +214,12 @@ export const Registration = () => {
                         })}
                       />
                       {errors.contactNumber && (
-                        <Grid
-                        container
-                        alignItems="flex-start"
-                      >
+                        <Grid container alignItems="flex-start">
                           <small style={{ color: "red" }}>
                             {errors.contactNumber.message}
                           </small>
                         </Grid>
-                     )}
+                      )}
                     </div>
                   </Grid>
                 </Grid>
@@ -286,10 +269,7 @@ export const Registration = () => {
                         })}
                       />
                       {errors.password && (
-                        <Grid
-                        container
-                        alignItems="flex-start"
-                      >
+                        <Grid container alignItems="flex-start">
                           <small style={{ color: "red" }}>
                             {errors.password.message}
                           </small>{" "}
@@ -315,10 +295,7 @@ export const Registration = () => {
                       />
 
                       {errors.confirmpassword && (
-                        <Grid
-                        container
-                        alignItems="flex-start"
-                      >
+                        <Grid container alignItems="flex-start">
                           <small style={{ color: "red" }}>
                             {errors.confirmpassword.message}
                           </small>{" "}
@@ -331,29 +308,20 @@ export const Registration = () => {
                 <Grid container sx={{ mt: "10px" }}>
                   <Grid item xs={12}>
                     <div className="form-group">
-                    <TextField
+                      <TextField
                         fullWidth
                         id="outlined-select-currency"
                         select
                         className="form-control"
                         label="-- Select Your Role---"
                         {...register("role", { required: "Role is Required" })}
-                        
                       >
-                          <MenuItem  value="admin">
-                          Admin
-                          </MenuItem>
-                          <MenuItem  value="user">
-                          User
-                            </MenuItem>
-                      
-                     </TextField>
-                     
+                        <MenuItem value="admin">Admin</MenuItem>
+                        <MenuItem value="user">User</MenuItem>
+                      </TextField>
+
                       {errors.role && (
-                        <Grid
-                        container
-                        alignItems="flex-start"
-                      >
+                        <Grid container alignItems="flex-start">
                           <small style={{ color: "red" }}>
                             {" "}
                             {errors.role.message}

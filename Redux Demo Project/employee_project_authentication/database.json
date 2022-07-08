@@ -77,70 +77,83 @@
       "id": 1657201596976,
       "email": "vishal.wandile@anka.co.in",
       "password": "Anuj@123"
+    },
+    {
+      "id": 1657254630184,
+      "email": "vishal.wandile@anka.co.in",
+      "password": "Anuj@123"
+    },
+    {
+      "id": 1657257193041,
+      "email": "vishal.wandile@anka.co.in",
+      "password": "Anuj@123"
     }
   ],
   "rolesData": [
     {
-      "id": 1,
-      "role": "Developer"
+      "id": 1698260511019,
+      "role": "Developer",
+      "description": "i am Developer"
     },
     {
-      "id": 2,
-      "role": "Tester"
+      "id": 1657260509019,
+      "role": "Tester",
+      "description": "i am Tester"
     },
     {
-      "id": 3,
-      "role": "Manager"
+      "id": 1657260231019,
+      "role": "Manager",
+      "description": "i am Manager"
     },
     {
-      "id": 4,
-      "role": "Team Leader"
+      "id": 1657260561019,
+      "role": "Team Leader",
+      "description": "i am Team Leader"
+    },
+    {
+      "id": 1657260511019,
+      "role": "admin",
+      "description": "i am admin"
+    },
+    {
+      "id": 1657283490911,
+      "role": "user",
+      "description": "user"
     }
   ],
   "skillsData": [
     {
-      "id": 1,
-      "skill": "Java"
+      "id": 1657258011848,
+      "skill": "NodeJs",
+      "description": "i am NodeJs developer"
     },
     {
-      "id": 2,
-      "skill": "NodeJs"
+      "id": 1657253581848,
+      "skill": "React",
+      "description": "i am React developer"
     },
     {
-      "id": 3,
-      "skill": "React"
+      "id": 1657259881848,
+      "skill": "Angular",
+      "description": "i am Angular developer"
     },
     {
-      "id": 4,
-      "skill": "Angular"
+      "id": 1657250781848,
+      "skill": "Android",
+      "description": "i am Android developer"
     },
     {
-      "id": 5,
-      "skill": "Android"
+      "id": 1657258781848,
+      "skill": "c",
+      "description": "i am c developer"
+    },
+    {
+      "id": 1657283452933,
+      "skill": "Java",
+      "description": "Java programming language"
     }
   ],
   "employees": [
-    {
-      "id": 1655966206661,
-      "firstName": "Anand",
-      "lastName": "Vyas",
-      "dob": "5/3/1999",
-      "employee_about": "i am fullstack developer",
-      "gender": "Male",
-      "role": {
-        "role": "Developer"
-      },
-      "skills": [
-        {
-          "id": 1,
-          "skill": "Java"
-        },
-        {
-          "id": 3,
-          "skill": "React"
-        }
-      ]
-    },
     {
       "id": 1657007818120,
       "firstName": "anuj",
@@ -182,6 +195,70 @@
           "skill": "Android"
         }
       ]
+    },
+    {
+      "id": 1657268208967,
+      "firstName": "Aayush",
+      "lastName": "vyas",
+      "dob": "2021/7/8",
+      "employee_about": "i am Aayush",
+      "gender": "Female",
+      "role": {
+        "role": "admin"
+      },
+      "skills": [
+        {
+          "id": 1657258781848,
+          "skill": "c",
+          "description": "i am c developer"
+        }
+      ]
+    },
+    {
+      "id": 1657271702019,
+      "firstName": "vishal",
+      "lastName": "dfgh",
+      "dob": "2021/7/8",
+      "employee_about": "xyz",
+      "gender": "Female",
+      "role": {
+        "role": "Team Leader"
+      },
+      "skills": [
+        {
+          "id": 1657253581848,
+          "skill": "React",
+          "description": "i am React developer"
+        },
+        {
+          "id": 1657258781848,
+          "skill": "c",
+          "description": "i am c developer"
+        }
+      ]
+    },
+    {
+      "id": 1657283538703,
+      "firstName": "Anand",
+      "lastName": "vyas",
+      "dob": "2021/7/8",
+      "employee_about": "xyz",
+      "gender": "Male",
+      "role": {
+        "role": "user"
+      },
+      "skills": [
+        {
+          "id": 1657283452933,
+          "skill": "Java",
+          "description": "Java programming language"
+        },
+        {
+          "id": 1657253581848,
+          "skill": "React",
+          "description": "i am React developer"
+        }
+      ]
     }
   ],
   "roles": [
@@ -205,32 +282,6 @@
         "role": "Developer"
       },
       "description": "i dev"
-    }
-  ],
-  "skills": [
-    {
-      "id": 1655966206661,
-      "description": "i am java developer",
-      "skills": [
-        {
-          "id": 1,
-          "skill": "Java"
-        },
-        {
-          "id": 3,
-          "skill": "React"
-        }
-      ]
-    },
-    {
-      "id": 1657193006813,
-      "skills": [
-        {
-          "id": 3,
-          "skill": "React"
-        }
-      ],
-      "description": "xyz"
     }
   ]
 }

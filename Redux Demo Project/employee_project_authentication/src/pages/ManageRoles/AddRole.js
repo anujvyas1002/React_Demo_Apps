@@ -1,32 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-
-import { addRole, fetchRole } from "../../store/manageRolesSlice";
-
-import { Button, MenuItem, TextField, Grid } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Grid,
+  DialogTitle,
+  DialogContent,
+  IconButton,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
-
 import { useDispatch, useSelector } from "react-redux";
-
-import { STATUSES } from "../../store/manageRolesSlice";
-
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-    width: 450,
-  },
-}));
+import { addRole, STATUSES } from "../../store/manageRolesSlice";
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
-
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
@@ -53,9 +42,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export const AddRole = () => {
-  const [show, setShow] = useState(false);
-
+export const AddRole = (props) => {
   const {
     register,
     handleSubmit,
@@ -65,7 +52,7 @@ export const AddRole = () => {
   });
 
   const dispatch = useDispatch();
-  const { rolesData, status } = useSelector((state) => state.manageRoles);
+  const { status } = useSelector((state) => state.manageRoles);
 
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;
@@ -83,154 +70,98 @@ export const AddRole = () => {
     console.log(data);
     req = {
       id: Date.now(),
-      role: { role: data.role },
+      role: data.role,
       description: data.description,
     };
-    handleClose();
+    onClose();
     dispatch(addRole(req));
-    fetchRole();
   };
 
-  //Modal popup close
-  const handleClose = () => setShow(false);
-
-  //Modal popup show
-  const handleShow = () => {
-    setShow(true);
+  const onClose = () => {
+    props.onClose();
   };
 
   return (
     <div>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="center"
-      >
-        <Button
-          sx={{ mt: "10px" }}
-          variant="contained"
-          color="primary"
-          onClick={handleShow}
-        >
-          Add Role
-        </Button>
-      </Grid>
-
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={show}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
-          onClose={handleClose}
-        >
-          Add New Skills
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={1}>
-              <Grid item xs={6}>
-                <label htmlFor="role">Select Your Role</label>
-                <div className="form-group">
+      <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
+        Add New Role
+      </BootstrapDialogTitle>
+      <DialogContent dividers>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <label htmlFor="role">Role</label>
+              <div className="form-group">
                 <TextField
-                    fullWidth
-                    id="role"
-                    className="form-control"
-                    select
-                    placeholder="--- Select Your Role ---"
-                    {...register("role", { required: "Role is Required" })}
-                  >
-                     <MenuItem value="">--- Select Your Role---</MenuItem>
-                  {rolesData.map((role) => (
-                    <MenuItem key={role.id} value={role.role}>
-                      {role.role}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                  {/* <NativeSelect
-                    className="form-control"
-                    id="role"
-                    {...register("role", { required: "Role is Required" })}
-                  >
-                    <option value="">--- Select Your Role---</option>
-                    {rolesData.map((role) => (
-                      <option key={role.id}>{role.role}</option>
-                    ))}
-                  </NativeSelect> */}
-                  {errors.role && (
-                    <Grid
-                    container
-                    alignItems="flex-start"
-                  >
-                      <small style={{ color: "red" }}>
-                        {" "}
-                        {errors.role.message}
-                      </small>
-                    </Grid>
-                  )}
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <label htmlFor="description">Description</label>
-                <div className="form-group">
-                  <TextField
-                    type="text"
-                    className="form-control"
-                    id="description"
-                    multiline
-                    rows={1}
-                    maxRows={4}
-                    placeholder="Enter Your Description"
-                    {...register("description", {
-                      required: "Description is Required",
-                      minLength: {
-                        value: 3,
-                        message: "Enter your Minimum 3 characters",
-                      },
-                      maxLength: {
-                        value: 300,
-                        message: "Enter your Maximum 300 characters",
-                      },
-                    })}
-                  />
-                  {errors.description && (
-                   <Grid
-                   container
-                   alignItems="flex-start"
-                 >
-                      <small style={{ color: "red" }}>
-                        {errors.description.message}
-                      </small>
-                    </Grid>
-                  )}
-                </div>
-              </Grid>
+                  type="text"
+                  className="form-control"
+                  id="role"
+                  placeholder="Enter Your Role"
+                  {...register("role", {
+                    required: "Role is Required",
+                    pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "Role is invaild",
+                    },
+                    minLength: {
+                      value: 1,
+                      message: "Enter your Minimum 2 characters",
+                    },
+                    maxLength: {
+                      value: 15,
+                      message: "Enter your Maximum 20 characters",
+                    },
+                  })}
+                />
+                {errors.role && (
+                  <Grid container alignItems="flex-start">
+                    <small style={{ color: "red" }}>
+                      {errors.role.message}
+                    </small>
+                  </Grid>
+                )}
+              </div>
             </Grid>
+            <Grid item xs={6}>
+              <label htmlFor="description">Description</label>
+              <div className="form-group">
+                <TextField
+                  type="text"
+                  className="form-control"
+                  id="description"
+                  multiline
+                  rows={1}
+                  maxRows={4}
+                  placeholder="Enter Your Description"
+                  {...register("description", {
+                    required: false,
+                  })}
+                />
+              </div>
+            </Grid>
+          </Grid>
 
-            <hr/>
-            <Grid
-              container
-              direction="row"
-              justifyContent="flex-end"
-              alignItems="flex-start"
-              spacing={0.5}
-            >
-              <Grid item>
+          <hr />
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="flex-start"
+            spacing={0.5}
+          >
+            <Grid item>
               <Button variant="contained" color="primary" type="submit">
-              Add
-            </Button>
-              </Grid>
-              <Grid item>
-              <Button variant="outlined" onClick={handleClose}>
-              Close
-            </Button>
-              </Grid>
+                Add
+              </Button>
             </Grid>
-          </form>
-        </DialogContent>
-      </BootstrapDialog>
+            <Grid item>
+              <Button variant="outlined" onClick={onClose}>
+                Close
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </DialogContent>
     </div>
   );
 };

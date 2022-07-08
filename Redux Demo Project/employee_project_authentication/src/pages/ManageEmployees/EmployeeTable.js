@@ -2,19 +2,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchEmployees,
-  removeEmployee,
-} from "../../store/manageEmployeesSlice";
-import { STATUSES } from "../../store/manageEmployeesSlice";
+import { fetchEmployees, STATUSES } from "../../store/manageEmployeesSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
-
-import { skillsData } from "../../store/manageEmployeesSlice";
-import { rolesData } from "../../store/manageEmployeesSlice";
-
+import { skillsData, rolesData } from "../../store/manageEmployeesSlice";
+import { styled } from "@mui/material/styles";
 import {
+  Dialog,
+  Fab,
   Table,
   TableBody,
   TableCell,
@@ -27,15 +22,28 @@ import {
   Button,
 } from "@mui/material";
 import { AddEmployee } from "./AddEmployee";
-// import { RemoveEmployee } from "./RemoveEmployee";
-// import { UpdateEmployee } from "./UpdateEmployee";
+import { UpdateEmployee } from "./UpdateEmployee";
+import RemoveEmployee from "./RemoveEmployee";
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+    width: 450,
+  },
+}));
 
 export const EmployeeTable = () => {
   // handle for pagination data
   const [page, setPage] = useState(0);
 
-  // handle model popup
-  const [show, setShow] = useState(false);
+  //state for open add users form
+  const [isAdd, setAdd] = useState(false);
+
+  //state for open remove users form
+  const [isRemove, setRemove] = useState(false);
+
+  //state for open edit Group form
+  const [isEdit, setEdit] = useState(false);
 
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -49,16 +57,56 @@ export const EmployeeTable = () => {
     dispatch(skillsData());
   }, []);
 
-  // //Modal popup close
-  // const handleClose = () => setShow(false);
+  //on click of add employee
+  const openAddForm = () => {
+    setAdd(true);
+  };
 
-  // //Modal popup show
-  // const handleShow = () => {
-  //   setShow(true);
-  // };
+  //close add new form
+  const onCloseForm = () => {
+    setAdd(false);
+  };
 
-  const handleModel = () => {
-    setShow(!show);
+  //refresh table after save
+  const onSaveUpdateTable = () => {
+    timerRef.current = window.setTimeout(() => {
+      setAdd(false);
+      dispatch(fetchEmployees());
+    }, constants.TIMEOUT);
+  };
+
+  //after edit refresh table
+  const onEditUpdateTable = () => {
+    timerRef.current = window.setTimeout(() => {
+      setEdit(false);
+
+      dispatch(fetchEmployees());
+    }, constants.TIMEOUT);
+  };
+
+  const openConfirmBox = () => {
+    setRemove(true);
+  };
+
+  //close add new form
+  const onCloseConfirmBox = () => {
+    setRemove(false);
+  };
+
+  const onSaveRemoveTable = () => {
+    timerRef.current = window.setTimeout(() => {
+      setRemove(false);
+      dispatch(fetchEmployees());
+    }, constants.TIMEOUT);
+  };
+  //on click of add group
+  const openEditForm = () => {
+    setEdit(true);
+  };
+
+  //close edit form
+  const onCloseEdit = () => {
+    setEdit(false);
   };
 
   // pagination set new Page
@@ -70,10 +118,6 @@ export const EmployeeTable = () => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const handleDelete = (id) => {
-    dispatch(removeEmployee(id));
   };
 
   // date format
@@ -96,8 +140,6 @@ export const EmployeeTable = () => {
   return (
     <>
       <div>
-        <AddEmployee show={show}></AddEmployee>
-
         <Grid
           container
           direction="row"
@@ -107,14 +149,26 @@ export const EmployeeTable = () => {
           <Button
             sx={{ mt: "10px" }}
             variant="contained"
+            onClick={openAddForm}
             color="primary"
-            onClick={() => handleModel()}
+            data-testid="addEmployeeBtn"
           >
             Add Employee
           </Button>
         </Grid>
 
-        <hr/>
+        <BootstrapDialog
+          onClose={onCloseForm}
+          aria-labelledby="customized-dialog-title"
+          open={isAdd}
+        >
+          <AddEmployee
+            onSaveUpdateTable={onSaveUpdateTable}
+            onClose={onCloseForm}
+          ></AddEmployee>
+        </BootstrapDialog>
+
+        <hr />
         {/* table */}
         <Paper sx={{ width: "100%", mb: 0 }}>
           <TableContainer component={Paper}>
@@ -160,14 +214,34 @@ export const EmployeeTable = () => {
                         {/* <EditIcon /> */}
 
                         <Fab size="small" color="secondary" aria-label="edit">
-                          <EditIcon />
+                          <BootstrapDialog
+                            onClose={onCloseEdit}
+                            aria-labelledby="customized-dialog-title"
+                            open={isEdit}
+                          >
+                            <UpdateEmployee
+                              onSaveUpdateTable={onEditUpdateTable}
+                              onClose={onCloseEdit}
+                              employee={employee}
+                            ></UpdateEmployee>
+                          </BootstrapDialog>
+                          <EditIcon onClick={openEditForm} />
                         </Fab>
                         {/* </IconButton> */}
 
                         <Fab size="small" color="error" aria-label="remove">
-                          <DeleteIcon
-                            onClick={() => handleDelete(employee.id)}
-                          />
+                          <Dialog
+                            open={isRemove}
+                            onClose={onCloseConfirmBox}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                          >
+                            <RemoveEmployee
+                              onSaveRemoveTable={onSaveRemoveTable}
+                              onClose={onCloseConfirmBox}
+                            ></RemoveEmployee>
+                          </Dialog>
+                          <DeleteIcon onClick={openConfirmBox} />
                         </Fab>
                       </TableCell>
                     </TableRow>

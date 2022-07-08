@@ -1,31 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
-  Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   Button,
 } from "@mui/material";
-
 import { removeRole, STATUSES } from "../../store/manageRolesSlice";
 
-export const RemoveRole = () => {
-  const [open, setOpen] = React.useState(false);
-
+export const RemoveRole = (props) => {
   const dispatch = useDispatch();
-  const { roles, status } = useSelector((state) => state.manageRoles);
-
-  //conformation box open
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
-  //conformation box Close
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const { rolesData, status } = useSelector((state) => state.manageRoles);
 
   // Delete Employee Delete Api Call
   const DeleteRole = (id) => {
@@ -40,36 +25,29 @@ export const RemoveRole = () => {
     return <h2>Something went wrong!</h2>;
   }
 
-  // if (status === STATUSES.IDLE) {
-  //   return console.log("IDLE MESSAGE");
-  // }
+  const onClose = () => {
+    props.onClose();
+  };
 
   return (
     <div>
       {/* conformation Box */}
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure want to delete <b>{roles.role} ?</b>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={DeleteRole}
-            autoFocus
-          >
-            Ok
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          Are you sure want to delete <b>{rolesData.role} ?</b>
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose}>Cancel</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={DeleteRole}
+          autoFocus
+        >
+          Ok
+        </Button>
+      </DialogActions>
     </div>
   );
 };

@@ -2,15 +2,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRole, removeRole } from "../../store/manageRolesSlice";
-import { STATUSES } from "../../store/manageRolesSlice";
+import { fetchRole, STATUSES } from "../../store/manageRolesSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
-
-import { rolesData } from "../../store/manageRolesSlice";
-
+import { styled } from "@mui/material/styles";
 import {
+  Dialog,
+  Fab,
   Table,
   TableBody,
   TableCell,
@@ -19,26 +17,97 @@ import {
   TableRow,
   Paper,
   TablePagination,
+  Button,
+  Grid,
 } from "@mui/material";
 import { AddRole } from "./AddRole";
-// import { RemoveEmployee } from "./RemoveEmployee";
-// import { UpdateRole } from "./UpdateRole";
+import { RemoveRole } from "./RemoveRole";
+import { UpdateRole } from "./UpdateRole";
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+    width: 450,
+  },
+}));
 
 export const RolesTable = () => {
   // handle for pagination data
   const [page, setPage] = useState(0);
 
+  //state for open add users form
+  const [isAdd, setAdd] = useState(false);
+
+  //state for open remove users form
+  const [isRemove, setRemove] = useState(false);
+
+  //state for open edit Group form
+  const [isEdit, setEdit] = useState(false);
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const dispatch = useDispatch();
-  const { roles, status } = useSelector((state) => state.manageRoles);
+  const { rolesData, status } = useSelector((state) => state.manageRoles);
 
   useEffect(() => {
     dispatch(fetchRole());
-    dispatch(rolesData());
   }, []);
 
+  const openConfirmBox = () => {
+    setRemove(true);
+  };
+
+  //close add new form
+  const onCloseConfirmBox = () => {
+    setRemove(false);
+  };
+
+  const onSaveRemoveTable = () => {
+    timerRef.current = window.setTimeout(() => {
+      setRemove(false);
+
+      dispatch(fetchRole());
+    }, constants.TIMEOUT);
+  };
+
+  //on click of add employee
+  const openAddForm = () => {
+    setAdd(true);
+  };
+
+  //close add new form
+  const onCloseForm = () => {
+    setAdd(false);
+  };
+
+  //refresh table after save
+  const onSaveUpdateTable = () => {
+    timerRef.current = window.setTimeout(() => {
+      setAdd(false);
+      //go to last page
+      // setLastPage(true);
+      dispatch(fetchRole());
+    }, constants.TIMEOUT);
+  };
+
+  //after edit refresh table
+  const onEditUpdateTable = () => {
+    timerRef.current = window.setTimeout(() => {
+      setEdit(false);
+
+      dispatch(fetchRole());
+    }, constants.TIMEOUT);
+  };
+
+  //on click of add group
+  const openEditForm = () => {
+    setEdit(true);
+  };
+
+  //close edit form
+  const onCloseEdit = () => {
+    setEdit(false);
+  };
   // pagination set new Page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -48,10 +117,6 @@ export const RolesTable = () => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const handleDelete = (id) => {
-    dispatch(removeRole(id));
   };
 
   if (status === STATUSES.LOADING) {
@@ -66,7 +131,44 @@ export const RolesTable = () => {
     <>
       <div>
         {/* <UpdateRole /> */}
-        <AddRole />
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="center"
+        >
+          <Button
+            sx={{ mt: "10px" }}
+            variant="contained"
+            onClick={openAddForm}
+            color="primary"
+            data-testid="addEmployeeBtn"
+          >
+            Add Role
+          </Button>
+        </Grid>
+
+        <BootstrapDialog
+          onClose={onCloseForm}
+          aria-labelledby="customized-dialog-title"
+          open={isAdd}
+        >
+          <AddRole
+            onSaveUpdateTable={onSaveUpdateTable}
+            onClose={onCloseForm}
+          ></AddRole>
+        </BootstrapDialog>
+        <BootstrapDialog
+          onClose={onCloseEdit}
+          aria-labelledby="customized-dialog-title"
+          open={isEdit}
+        >
+          <UpdateRole
+            onSaveUpdateTable={onEditUpdateTable}
+            onClose={onCloseEdit}
+          ></UpdateRole>
+        </BootstrapDialog>
+
         <hr />
         {/* table */}
         <Paper sx={{ width: "100%", mb: 0 }}>
@@ -85,21 +187,33 @@ export const RolesTable = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {roles
+                {rolesData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((role) => (
+                  .map((roles) => (
                     <TableRow
-                      key={role.id}
+                      key={roles.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell>{role.role.role}</TableCell>
-                      <TableCell>{role.description}</TableCell>
+                      <TableCell>{roles.role}</TableCell>
+                      <TableCell>{roles.description}</TableCell>
                       <TableCell>
                         <Fab size="small" color="secondary" aria-label="edit">
-                          <EditIcon />
+                          <EditIcon onClick={openEditForm} />
                         </Fab>
+
                         <Fab size="small" color="error" aria-label="remove">
-                          <DeleteIcon onClick={() => handleDelete(role.id)} />
+                          <Dialog
+                            open={isRemove}
+                            onClose={onCloseConfirmBox}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                          >
+                            <RemoveRole
+                              onSaveRemoveTable={onSaveRemoveTable}
+                              onClose={onCloseConfirmBox}
+                            ></RemoveRole>
+                          </Dialog>
+                          <DeleteIcon onClick={openConfirmBox} />
                         </Fab>
                       </TableCell>
                     </TableRow>
@@ -111,7 +225,7 @@ export const RolesTable = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={roles.length}
+            count={rolesData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
