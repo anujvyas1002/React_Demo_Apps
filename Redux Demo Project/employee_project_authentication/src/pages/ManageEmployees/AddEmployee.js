@@ -99,8 +99,8 @@ export const AddEmployee = (props) => {
       role: { role: data.role },
       skills: selectedSkills,
     };
-    onClose();
     dispatch(addEmployee(req));
+    props.onSaveUpdateTable();
   };
 
   const onClose = () => {

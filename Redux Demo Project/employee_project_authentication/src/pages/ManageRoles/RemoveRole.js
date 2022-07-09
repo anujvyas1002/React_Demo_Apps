@@ -10,11 +10,12 @@ import { removeRole, STATUSES } from "../../store/manageRolesSlice";
 
 export const RemoveRole = (props) => {
   const dispatch = useDispatch();
-  const { rolesData, status } = useSelector((state) => state.manageRoles);
+  const {  status } = useSelector((state) => state.manageRoles);
 
   // Delete Employee Delete Api Call
   const DeleteRole = (id) => {
     dispatch(removeRole(id));
+    props.onSaveRemoveTable();
   };
 
   if (status === STATUSES.LOADING) {
@@ -34,7 +35,7 @@ export const RemoveRole = (props) => {
       {/* conformation Box */}
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Are you sure want to delete <b>{rolesData.role} ?</b>
+          Are you sure want to delete <b>{props.role.role} ?</b>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -42,7 +43,7 @@ export const RemoveRole = (props) => {
         <Button
           variant="contained"
           color="primary"
-          onClick={DeleteRole}
+          onClick={DeleteRole(props.role.id)}
           autoFocus
         >
           Ok

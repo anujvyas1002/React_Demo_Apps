@@ -46,6 +46,7 @@ export const UpdateSkill = (props) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isDirty, isValid },
   } = useForm({
     mode: "onTouched",
@@ -64,14 +65,16 @@ export const UpdateSkill = (props) => {
       skills: data.skill,
       description: data.description,
     };
-    onClose();
     dispatch(
-      updateSkills(
-        req
-        // id
-      )
+      updateSkills(props.skill.id,req)
     );
+    props.onEditUpdateTable();
   };
+
+  setValue("id", props.skill.id);
+  setValue("skill", props.skill.skill);
+  setValue("description", props.skill.description);
+
 
   const onClose = () => {
     props.onClose();

@@ -10,11 +10,12 @@ import { removeEmployee, STATUSES } from "../../store/manageEmployeesSlice";
 
 const RemoveEmployee = (props) => {
   const dispatch = useDispatch();
-  const { employees, status } = useSelector((state) => state.manageEmployees);
+  const {  status } = useSelector((state) => state.manageEmployees);
 
   // Delete Employee Delete Api Call
   const DeleteEmployee = (id) => {
     dispatch(removeEmployee(id));
+    props.onSaveRemoveTable();
   };
 
   if (status === STATUSES.LOADING) {
@@ -36,7 +37,7 @@ const RemoveEmployee = (props) => {
         <DialogContentText id="alert-dialog-description">
           Are you sure want to delete{" "}
           <b>
-            {employees.firstName} {employees.lastName} ?
+            {props.employee.firstName} {props.employee.lastName} ?
           </b>
         </DialogContentText>
       </DialogContent>
@@ -45,7 +46,7 @@ const RemoveEmployee = (props) => {
         <Button
           variant="contained"
           color="primary"
-          onClick={DeleteEmployee}
+          onClick={DeleteEmployee(props.employee.id)}
           autoFocus
         >
           Ok

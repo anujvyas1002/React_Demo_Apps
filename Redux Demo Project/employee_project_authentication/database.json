@@ -7,24 +7,6 @@
       "contectNumber": "1234567890",
       "role": "admin",
       "password": "Anuj@123"
-    },
-    {
-      "id": 1657105249340,
-      "firstName": "anuj",
-      "lastName": "vyas",
-      "username": "anujv@gmail.com",
-      "contectNumber": "1234567890",
-      "role": "admin",
-      "password": "Anuj@123"
-    },
-    {
-      "id": 1657174941403,
-      "firstName": "ankit",
-      "lastName": "vyas",
-      "username": "anujv@gmail.com",
-      "contectNumber": "1234567890",
-      "role": "admin",
-      "password": "Anuj@123"
     }
   ],
   "login": [
@@ -34,57 +16,17 @@
       "password": "Anuj@123"
     },
     {
-      "id": 1657104713245,
-      "userName": "anujvy@gmail.com",
-      "password": "Anuj@1"
-    },
-    {
-      "id": 1657172566958,
-      "userName": "anujvy@gmail.com",
-      "password": "Anuj@123"
-    },
-    {
-      "id": 1657172678824,
-      "userName": "anujvy@gmail.com",
-      "password": "Anuj@123"
-    },
-    {
-      "id": 1657174990475,
-      "userName": "anujvy@gmail.com",
-      "password": "Anuj@123"
-    },
-    {
-      "id": 1657175184751,
-      "userName": "anujvy@gmail.com",
-      "password": "Anuj@123"
-    },
-    {
-      "id": 1657175407172,
-      "userName": "anujvy@gmail.com",
-      "password": "Anuj@123"
-    },
-    {
-      "id": 1657194306427,
-      "userName": "anujvy@gmail.com",
-      "password": "anuj@123"
-    },
-    {
-      "id": 1657198217049,
-      "userName": "anujvy@gmail.com",
-      "password": "Anuj@12"
-    },
-    {
-      "id": 1657201596976,
+      "id": 1657341983932,
       "email": "vishal.wandile@anka.co.in",
       "password": "Anuj@123"
     },
     {
-      "id": 1657254630184,
+      "id": 1657343941697,
       "email": "vishal.wandile@anka.co.in",
       "password": "Anuj@123"
     },
     {
-      "id": 1657257193041,
+      "id": 1657377264923,
       "email": "vishal.wandile@anka.co.in",
       "password": "Anuj@123"
     }
@@ -106,19 +48,9 @@
       "description": "i am Manager"
     },
     {
-      "id": 1657260561019,
-      "role": "Team Leader",
-      "description": "i am Team Leader"
-    },
-    {
-      "id": 1657260511019,
-      "role": "admin",
-      "description": "i am admin"
-    },
-    {
-      "id": 1657283490911,
-      "role": "user",
-      "description": "user"
+      "requestId": "axa-b22EQAkjrB5tIxmtT",
+      "signal": {},
+      "id": 1657260511019
     }
   ],
   "skillsData": [
@@ -151,6 +83,41 @@
       "id": 1657283452933,
       "skill": "Java",
       "description": "Java programming language"
+    },
+    {
+      "id": 1657342080362,
+      "skill": "pythan",
+      "description": "xyz"
+    },
+    {
+      "id": 1657342909562,
+      "skill": "jingo",
+      "description": "xyz"
+    },
+    {
+      "id": 1657343160123,
+      "skill": "pythan",
+      "description": "gv"
+    },
+    {
+      "id": 1657343391602,
+      "skill": "Java",
+      "description": "xyz"
+    },
+    {
+      "id": 1657343488482,
+      "skill": "bootstrap",
+      "description": "xyz"
+    },
+    {
+      "id": 1657343662907,
+      "skill": "xyz",
+      "description": "xyz"
+    },
+    {
+      "id": 1657343800828,
+      "skill": "xyz",
+      "description": "abx"
     }
   ],
   "employees": [
@@ -197,62 +164,16 @@
       ]
     },
     {
-      "id": 1657268208967,
-      "firstName": "Aayush",
-      "lastName": "vyas",
-      "dob": "2021/7/8",
-      "employee_about": "i am Aayush",
-      "gender": "Female",
-      "role": {
-        "role": "admin"
-      },
-      "skills": [
-        {
-          "id": 1657258781848,
-          "skill": "c",
-          "description": "i am c developer"
-        }
-      ]
-    },
-    {
-      "id": 1657271702019,
-      "firstName": "vishal",
-      "lastName": "dfgh",
-      "dob": "2021/7/8",
-      "employee_about": "xyz",
-      "gender": "Female",
-      "role": {
-        "role": "Team Leader"
-      },
-      "skills": [
-        {
-          "id": 1657253581848,
-          "skill": "React",
-          "description": "i am React developer"
-        },
-        {
-          "id": 1657258781848,
-          "skill": "c",
-          "description": "i am c developer"
-        }
-      ]
-    },
-    {
-      "id": 1657283538703,
+      "id": 1657372908105,
       "firstName": "Anand",
       "lastName": "vyas",
-      "dob": "2021/7/8",
+      "dob": "2020/7/9",
       "employee_about": "xyz",
-      "gender": "Male",
+      "gender": "Female",
       "role": {
-        "role": "user"
+        "role": "Manager"
       },
       "skills": [
-        {
-          "id": 1657283452933,
-          "skill": "Java",
-          "description": "Java programming language"
-        },
         {
           "id": 1657253581848,
           "skill": "React",

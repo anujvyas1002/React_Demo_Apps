@@ -39,7 +39,6 @@ const skillsSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(addSkills.fulfilled, (state, action) => {
-        state.skillsData = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(addSkills.rejected, (state, action) => {
@@ -49,7 +48,6 @@ const skillsSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(updateSkills.fulfilled, (state, action) => {
-        state.skillsData = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(updateSkills.rejected, (state, action) => {
@@ -59,7 +57,6 @@ const skillsSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(removeSkills.fulfilled, (state, action) => {
-        state.skillsData = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(removeSkills.rejected, (state, action) => {

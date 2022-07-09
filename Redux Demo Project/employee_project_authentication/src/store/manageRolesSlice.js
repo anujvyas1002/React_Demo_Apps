@@ -39,7 +39,6 @@ const rolesSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(addRole.fulfilled, (state, action) => {
-        state.rolesData = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(addRole.rejected, (state, action) => {
@@ -49,7 +48,6 @@ const rolesSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(updateRole.fulfilled, (state, action) => {
-        state.rolesData = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(updateRole.rejected, (state, action) => {
@@ -59,7 +57,6 @@ const rolesSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(removeRole.fulfilled, (state, action) => {
-        state.rolesData = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(removeRole.rejected, (state, action) => {

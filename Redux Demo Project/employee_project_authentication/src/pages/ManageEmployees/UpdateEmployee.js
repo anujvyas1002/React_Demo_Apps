@@ -59,20 +59,13 @@ export const UpdateEmployee = (props) => {
     mode: "onTouched",
   });
 
-  setValue("id", props.employee.id);
-  setValue("firstName", props.employee.firstName);
-  setValue("lastName", props.employee.lastName);
-  setValue("dob", props.employee.dob);
-  setValue("role", props.employee.role.role);
-  setValue("gender", props.employee.gender);
-  setValue("employee_about", props.employee.employee_about);
-  setValue("skill", props.employee.skills);
+
 
   // selected Skill mantain state
   const [selectedSkills, setSelectedSkills] = useState(props.employee.skills);
 
   // SelectedDate mantain
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState(props.employee.dob);
 
   const dispatch = useDispatch();
   const { skills, roles, status } = useSelector(
@@ -103,14 +96,22 @@ export const UpdateEmployee = (props) => {
       role: { role: data.role },
       skills: selectedSkills,
     };
-    onClose();
     dispatch(
-      updateEmployee(
-        req
-        // id
-      )
+      updateEmployee(props.employee.id,req)
     );
+    console.log(req)
+    console.log(props.employee.id)
+    props.onEditUpdateTable();
   };
+
+  setValue("id", props.employee.id);
+  setValue("firstName", props.employee.firstName);
+  setValue("lastName", props.employee.lastName);
+  setValue("dob", props.employee.dob);
+  setValue("role", props.employee.role.role);
+  setValue("gender", props.employee.gender);
+  setValue("employee_about", props.employee.employee_about);
+  setValue("skill", props.employee.skills);
 
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;

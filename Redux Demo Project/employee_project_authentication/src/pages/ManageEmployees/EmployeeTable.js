@@ -45,6 +45,9 @@ export const EmployeeTable = () => {
   //state for open edit Group form
   const [isEdit, setEdit] = useState(false);
 
+  //employee data
+  const [employee , setEmployee] = useState([]);
+
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -69,23 +72,23 @@ export const EmployeeTable = () => {
 
   //refresh table after save
   const onSaveUpdateTable = () => {
-    timerRef.current = window.setTimeout(() => {
+    // timerRef.current = window.setTimeout(() => {
       setAdd(false);
       dispatch(fetchEmployees());
-    }, constants.TIMEOUT);
+    // }, constants.TIMEOUT);
   };
 
   //after edit refresh table
   const onEditUpdateTable = () => {
-    timerRef.current = window.setTimeout(() => {
+    // timerRef.current = window.setTimeout(() => {
       setEdit(false);
-
       dispatch(fetchEmployees());
-    }, constants.TIMEOUT);
+    // }, constants.TIMEOUT);
   };
 
-  const openConfirmBox = () => {
+  const openConfirmBox = (employee) => {
     setRemove(true);
+    setEmployee(employee);
   };
 
   //close add new form
@@ -94,13 +97,15 @@ export const EmployeeTable = () => {
   };
 
   const onSaveRemoveTable = () => {
-    timerRef.current = window.setTimeout(() => {
+    // timerRef.current = window.setTimeout(() => {
       setRemove(false);
       dispatch(fetchEmployees());
-    }, constants.TIMEOUT);
+    // }, constants.TIMEOUT);
   };
   //on click of add group
-  const openEditForm = () => {
+  const openEditForm = (employee) => {
+    console.log(employee)
+    setEmployee(employee);
     setEdit(true);
   };
 
@@ -167,6 +172,30 @@ export const EmployeeTable = () => {
             onClose={onCloseForm}
           ></AddEmployee>
         </BootstrapDialog>
+        <BootstrapDialog
+          onClose={onCloseEdit}
+          aria-labelledby="customized-dialog-title"
+          open={isEdit}
+        >
+          <UpdateEmployee
+            onSaveUpdateTable={onEditUpdateTable}
+            onClose={onCloseEdit}
+            employee={employee}
+          ></UpdateEmployee>
+        </BootstrapDialog>
+
+        <Dialog
+          open={isRemove}
+          onClose={onCloseConfirmBox}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <RemoveEmployee
+            onSaveRemoveTable={onSaveRemoveTable}
+            onClose={onCloseConfirmBox}
+            employee={employee}
+          ></RemoveEmployee>
+        </Dialog>
 
         <hr />
         {/* table */}
@@ -214,34 +243,12 @@ export const EmployeeTable = () => {
                         {/* <EditIcon /> */}
 
                         <Fab size="small" color="secondary" aria-label="edit">
-                          <BootstrapDialog
-                            onClose={onCloseEdit}
-                            aria-labelledby="customized-dialog-title"
-                            open={isEdit}
-                          >
-                            <UpdateEmployee
-                              onSaveUpdateTable={onEditUpdateTable}
-                              onClose={onCloseEdit}
-                              employee={employee}
-                            ></UpdateEmployee>
-                          </BootstrapDialog>
-                          <EditIcon onClick={openEditForm} />
+                          <EditIcon onClick={()=>openEditForm(employee)} />
                         </Fab>
                         {/* </IconButton> */}
 
                         <Fab size="small" color="error" aria-label="remove">
-                          <Dialog
-                            open={isRemove}
-                            onClose={onCloseConfirmBox}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                          >
-                            <RemoveEmployee
-                              onSaveRemoveTable={onSaveRemoveTable}
-                              onClose={onCloseConfirmBox}
-                            ></RemoveEmployee>
-                          </Dialog>
-                          <DeleteIcon onClick={openConfirmBox} />
+                          <DeleteIcon onClick={()=>openConfirmBox(employee)} />
                         </Fab>
                       </TableCell>
                     </TableRow>

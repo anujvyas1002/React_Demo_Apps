@@ -46,6 +46,7 @@ export const UpdateRole = (props) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isDirty, isValid },
   } = useForm({
     mode: "onTouched",
@@ -63,15 +64,17 @@ export const UpdateRole = (props) => {
       id: Date.now(),
       role: data.role,
       description: data.description,
-    };
-    onClose();
+    };  
     dispatch(
-      updateRole(
-        req
-        // id
-      )
+      updateRole(props.role.id,req)
     );
+    props.onEditUpdateTable();
   };
+
+
+  setValue("id", props.role.id);
+  setValue("role", props.role.role);
+  setValue("description", props.role.description);
 
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
@@ -74,8 +73,8 @@ export const AddSkill = (props) => {
       skill: data.skill,
       description: data.description,
     };
-    onClose();
     dispatch(addSkills(req));
+    props.onSaveUpdateTable();
   };
 
   const onClose = () => {

@@ -41,6 +41,8 @@ export const RolesTable = () => {
   //state for open remove users form
   const [isRemove, setRemove] = useState(false);
 
+  const [role , setRole] = useState([]);
+
   //state for open edit Group form
   const [isEdit, setEdit] = useState(false);
   // handle for tables rows
@@ -53,8 +55,9 @@ export const RolesTable = () => {
     dispatch(fetchRole());
   }, []);
 
-  const openConfirmBox = () => {
+  const openConfirmBox = (role) => {
     setRemove(true);
+    setRole(role);
   };
 
   //close add new form
@@ -63,11 +66,8 @@ export const RolesTable = () => {
   };
 
   const onSaveRemoveTable = () => {
-    timerRef.current = window.setTimeout(() => {
       setRemove(false);
-
       dispatch(fetchRole());
-    }, constants.TIMEOUT);
   };
 
   //on click of add employee
@@ -82,26 +82,20 @@ export const RolesTable = () => {
 
   //refresh table after save
   const onSaveUpdateTable = () => {
-    timerRef.current = window.setTimeout(() => {
       setAdd(false);
-      //go to last page
-      // setLastPage(true);
       dispatch(fetchRole());
-    }, constants.TIMEOUT);
   };
 
   //after edit refresh table
   const onEditUpdateTable = () => {
-    timerRef.current = window.setTimeout(() => {
       setEdit(false);
-
       dispatch(fetchRole());
-    }, constants.TIMEOUT);
   };
 
   //on click of add group
-  const openEditForm = () => {
+  const openEditForm = (role) => {
     setEdit(true);
+    setRole(role);
   };
 
   //close edit form
@@ -166,8 +160,21 @@ export const RolesTable = () => {
           <UpdateRole
             onSaveUpdateTable={onEditUpdateTable}
             onClose={onCloseEdit}
+            role={role}
           ></UpdateRole>
         </BootstrapDialog>
+        <Dialog
+          open={isRemove}
+          onClose={onCloseConfirmBox}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <RemoveRole
+            onSaveRemoveTable={onSaveRemoveTable}
+            onClose={onCloseConfirmBox}
+            role={role}
+          ></RemoveRole>
+        </Dialog>
 
         <hr />
         {/* table */}
@@ -198,22 +205,10 @@ export const RolesTable = () => {
                       <TableCell>{roles.description}</TableCell>
                       <TableCell>
                         <Fab size="small" color="secondary" aria-label="edit">
-                          <EditIcon onClick={openEditForm} />
+                          <EditIcon  onClick={()=>openEditForm(roles)} />
                         </Fab>
-
                         <Fab size="small" color="error" aria-label="remove">
-                          <Dialog
-                            open={isRemove}
-                            onClose={onCloseConfirmBox}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                          >
-                            <RemoveRole
-                              onSaveRemoveTable={onSaveRemoveTable}
-                              onClose={onCloseConfirmBox}
-                            ></RemoveRole>
-                          </Dialog>
-                          <DeleteIcon onClick={openConfirmBox} />
+                          <DeleteIcon onClick={()=>openConfirmBox(roles)}  />
                         </Fab>
                       </TableCell>
                     </TableRow>

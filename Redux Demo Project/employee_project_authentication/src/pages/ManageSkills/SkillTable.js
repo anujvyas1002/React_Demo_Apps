@@ -47,6 +47,8 @@ export const SkillTable = () => {
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const [skill, setSkill] = useState([]);
+
   const dispatch = useDispatch();
   const { skillsData, status } = useSelector((state) => state.manageSkills);
 
@@ -54,8 +56,9 @@ export const SkillTable = () => {
     dispatch(fetchSkills());
   }, []);
 
-  const openConfirmBox = () => {
+  const openConfirmBox = (skill) => {
     setRemove(true);
+    setSkill(skill);
   };
 
   //close add new form
@@ -64,11 +67,8 @@ export const SkillTable = () => {
   };
 
   const onSaveRemoveTable = () => {
-    timerRef.current = window.setTimeout(() => {
-      setRemove(false);
-
-      dispatch(fetchSkills());
-    }, constants.TIMEOUT);
+    setRemove(false);
+    dispatch(fetchSkills());
   };
 
   //on click of add employee
@@ -83,24 +83,20 @@ export const SkillTable = () => {
 
   //refresh table after save
   const onSaveUpdateTable = () => {
-    timerRef.current = window.setTimeout(() => {
-      setAdd(false);
-      dispatch(fetchSkills());
-    }, constants.TIMEOUT);
+    setAdd(false);
+    dispatch(fetchSkills());
   };
 
   //after edit refresh table
   const onEditUpdateTable = () => {
-    timerRef.current = window.setTimeout(() => {
-      setEdit(false);
-
-      dispatch(fetchRole());
-    }, constants.TIMEOUT);
+    setEdit(false);
+    dispatch(fetchRole());
   };
 
   //on click of add group
-  const openEditForm = () => {
+  const openEditForm = (skill) => {
     setEdit(true);
+    setSkill(skill);
   };
 
   //close edit form
@@ -165,8 +161,22 @@ export const SkillTable = () => {
           <UpdateSkill
             onSaveUpdateTable={onEditUpdateTable}
             onClose={onCloseEdit}
+            skill={skill}
           ></UpdateSkill>
         </BootstrapDialog>
+
+        <Dialog
+          open={isRemove}
+          onClose={onCloseConfirmBox}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <RemoveSkill
+            onSaveRemoveTable={onSaveRemoveTable}
+            onClose={onCloseConfirmBox}
+            skill={skill}
+          ></RemoveSkill>
+        </Dialog>
         <hr />
         {/* table */}
         <Paper sx={{ width: "100%", mb: 0 }}>
@@ -196,21 +206,10 @@ export const SkillTable = () => {
                       <TableCell>{skills.description}</TableCell>
                       <TableCell>
                         <Fab size="small" color="secondary" aria-label="edit">
-                          <EditIcon onClick={openEditForm} />
+                          <EditIcon onClick={() => openEditForm(skills)} />
                         </Fab>
                         <Fab size="small" color="error" aria-label="remove">
-                          <Dialog
-                            open={isRemove}
-                            onClose={onCloseConfirmBox}
-                            aria-labelledby="alert-dialog-title"
-                            aria-describedby="alert-dialog-description"
-                          >
-                            <RemoveSkill
-                              onSaveRemoveTable={onSaveRemoveTable}
-                              onClose={onCloseConfirmBox}
-                            ></RemoveSkill>
-                          </Dialog>
-                          <DeleteIcon onClick={openConfirmBox} />
+                          <DeleteIcon onClick={() => openConfirmBox(skills)} />
                         </Fab>
                       </TableCell>
                     </TableRow>

@@ -10,14 +10,15 @@ import { removeSkills, STATUSES } from "../../store/manageSkillsSlice";
 
 export const RemoveSkill = (props) => {
   const dispatch = useDispatch();
-  const { skillsData, status } = useSelector((state) => state.manageSkills);
+  const {  status } = useSelector((state) => state.manageSkills);
 
   const onClose = () => {
     props.onClose();
   };
   // Delete Employee Delete Api Call
-  const DeleteRole = (id) => {
+  const DeleteSkill = (id) => {
     dispatch(removeSkills(id));
+    props.onSaveRemoveTable();
   };
 
   if (status === STATUSES.LOADING) {
@@ -33,7 +34,7 @@ export const RemoveSkill = (props) => {
       {/* conformation Box */}
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Are you sure want to delete <b>{skillsData.skill} ?</b>
+          Are you sure want to delete <b>{props.skill.skill} ?</b>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -41,7 +42,7 @@ export const RemoveSkill = (props) => {
         <Button
           variant="contained"
           color="primary"
-          onClick={DeleteRole}
+          onClick={DeleteSkill(props.skill.id)}
           autoFocus
         >
           Ok
