@@ -10,12 +10,12 @@ import { removeRole, STATUSES } from "../../store/manageRolesSlice";
 
 export const RemoveRole = (props) => {
   const dispatch = useDispatch();
-  const {  status } = useSelector((state) => state.manageRoles);
+  const { status } = useSelector((state) => state.manageRoles);
 
   // Delete Employee Delete Api Call
   const DeleteRole = (id) => {
     dispatch(removeRole(id));
-    props.onSaveRemoveTable();
+    props.onSaveRemoveRole();
   };
 
   if (status === STATUSES.LOADING) {

@@ -75,7 +75,7 @@ export const AddRole = (props) => {
     dispatch(addRole(req));
     props.onSaveUpdateTable();
   };
-  
+
   const onClose = () => {
     props.onClose();
   };

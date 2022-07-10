@@ -59,8 +59,6 @@ export const UpdateEmployee = (props) => {
     mode: "onTouched",
   });
 
-
-
   // selected Skill mantain state
   const [selectedSkills, setSelectedSkills] = useState(props.employee.skills);
 
@@ -96,11 +94,9 @@ export const UpdateEmployee = (props) => {
       role: { role: data.role },
       skills: selectedSkills,
     };
-    dispatch(
-      updateEmployee(props.employee.id,req)
-    );
-    console.log(req)
-    console.log(props.employee.id)
+    dispatch(updateEmployee(props.employee.id, req));
+    console.log(req);
+    console.log(props.employee.id);
     props.onEditUpdateTable();
   };
 

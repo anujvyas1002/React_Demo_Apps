@@ -29,6 +29,11 @@
       "id": 1657377264923,
       "email": "vishal.wandile@anka.co.in",
       "password": "Anuj@123"
+    },
+    {
+      "id": 1657432247106,
+      "email": "vishal.wandile@anka.co.in",
+      "password": "Anuj@123"
     }
   ],
   "rolesData": [
@@ -60,11 +65,6 @@
       "description": "i am NodeJs developer"
     },
     {
-      "id": 1657253581848,
-      "skill": "React",
-      "description": "i am React developer"
-    },
-    {
       "id": 1657259881848,
       "skill": "Angular",
       "description": "i am Angular developer"
@@ -73,11 +73,6 @@
       "id": 1657250781848,
       "skill": "Android",
       "description": "i am Android developer"
-    },
-    {
-      "id": 1657258781848,
-      "skill": "c",
-      "description": "i am c developer"
     },
     {
       "id": 1657283452933,
@@ -121,27 +116,6 @@
     }
   ],
   "employees": [
-    {
-      "id": 1657007818120,
-      "firstName": "anuj",
-      "lastName": "vyas",
-      "dob": "2021/7/5",
-      "employee_about": "i am anuj",
-      "gender": "Female",
-      "role": {
-        "role": "Tester"
-      },
-      "skills": [
-        {
-          "id": 2,
-          "skill": "NodeJs"
-        },
-        {
-          "id": 4,
-          "skill": "Angular"
-        }
-      ]
-    },
     {
       "id": 1657194357024,
       "firstName": "ankit",

@@ -10,12 +10,12 @@ import { removeEmployee, STATUSES } from "../../store/manageEmployeesSlice";
 
 const RemoveEmployee = (props) => {
   const dispatch = useDispatch();
-  const {  status } = useSelector((state) => state.manageEmployees);
+  const { status } = useSelector((state) => state.manageEmployees);
 
   // Delete Employee Delete Api Call
   const DeleteEmployee = (id) => {
     dispatch(removeEmployee(id));
-    props.onSaveRemoveTable();
+    props.onSaveRemoveEmployee();
   };
 
   if (status === STATUSES.LOADING) {

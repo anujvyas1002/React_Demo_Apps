@@ -46,7 +46,7 @@ export const EmployeeTable = () => {
   const [isEdit, setEdit] = useState(false);
 
   //employee data
-  const [employee , setEmployee] = useState([]);
+  const [employee, setEmployee] = useState([]);
 
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -73,16 +73,16 @@ export const EmployeeTable = () => {
   //refresh table after save
   const onSaveUpdateTable = () => {
     // timerRef.current = window.setTimeout(() => {
-      setAdd(false);
-      dispatch(fetchEmployees());
+    setAdd(false);
+    dispatch(fetchEmployees());
     // }, constants.TIMEOUT);
   };
 
   //after edit refresh table
   const onEditUpdateTable = () => {
     // timerRef.current = window.setTimeout(() => {
-      setEdit(false);
-      dispatch(fetchEmployees());
+    setEdit(false);
+    dispatch(fetchEmployees());
     // }, constants.TIMEOUT);
   };
 
@@ -96,15 +96,15 @@ export const EmployeeTable = () => {
     setRemove(false);
   };
 
-  const onSaveRemoveTable = () => {
+  const onSaveRemoveEmployee = () => {
     // timerRef.current = window.setTimeout(() => {
-      setRemove(false);
-      dispatch(fetchEmployees());
+    setRemove(false);
+    dispatch(fetchEmployees());
     // }, constants.TIMEOUT);
   };
   //on click of add group
   const openEditForm = (employee) => {
-    console.log(employee)
+    console.log(employee);
     setEmployee(employee);
     setEdit(true);
   };
@@ -191,7 +191,7 @@ export const EmployeeTable = () => {
           aria-describedby="alert-dialog-description"
         >
           <RemoveEmployee
-            onSaveRemoveTable={onSaveRemoveTable}
+            onSaveRemoveEmployee={onSaveRemoveEmployee}
             onClose={onCloseConfirmBox}
             employee={employee}
           ></RemoveEmployee>
@@ -243,12 +243,14 @@ export const EmployeeTable = () => {
                         {/* <EditIcon /> */}
 
                         <Fab size="small" color="secondary" aria-label="edit">
-                          <EditIcon onClick={()=>openEditForm(employee)} />
+                          <EditIcon onClick={() => openEditForm(employee)} />
                         </Fab>
                         {/* </IconButton> */}
 
                         <Fab size="small" color="error" aria-label="remove">
-                          <DeleteIcon onClick={()=>openConfirmBox(employee)} />
+                          <DeleteIcon
+                            onClick={() => openConfirmBox(employee)}
+                          />
                         </Fab>
                       </TableCell>
                     </TableRow>

@@ -112,6 +112,7 @@ export const addEmployee = createAsyncThunk("employees/add", async (req) => {
 export const updateEmployee = createAsyncThunk(
   "employees/update",
   async (id,req) => {
+    console.log(id);
     console.log(req);
     const res = await axios.put(`http://localhost:3000/employees/${id}`,req);
     const data = res.data;

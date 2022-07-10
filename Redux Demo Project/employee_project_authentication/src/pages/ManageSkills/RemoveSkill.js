@@ -10,7 +10,7 @@ import { removeSkills, STATUSES } from "../../store/manageSkillsSlice";
 
 export const RemoveSkill = (props) => {
   const dispatch = useDispatch();
-  const {  status } = useSelector((state) => state.manageSkills);
+  const { status } = useSelector((state) => state.manageSkills);
 
   const onClose = () => {
     props.onClose();
@@ -18,7 +18,7 @@ export const RemoveSkill = (props) => {
   // Delete Employee Delete Api Call
   const DeleteSkill = (id) => {
     dispatch(removeSkills(id));
-    props.onSaveRemoveTable();
+    props.onSaveRemoveSkill();
   };
 
   if (status === STATUSES.LOADING) {

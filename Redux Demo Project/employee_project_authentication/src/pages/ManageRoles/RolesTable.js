@@ -41,7 +41,7 @@ export const RolesTable = () => {
   //state for open remove users form
   const [isRemove, setRemove] = useState(false);
 
-  const [role , setRole] = useState([]);
+  const [role, setRole] = useState([]);
 
   //state for open edit Group form
   const [isEdit, setEdit] = useState(false);
@@ -65,9 +65,9 @@ export const RolesTable = () => {
     setRemove(false);
   };
 
-  const onSaveRemoveTable = () => {
-      setRemove(false);
-      dispatch(fetchRole());
+  const onSaveRemoveRole = () => {
+    setRemove(false);
+    dispatch(fetchRole());
   };
 
   //on click of add employee
@@ -82,14 +82,14 @@ export const RolesTable = () => {
 
   //refresh table after save
   const onSaveUpdateTable = () => {
-      setAdd(false);
-      dispatch(fetchRole());
+    setAdd(false);
+    dispatch(fetchRole());
   };
 
   //after edit refresh table
   const onEditUpdateTable = () => {
-      setEdit(false);
-      dispatch(fetchRole());
+    setEdit(false);
+    dispatch(fetchRole());
   };
 
   //on click of add group
@@ -170,7 +170,7 @@ export const RolesTable = () => {
           aria-describedby="alert-dialog-description"
         >
           <RemoveRole
-            onSaveRemoveTable={onSaveRemoveTable}
+            onSaveRemoveRole={onSaveRemoveRole}
             onClose={onCloseConfirmBox}
             role={role}
           ></RemoveRole>
@@ -205,10 +205,10 @@ export const RolesTable = () => {
                       <TableCell>{roles.description}</TableCell>
                       <TableCell>
                         <Fab size="small" color="secondary" aria-label="edit">
-                          <EditIcon  onClick={()=>openEditForm(roles)} />
+                          <EditIcon onClick={() => openEditForm(roles)} />
                         </Fab>
                         <Fab size="small" color="error" aria-label="remove">
-                          <DeleteIcon onClick={()=>openConfirmBox(roles)}  />
+                          <DeleteIcon onClick={() => openConfirmBox(roles)} />
                         </Fab>
                       </TableCell>
                     </TableRow>

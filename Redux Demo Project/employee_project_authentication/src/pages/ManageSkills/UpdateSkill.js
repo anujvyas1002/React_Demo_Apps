@@ -65,16 +65,13 @@ export const UpdateSkill = (props) => {
       skills: data.skill,
       description: data.description,
     };
-    dispatch(
-      updateSkills(props.skill.id,req)
-    );
+    dispatch(updateSkills(props.skill.id, req));
     props.onEditUpdateTable();
   };
 
   setValue("id", props.skill.id);
   setValue("skill", props.skill.skill);
   setValue("description", props.skill.description);
-
 
   const onClose = () => {
     props.onClose();

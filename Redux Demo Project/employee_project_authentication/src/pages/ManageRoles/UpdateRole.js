@@ -64,13 +64,10 @@ export const UpdateRole = (props) => {
       id: Date.now(),
       role: data.role,
       description: data.description,
-    };  
-    dispatch(
-      updateRole(props.role.id,req)
-    );
+    };
+    dispatch(updateRole(props.role.id, req));
     props.onEditUpdateTable();
   };
-
 
   setValue("id", props.role.id);
   setValue("role", props.role.role);
