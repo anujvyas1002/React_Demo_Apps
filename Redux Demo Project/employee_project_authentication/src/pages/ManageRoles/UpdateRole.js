@@ -61,11 +61,11 @@ export const UpdateRole = (props) => {
   //from data
   const onSubmit = (data) => {
     req = {
-      id: Date.now(),
+      id: props.role.id,
       role: data.role,
       description: data.description,
     };
-    dispatch(updateRole(props.role.id, req));
+    dispatch(updateRole(req));
     props.onEditUpdateTable();
   };
 
@@ -90,7 +90,7 @@ export const UpdateRole = (props) => {
   return (
     <div>
       <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
-        Update Role
+        Update {props.role.role}
       </BootstrapDialogTitle>
       <DialogContent dividers>
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -85,8 +85,8 @@ export const addRole = createAsyncThunk("role/add", async (req) => {
 });
 
 // Edit Role Api Call
-export const updateRole = createAsyncThunk("role/update", async (id, req) => {
-  const res = await axios.put(`http://localhost:3000/rolesData/${id}`, req);
+export const updateRole = createAsyncThunk("role/update", async (req) => {
+  const res = await axios.put(`http://localhost:3000/rolesData/${req.id}`, req);
   const data = res.data;
   return data;
 });

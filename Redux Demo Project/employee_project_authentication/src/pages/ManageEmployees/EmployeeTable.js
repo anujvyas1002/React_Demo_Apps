@@ -94,7 +94,7 @@ export const EmployeeTable = () => {
   };
 
   //refresh table after Remove Employee
-  const onSaveRemoveEmployee = () => {
+  const onRemoveEmployee = () => {
     setRemove(false);
     dispatch(fetchEmployees());
   };
@@ -174,7 +174,7 @@ export const EmployeeTable = () => {
           open={isEdit}
         >
           <UpdateEmployee
-            onSaveUpdateTable={onEditUpdateTable}
+            onEditUpdateTable={onEditUpdateTable}
             onClose={onCloseEdit}
             employee={employee}
           ></UpdateEmployee>
@@ -187,7 +187,7 @@ export const EmployeeTable = () => {
           aria-describedby="alert-dialog-description"
         >
           <RemoveEmployee
-            onSaveRemoveEmployee={onSaveRemoveEmployee}
+            onRemoveEmployee={onRemoveEmployee}
             onClose={onCloseConfirmBox}
             employee={employee}
           ></RemoveEmployee>

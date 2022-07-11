@@ -53,7 +53,6 @@ export const UpdateEmployee = (props) => {
     register,
     handleSubmit,
     setValue,
-    resetField,
     formState: { errors, isDirty, isValid },
   } = useForm({
     mode: "onTouched",
@@ -85,7 +84,7 @@ export const UpdateEmployee = (props) => {
   //from data
   const onSubmit = (data) => {
     req = {
-      id: Date.now(),
+      id: props.employee.id,
       firstName: data.firstName,
       lastName: data.lastName,
       dob: formatDate(selectedDate),
@@ -94,7 +93,7 @@ export const UpdateEmployee = (props) => {
       role: { role: data.role },
       skills: selectedSkills,
     };
-    dispatch(updateEmployee(props.employee.id, req));
+    dispatch(updateEmployee(req));
     props.onEditUpdateTable();
   };
 
@@ -119,13 +118,6 @@ export const UpdateEmployee = (props) => {
   // close Dialog
   const onClose = () => {
     props.onClose();
-    resetField("id");
-    resetField("firstName");
-    resetField("lastName");
-    resetField("dob");
-    resetField("role");
-    resetField("gender");
-    resetField("employee_about");
   };
 
   // Skills input filed Condition
@@ -143,7 +135,7 @@ export const UpdateEmployee = (props) => {
   return (
     <div>
       <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
-        Update Employee
+        {props.employee.firstName} {props.employee.lastName} Update
       </BootstrapDialogTitle>
       <DialogContent dividers>
         <form onSubmit={handleSubmit(onSubmit)}>

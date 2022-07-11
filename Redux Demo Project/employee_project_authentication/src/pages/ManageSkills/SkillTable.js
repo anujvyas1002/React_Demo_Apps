@@ -93,7 +93,7 @@ export const SkillTable = () => {
   //after edit refresh table
   const onEditUpdateTable = () => {
     setEdit(false);
-    dispatch(fetchRole());
+    dispatch(fetchSkills());
   };
 
   //on click of add Skill Dialog
@@ -162,7 +162,7 @@ export const SkillTable = () => {
           open={isEdit}
         >
           <UpdateSkill
-            onSaveUpdateTable={onEditUpdateTable}
+            onEditUpdateTable={onEditUpdateTable}
             onClose={onCloseEdit}
             skill={skill}
           ></UpdateSkill>

@@ -17,6 +17,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee, STATUSES } from "../../store/manageEmployeesSlice";
+// import { ToasterMessage } from "../../components/ToasterMessage";
+// import { Loader } from "../../components/Loader";
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -120,6 +122,8 @@ export const AddEmployee = (props) => {
 
   return (
     <div>
+      {/* <ToasterMessage/> */}
+      {/* <Loader/> */}
       <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
         Create New Empoyee
       </BootstrapDialogTitle>

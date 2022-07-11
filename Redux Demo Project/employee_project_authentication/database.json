@@ -53,15 +53,15 @@
       "description": "i am Tester"
     },
     {
-      "id": 1657260231019,
-      "role": "Manager",
-      "description": "i am Manager"
+      "id": 1657544161455,
+      "role": "Admin",
+      "description": "i am admin"
     }
   ],
   "skillsData": [
     {
       "id": 1657258011848,
-      "skill": "NodeJs",
+      "skill": "NodeJS",
       "description": "i am NodeJs developer"
     },
     {
@@ -70,29 +70,19 @@
       "description": "i am Angular developer"
     },
     {
+      "id": 1657259884548,
+      "skill": "React",
+      "description": "i am React developer"
+    },
+    {
       "id": 1657250781848,
       "skill": "Android",
       "description": "i am Android developer"
     },
     {
-      "id": 1657283452933,
-      "skill": "Java",
-      "description": "Java programming language"
-    },
-    {
       "id": 1657342080362,
       "skill": "pythan",
       "description": "xyz"
-    },
-    {
-      "id": 1657342909562,
-      "skill": "jingo",
-      "description": "xyz"
-    },
-    {
-      "id": 1657343160123,
-      "skill": "pythan",
-      "description": "gv"
     },
     {
       "id": 1657343391602,
@@ -102,11 +92,6 @@
     {
       "id": 1657343488482,
       "skill": "bootstrap",
-      "description": "xyz"
-    },
-    {
-      "id": 1657343662907,
-      "skill": "xyz",
       "description": "xyz"
     }
   ],
@@ -123,7 +108,12 @@
       },
       "skills": [
         {
-          "id": 1657253581848,
+          "id": 1657283452933,
+          "skill": "Java",
+          "description": "Java programming language"
+        },
+        {
+          "id": 1657259884548,
           "skill": "React",
           "description": "i am React developer"
         }
@@ -133,7 +123,7 @@
       "id": 1657453560959,
       "firstName": "anuj",
       "lastName": "vyas",
-      "dob": "2021/7/10",
+      "dob": "2000/12/13",
       "employee_about": "xyz",
       "gender": "Male",
       "role": {
@@ -141,14 +131,32 @@
       },
       "skills": [
         {
-          "id": 1657283452933,
-          "skill": "Java",
-          "description": "Java programming language"
+          "id": 1657343488482,
+          "skill": "bootstrap",
+          "description": "xyz"
+        }
+      ]
+    },
+    {
+      "id": 1657546092193,
+      "firstName": "vishal",
+      "lastName": "vyas",
+      "dob": "2021/7/11",
+      "employee_about": "xyz",
+      "gender": "Female",
+      "role": {
+        "role": "Developer"
+      },
+      "skills": [
+        {
+          "id": 1657259881848,
+          "skill": "Angular",
+          "description": "i am Angular developer"
         },
         {
-          "id": 1657342909562,
-          "skill": "jingo",
-          "description": "xyz"
+          "id": 1657250781848,
+          "skill": "Android",
+          "description": "i am Android developer"
         }
       ]
     }

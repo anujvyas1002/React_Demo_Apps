@@ -18,7 +18,7 @@ export const RemoveSkill = (props) => {
   };
   
   // Delete Employee Delete Api Call
-  const DeleteSkill = (id) => {
+  const deleteSkill = (id) => {
     dispatch(removeSkills(id));
     props.onSaveRemoveSkill();
   };
@@ -44,7 +44,7 @@ export const RemoveSkill = (props) => {
         <Button
           variant="contained"
           color="primary"
-          onClick={DeleteSkill(props.skill.id)}
+          onClick={()=>deleteSkill(props.skill.id)}
           autoFocus
         >
           Ok

@@ -161,7 +161,7 @@ export const RolesTable = () => {
           open={isEdit}
         >
           <UpdateRole
-            onSaveUpdateTable={onEditUpdateTable}
+            onEditUpdateTable={onEditUpdateTable}
             onClose={onCloseEdit}
             role={role}
           ></UpdateRole>

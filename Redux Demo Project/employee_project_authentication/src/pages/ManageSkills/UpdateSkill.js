@@ -61,11 +61,11 @@ export const UpdateSkill = (props) => {
   //from data
   const onSubmit = (data) => {
     req = {
-      id: Date.now(),
-      skills: data.skill,
+      id: props.skill.id,
+      skill: data.skill,
       description: data.description,
     };
-    dispatch(updateSkills(props.skill.id, req));
+    dispatch(updateSkills(req));
     props.onEditUpdateTable();
   };
 
@@ -90,7 +90,7 @@ export const UpdateSkill = (props) => {
   return (
     <div>
       <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
-        Update Skill
+        Update {props.skill.skill}
       </BootstrapDialogTitle>
       <DialogContent dividers>
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -86,8 +86,8 @@ export const addSkills = createAsyncThunk("skills/add", async (req) => {
 // Edit Skill Api Call
 export const updateSkills = createAsyncThunk(
   "skills/update",
-  async (id, req) => {
-    const res = await axios.put(`http://localhost:3000/skillsData/${id}`, req);
+  async (req) => {
+    const res = await axios.put(`http://localhost:3000/skillsData/${req.id}`, req);
     const data = res.data;
     return data;
   }

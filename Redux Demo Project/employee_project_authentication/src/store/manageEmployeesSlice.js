@@ -63,7 +63,6 @@ const employeeSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(updateEmployee.fulfilled, (state, action) => {
-        state.employees = action.payload;
         state.status = STATUSES.IDLE;
       })
       .addCase(updateEmployee.rejected, (state, action) => {
@@ -104,9 +103,8 @@ export const addEmployee = createAsyncThunk("employees/add", async (req) => {
 // Edit Employee Api Call
 export const updateEmployee = createAsyncThunk(
   "employees/update",
-  async (id,req) => {
-    console.log(req,id);
-    const res = await axios.put(`http://localhost:3000/employees/${id}`,req);
+  async (req) => {
+    const res = await axios.put(`http://localhost:3000/employees/${req.id}`,req);
     const data = res.data;
     console.log(data);
     return data;

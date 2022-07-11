@@ -13,9 +13,9 @@ const RemoveEmployee = (props) => {
   const { status } = useSelector((state) => state.manageEmployees);
 
   // Delete Employee Delete Api Call
-  const DeleteEmployee = (id) => {
+  const deleteEmployee = (id) => {
     dispatch(removeEmployee(id));
-    props.onSaveRemoveEmployee();
+    props.onRemoveEmployee();
   };
 
   if (status === STATUSES.LOADING) {
@@ -47,7 +47,7 @@ const RemoveEmployee = (props) => {
         <Button
           variant="contained"
           color="primary"
-          onClick={DeleteEmployee(props.employee.id)}
+          onClick={()=>deleteEmployee(props.employee.id)}
           autoFocus
         >
           Ok

@@ -13,7 +13,7 @@ export const RemoveRole = (props) => {
   const { status } = useSelector((state) => state.manageRoles);
 
   // Delete Employee Delete Api Call
-  const DeleteRole = (id) => {
+  const deleteRole = (id) => {
     dispatch(removeRole(id));
     props.onSaveRemoveRole();
   };
@@ -44,7 +44,7 @@ export const RemoveRole = (props) => {
         <Button
           variant="contained"
           color="primary"
-          onClick={DeleteRole(props.role.id)}
+          onClick={()=>deleteRole(props.role.id)}
           autoFocus
         >
           Ok
