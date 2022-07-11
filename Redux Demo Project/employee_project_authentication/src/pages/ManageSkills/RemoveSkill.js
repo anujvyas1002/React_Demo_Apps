@@ -20,7 +20,7 @@ export const RemoveSkill = (props) => {
   // Delete Employee Delete Api Call
   const deleteSkill = (id) => {
     dispatch(removeSkills(id));
-    props.onSaveRemoveSkill();
+    props.onRemoveSkill();
   };
 
   if (status === STATUSES.LOADING) {

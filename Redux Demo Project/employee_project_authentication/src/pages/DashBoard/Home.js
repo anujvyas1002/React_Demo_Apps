@@ -1,5 +1,7 @@
 import React from "react";
 
 export const Home = () => {
-  return <div>DashBoard</div>;
+  return <div>
+    <h4>DashBoard</h4>
+    </div>
 };

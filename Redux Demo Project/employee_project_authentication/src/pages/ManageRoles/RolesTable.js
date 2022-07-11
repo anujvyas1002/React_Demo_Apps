@@ -68,7 +68,7 @@ export const RolesTable = () => {
   };
 
   //refresh table after remove Role
-  const onSaveRemoveRole = () => {
+  const onRemoveRole = () => {
     setRemove(false);
     dispatch(fetchRole());
   };
@@ -173,7 +173,7 @@ export const RolesTable = () => {
           aria-describedby="alert-dialog-description"
         >
           <RemoveRole
-            onSaveRemoveRole={onSaveRemoveRole}
+            onRemoveRole={onRemoveRole}
             onClose={onCloseConfirmBox}
             role={role}
           ></RemoveRole>

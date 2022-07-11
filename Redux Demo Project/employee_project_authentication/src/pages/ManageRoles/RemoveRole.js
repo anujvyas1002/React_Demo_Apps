@@ -15,7 +15,7 @@ export const RemoveRole = (props) => {
   // Delete Employee Delete Api Call
   const deleteRole = (id) => {
     dispatch(removeRole(id));
-    props.onSaveRemoveRole();
+    props.onRemoveRole();
   };
 
   if (status === STATUSES.LOADING) {

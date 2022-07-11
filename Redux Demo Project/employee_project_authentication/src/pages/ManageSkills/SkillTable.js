@@ -69,7 +69,7 @@ export const SkillTable = () => {
   };
 
   //refresh table after Remove Skill
-  const onSaveRemoveSkill = () => {
+  const onRemoveSkill = () => {
     setRemove(false);
     dispatch(fetchSkills());
   };
@@ -175,7 +175,7 @@ export const SkillTable = () => {
           aria-describedby="alert-dialog-description"
         >
           <RemoveSkill
-            onSaveRemoveSkill={onSaveRemoveSkill}
+            onRemoveSkill={onRemoveSkill}
             onClose={onCloseConfirmBox}
             skill={skill}
           ></RemoveSkill>
