@@ -34,7 +34,6 @@ const skillsSlice = createSlice({
       .addCase(fetchSkills.rejected, (state, action) => {
         state.status = STATUSES.ERROR;
       })
-
       .addCase(addSkills.pending, (state, action) => {
         state.status = STATUSES.LOADING;
       })
@@ -70,32 +69,33 @@ export const { setSkills, setStatus } = skillsSlice.actions;
 export default skillsSlice.reducer;
 
 // Thunks
+//  fetch Api All Skills Data
 export const fetchSkills = createAsyncThunk("skills/fetch", async () => {
   const res = await axios.get(`http://localhost:3000/skillsData`);
   const data = res.data;
-  console.log(data);
   return data;
 });
 
+// Add Skill Api Call
 export const addSkills = createAsyncThunk("skills/add", async (req) => {
   const res = await axios.post(`http://localhost:3000/skillsData`, req);
   const data = res.data;
-  console.log(data);
   return data;
 });
+
+// Edit Skill Api Call
 export const updateSkills = createAsyncThunk(
   "skills/update",
   async (id, req) => {
     const res = await axios.put(`http://localhost:3000/skillsData/${id}`, req);
     const data = res.data;
-    console.log(data);
     return data;
   }
 );
+
+// Remove Skill Api Call
 export const removeSkills = createAsyncThunk("skills/remove", async (id) => {
   const res = await axios.delete(`http://localhost:3000/skillsData/${id}`);
-  console.log(res.status);
   const data = res.data;
-  console.log(data);
   return data;
 });

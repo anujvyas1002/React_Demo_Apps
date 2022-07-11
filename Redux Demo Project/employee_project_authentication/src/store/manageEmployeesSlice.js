@@ -16,14 +16,6 @@ const employeeSlice = createSlice({
     roles: [],
     skills: [],
   },
-  reducers: {
-    // setProducts(state, action) {
-    //     state.data = action.payload;
-    // },
-    // setStatus(state, action) {
-    //     state.status = action.payload;
-    // },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchEmployees.pending, (state, action) => {
@@ -40,7 +32,6 @@ const employeeSlice = createSlice({
         state.status = STATUSES.LOADING;
       })
       .addCase(skillsData.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.skills = action.payload;
         state.status = STATUSES.IDLE;
       })
@@ -96,51 +87,53 @@ export const { setEmployees, setStatus, setSkillsData, setRolesData } =
 export default employeeSlice.reducer;
 
 // Thunks
+//  fetch Api All Employee Data
 export const fetchEmployees = createAsyncThunk("employees/fetch", async () => {
   const res = await axios.get(`http://localhost:3000/employees`);
   const data = res.data;
-  console.log(data);
   return data;
 });
 
+// Add Employee Api Call
 export const addEmployee = createAsyncThunk("employees/add", async (req) => {
   const res = await axios.post(`http://localhost:3000/employees`, req);
   const data = res.data;
-  console.log(data);
   return data;
 });
+
+// Edit Employee Api Call
 export const updateEmployee = createAsyncThunk(
   "employees/update",
   async (id,req) => {
-    console.log(id);
-    console.log(req);
+    console.log(req,id);
     const res = await axios.put(`http://localhost:3000/employees/${id}`,req);
     const data = res.data;
     console.log(data);
     return data;
   }
 );
+
+// Remove Employee Api Call
 export const removeEmployee = createAsyncThunk(
   "employees/remove",
   async (id) => {
     const res = await axios.delete(`http://localhost:3000/employees/${id}`);
-    console.log(res.status);
     const data = res.data;
     console.log(data);
     return data;
   }
 );
 
+//  Role Api All Role Data
 export const rolesData = createAsyncThunk("employees/roles", async () => {
   const res = await axios.get(`http://localhost:3000/rolesData`);
   const data = res.data;
-  console.log(data);
   return data;
 });
 
+//  Skill Api All Skill Data
 export const skillsData = createAsyncThunk("employees/skills", async () => {
   const res = await axios.get(`http://localhost:3000/skillsData`);
   const data = res.data;
-  console.log(data);
   return data;
 });

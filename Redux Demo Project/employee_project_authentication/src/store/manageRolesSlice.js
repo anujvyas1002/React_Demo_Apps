@@ -70,29 +70,30 @@ export const { setRoles, setStatus } = rolesSlice.actions;
 export default rolesSlice.reducer;
 
 // Thunks
+//  fetch Api All Role Data
 export const fetchRole = createAsyncThunk("role/fetch", async () => {
   const res = await axios.get(`http://localhost:3000/rolesData`);
   const data = res.data;
-  console.log(data);
   return data;
 });
 
+// Add Role Api Call
 export const addRole = createAsyncThunk("role/add", async (req) => {
   const res = await axios.post(`http://localhost:3000/rolesData`, req);
   const data = res.data;
-  console.log(data);
   return data;
 });
+
+// Edit Role Api Call
 export const updateRole = createAsyncThunk("role/update", async (id, req) => {
   const res = await axios.put(`http://localhost:3000/rolesData/${id}`, req);
   const data = res.data;
-  console.log(data);
   return data;
 });
+
+// Remove Role Api Call
 export const removeRole = createAsyncThunk("role/remove", async (id) => {
   const res = await axios.delete(`http://localhost:3000/rolesData/${id}`);
-  console.log(res.status);
   const data = res.data;
-  console.log(data);
   return data;
 });
