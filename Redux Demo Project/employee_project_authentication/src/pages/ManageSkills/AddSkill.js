@@ -67,7 +67,6 @@ export const AddSkill = (props) => {
 
   //from data
   const onSubmit = (data) => {
-    console.log(data);
     req = {
       id: Date.now(),
       skill: data.skill,

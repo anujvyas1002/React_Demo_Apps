@@ -106,7 +106,6 @@ export const updateEmployee = createAsyncThunk(
   async (req) => {
     const res = await axios.put(`http://localhost:3000/employees/${req.id}`,req);
     const data = res.data;
-    console.log(data);
     return data;
   }
 );
@@ -117,7 +116,6 @@ export const removeEmployee = createAsyncThunk(
   async (id) => {
     const res = await axios.delete(`http://localhost:3000/employees/${id}`);
     const data = res.data;
-    console.log(data);
     return data;
   }
 );

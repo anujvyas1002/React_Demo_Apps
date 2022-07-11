@@ -54,9 +54,7 @@ export default authenticationSlice.reducer;
 export const registrationEmployee = createAsyncThunk(
   "Authentication/registration",
   async (req) => {
-    console.log(req);
     axios.post("http://localhost:3000/users", req).then((response) => {
-      console.log(response);
       return response.data;
     });
   }
@@ -65,9 +63,7 @@ export const registrationEmployee = createAsyncThunk(
 export const loginEmployee = createAsyncThunk(
   "Authentication/add",
   async (req) => {
-    console.log(req);
     axios.post("http://localhost:3000/login", req).then((response) => {
-      console.log(response);
       return response.data;
     });
   }
