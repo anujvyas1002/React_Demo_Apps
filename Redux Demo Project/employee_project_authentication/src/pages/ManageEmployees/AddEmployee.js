@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
@@ -88,7 +87,6 @@ export const AddEmployee = (props) => {
 
   //from data
   const onSubmit = (data) => {
-    console.log(data);
     req = {
       id: Date.now(),
       firstName: data.firstName,
@@ -103,6 +101,7 @@ export const AddEmployee = (props) => {
     props.onSaveUpdateTable();
   };
 
+  // Dialog close
   const onClose = () => {
     props.onClose();
   };

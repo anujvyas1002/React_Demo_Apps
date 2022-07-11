@@ -12,9 +12,11 @@ export const RemoveSkill = (props) => {
   const dispatch = useDispatch();
   const { status } = useSelector((state) => state.manageSkills);
 
+  // Close confirmBox
   const onClose = () => {
     props.onClose();
   };
+  
   // Delete Employee Delete Api Call
   const DeleteSkill = (id) => {
     dispatch(removeSkills(id));

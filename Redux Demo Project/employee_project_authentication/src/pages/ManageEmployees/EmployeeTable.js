@@ -36,13 +36,13 @@ export const EmployeeTable = () => {
   // handle for pagination data
   const [page, setPage] = useState(0);
 
-  //state for open add users form
+  //state for open add employee  Dialog
   const [isAdd, setAdd] = useState(false);
 
-  //state for open remove users form
+  //state for open remove employee ConfirmBox
   const [isRemove, setRemove] = useState(false);
 
-  //state for open edit Group form
+  //state for open edit Employee  Dialog
   const [isEdit, setEdit] = useState(false);
 
   //employee data
@@ -65,51 +65,47 @@ export const EmployeeTable = () => {
     setAdd(true);
   };
 
-  //close add new form
+  //close add new Employee  Dialog
   const onCloseForm = () => {
     setAdd(false);
   };
 
   //refresh table after save
   const onSaveUpdateTable = () => {
-    // timerRef.current = window.setTimeout(() => {
     setAdd(false);
     dispatch(fetchEmployees());
-    // }, constants.TIMEOUT);
   };
 
   //after edit refresh table
   const onEditUpdateTable = () => {
-    // timerRef.current = window.setTimeout(() => {
     setEdit(false);
     dispatch(fetchEmployees());
-    // }, constants.TIMEOUT);
   };
 
+  //on click of remove employee ConfirmBox open
   const openConfirmBox = (employee) => {
     setRemove(true);
     setEmployee(employee);
   };
 
-  //close add new form
+  //close ConfirmBox
   const onCloseConfirmBox = () => {
     setRemove(false);
   };
 
+  //refresh table after Remove Employee
   const onSaveRemoveEmployee = () => {
-    // timerRef.current = window.setTimeout(() => {
     setRemove(false);
     dispatch(fetchEmployees());
-    // }, constants.TIMEOUT);
   };
-  //on click of add group
+
+  //on click of add Employee
   const openEditForm = (employee) => {
-    console.log(employee);
     setEmployee(employee);
     setEdit(true);
   };
 
-  //close edit form
+  //close edit Dialog
   const onCloseEdit = () => {
     setEdit(false);
   };

@@ -35,18 +35,19 @@ export const SkillTable = () => {
   // handle for pagination data
   const [page, setPage] = useState(0);
 
-  //state for open add users form
+  //state for open add Skill  Dialog
   const [isAdd, setAdd] = useState(false);
 
-  //state for open remove users form
+  //state for open remove Skill confirmBox
   const [isRemove, setRemove] = useState(false);
 
-  //state for open edit Group form
+  //state for open edit Skill Dialog
   const [isEdit, setEdit] = useState(false);
 
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  // Skill Data 
   const [skill, setSkill] = useState([]);
 
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ export const SkillTable = () => {
     dispatch(fetchSkills());
   }, []);
 
+  // onClick open ConfirmBox
   const openConfirmBox = (skill) => {
     setRemove(true);
     setSkill(skill);
@@ -66,12 +68,13 @@ export const SkillTable = () => {
     setRemove(false);
   };
 
+  //refresh table after Remove Skill
   const onSaveRemoveSkill = () => {
     setRemove(false);
     dispatch(fetchSkills());
   };
 
-  //on click of add employee
+  //on click of add Skill
   const openAddForm = () => {
     setAdd(true);
   };
@@ -93,13 +96,13 @@ export const SkillTable = () => {
     dispatch(fetchRole());
   };
 
-  //on click of add group
+  //on click of add Skill Dialog
   const openEditForm = (skill) => {
     setEdit(true);
     setSkill(skill);
   };
 
-  //close edit form
+  //close edit Skill Dialog
   const onCloseEdit = () => {
     setEdit(false);
   };

@@ -34,6 +34,11 @@
       "id": 1657432247106,
       "email": "vishal.wandile@anka.co.in",
       "password": "Anuj@123"
+    },
+    {
+      "id": 1657514604091,
+      "email": "vishal.wandile@anka.co.in",
+      "password": "Anuj@123"
     }
   ],
   "rolesData": [
@@ -51,11 +56,6 @@
       "id": 1657260231019,
       "role": "Manager",
       "description": "i am Manager"
-    },
-    {
-      "requestId": "axa-b22EQAkjrB5tIxmtT",
-      "signal": {},
-      "id": 1657260511019
     }
   ],
   "skillsData": [
@@ -108,35 +108,9 @@
       "id": 1657343662907,
       "skill": "xyz",
       "description": "xyz"
-    },
-    {
-      "id": 1657343800828,
-      "skill": "xyz",
-      "description": "abx"
     }
   ],
   "employees": [
-    {
-      "id": 1657194357024,
-      "firstName": "ankit",
-      "lastName": "vyas",
-      "dob": "2022/7/6",
-      "employee_about": "xyz",
-      "gender": "Male",
-      "role": {
-        "role": "Tester"
-      },
-      "skills": [
-        {
-          "id": 3,
-          "skill": "React"
-        },
-        {
-          "id": 5,
-          "skill": "Android"
-        }
-      ]
-    },
     {
       "id": 1657372908105,
       "firstName": "Anand",
@@ -152,6 +126,29 @@
           "id": 1657253581848,
           "skill": "React",
           "description": "i am React developer"
+        }
+      ]
+    },
+    {
+      "id": 1657453560959,
+      "firstName": "anuj",
+      "lastName": "vyas",
+      "dob": "2021/7/10",
+      "employee_about": "xyz",
+      "gender": "Male",
+      "role": {
+        "role": "Tester"
+      },
+      "skills": [
+        {
+          "id": 1657283452933,
+          "skill": "Java",
+          "description": "Java programming language"
+        },
+        {
+          "id": 1657342909562,
+          "skill": "jingo",
+          "description": "xyz"
         }
       ]
     }

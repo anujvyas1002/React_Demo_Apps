@@ -77,6 +77,7 @@ export const AddSkill = (props) => {
     props.onSaveUpdateTable();
   };
 
+  // Close Dialog
   const onClose = () => {
     props.onClose();
   };

@@ -69,10 +69,12 @@ export const UpdateSkill = (props) => {
     props.onEditUpdateTable();
   };
 
+  // SelValue For inputFiled
   setValue("id", props.skill.id);
   setValue("skill", props.skill.skill);
   setValue("description", props.skill.description);
 
+  // Close Dialog
   const onClose = () => {
     props.onClose();
   };

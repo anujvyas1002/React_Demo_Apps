@@ -66,7 +66,6 @@ export const AddRole = (props) => {
 
   //from data
   const onSubmit = (data) => {
-    console.log(data);
     req = {
       id: Date.now(),
       role: data.role,
@@ -76,6 +75,7 @@ export const AddRole = (props) => {
     props.onSaveUpdateTable();
   };
 
+  // close Dialog
   const onClose = () => {
     props.onClose();
   };

@@ -26,6 +26,7 @@ const RemoveEmployee = (props) => {
     return <h2>Something went wrong!</h2>;
   }
 
+  //close ConfirmBox
   const onClose = () => {
     props.onClose();
   };

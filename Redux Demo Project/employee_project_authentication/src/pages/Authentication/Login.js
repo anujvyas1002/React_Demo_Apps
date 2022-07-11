@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef,useState } from "react";
 import { loginEmployee, STATUSES } from "../../store/authenticationSlice";
 import {
   Button,
@@ -30,12 +30,14 @@ export const Login = () => {
     mode: "onTouched",
   });
 
-  const [values, setValues] = React.useState({ password: "" });
+  // password value show & hide
+  const [values, setValues] = useState({ password: "" });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  // click icon password value show
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -43,6 +45,8 @@ export const Login = () => {
     });
   };
 
+  
+  // click icon password value Hide
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -64,7 +68,6 @@ export const Login = () => {
   let req;
   //from data
   const onSubmit = (data) => {
-    console.log(data);
     req = {
       id: Date.now(),
       email: data.email,

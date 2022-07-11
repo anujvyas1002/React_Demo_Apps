@@ -69,6 +69,7 @@ export const UpdateRole = (props) => {
     props.onEditUpdateTable();
   };
 
+  // SetValue for inputFiled
   setValue("id", props.role.id);
   setValue("role", props.role.role);
   setValue("description", props.role.description);
@@ -81,6 +82,7 @@ export const UpdateRole = (props) => {
     return <h2>Something went wrong!</h2>;
   }
 
+  // Close Dialog
   const onClose = () => {
     props.onClose();
   };

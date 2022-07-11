@@ -95,11 +95,10 @@ export const UpdateEmployee = (props) => {
       skills: selectedSkills,
     };
     dispatch(updateEmployee(props.employee.id, req));
-    console.log(req);
-    console.log(props.employee.id);
     props.onEditUpdateTable();
   };
 
+  // SetValue for input filed
   setValue("id", props.employee.id);
   setValue("firstName", props.employee.firstName);
   setValue("lastName", props.employee.lastName);
@@ -117,6 +116,7 @@ export const UpdateEmployee = (props) => {
     return <h2>Something went wrong!</h2>;
   }
 
+  // close Dialog
   const onClose = () => {
     props.onClose();
     resetField("id");

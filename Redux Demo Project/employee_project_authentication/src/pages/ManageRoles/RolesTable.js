@@ -35,16 +35,17 @@ export const RolesTable = () => {
   // handle for pagination data
   const [page, setPage] = useState(0);
 
-  //state for open add users form
+  //state for open add Role Dialog
   const [isAdd, setAdd] = useState(false);
 
-  //state for open remove users form
+  //state for open remove ConfirmBox
   const [isRemove, setRemove] = useState(false);
 
   const [role, setRole] = useState([]);
 
-  //state for open edit Group form
+  //state for open edit Role form
   const [isEdit, setEdit] = useState(false);
+
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -55,32 +56,34 @@ export const RolesTable = () => {
     dispatch(fetchRole());
   }, []);
 
+  // onclick open confirmbox
   const openConfirmBox = (role) => {
     setRemove(true);
     setRole(role);
   };
 
-  //close add new form
+  //close add new confirmbox
   const onCloseConfirmBox = () => {
     setRemove(false);
   };
 
+  //refresh table after remove Role
   const onSaveRemoveRole = () => {
     setRemove(false);
     dispatch(fetchRole());
   };
 
-  //on click of add employee
+  //on click of add Role
   const openAddForm = () => {
     setAdd(true);
   };
 
-  //close add new form
+  //close add new Role Dialog
   const onCloseForm = () => {
     setAdd(false);
   };
 
-  //refresh table after save
+  //refresh table after save Role
   const onSaveUpdateTable = () => {
     setAdd(false);
     dispatch(fetchRole());
@@ -92,16 +95,17 @@ export const RolesTable = () => {
     dispatch(fetchRole());
   };
 
-  //on click of add group
+  //on click of add Role
   const openEditForm = (role) => {
     setEdit(true);
     setRole(role);
   };
 
-  //close edit form
+  //close edit Dialog
   const onCloseEdit = () => {
     setEdit(false);
   };
+
   // pagination set new Page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -124,7 +128,6 @@ export const RolesTable = () => {
   return (
     <>
       <div>
-        {/* <UpdateRole /> */}
         <Grid
           container
           direction="row"
