@@ -40,7 +40,6 @@ const employeeSlice = createSlice({
                 state.status = STATUSES.LOADING;
             })
             .addCase(skillsData.fulfilled, (state, action) => {
-                console.log(action.payload)
                 state.skills = action.payload;
                 state.status = STATUSES.IDLE;
             })
@@ -72,7 +71,6 @@ const employeeSlice = createSlice({
                 state.status = STATUSES.LOADING;
             })
             .addCase(updateEmployee.fulfilled, (state, action) => {
-                state.employees = action.payload;
                 state.status = STATUSES.IDLE;
             })
             .addCase(updateEmployee.rejected, (state, action) => {
@@ -82,7 +80,6 @@ const employeeSlice = createSlice({
                 state.status = STATUSES.LOADING;
             })
             .addCase(removeEmployee.fulfilled, (state, action) => {
-                state.employees = action.payload;
                 state.status = STATUSES.IDLE;
             })
             .addCase(removeEmployee.rejected, (state, action) => {
@@ -105,57 +102,36 @@ export default employeeSlice.reducer;
 export const fetchEmployees = createAsyncThunk('employees/fetch', async () => {
     const res = await axios.get(`http://localhost:3000/employees`)
         const data = res.data
-        console.log(data)
         return data;
 });
 
 export const addEmployee = createAsyncThunk('employees/add', async (req) => {
     const res = await axios.post(`http://localhost:3000/employees`,req)
     const data = res.data
-    console.log(data)
     return data;
 });
-export const updateEmployee = createAsyncThunk('employees/update', async (id,req) => {
-    const res = await axios.put(`http://localhost:3000/employees/${id}`, req)
+export const updateEmployee = createAsyncThunk('employees/update', async (req) => {
+    const res = await axios.put(`http://localhost:3000/employees/${req.id}`, req)
     const data = res.data
-    console.log(data)
     return data;
 });
 export const removeEmployee = createAsyncThunk('employees/remove', async (id) => {
     const res = await axios.delete(`http://localhost:3000/employees/${id}`)
-    console.log(res.status)
     const data = res.data
-    console.log(data)
     return data;
 });
 
 export const rolesData = createAsyncThunk('employees/roles', async () => {
     const res = await axios.get(`http://localhost:3000/roles`)
         const data = res.data
-        console.log(data)
         return data;
 });
 
 export const skillsData = createAsyncThunk('employees/skills', async () => {
     const res = await axios.get(`http://localhost:3000/skills`)
         const data = res.data
-        console.log(data)
         return data;
 });
 
 
 
-// export function fetchProducts() {
-//     return async function fetchProductThunk(dispatch, getState) {
-//         dispatch(setStatus(STATUSES.LOADING));
-//         try {
-//             const res = await fetch('http://localhost:3000/employees');
-//             const data = await res.json();
-//             dispatch(setProducts(data));
-//             dispatch(setStatus(STATUSES.IDLE));
-//         } catch (err) {
-//             console.log(err);
-//             dispatch(setStatus(STATUSES.ERROR));
-//         }
-//     };
-// }
