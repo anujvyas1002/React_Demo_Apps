@@ -114,7 +114,7 @@ export const UpdateRole = (props) => {
                       message: "Enter your Minimum 2 characters",
                     },
                     maxLength: {
-                      value: 15,
+                      value: 20,
                       message: "Enter your Maximum 20 characters",
                     },
                   })}

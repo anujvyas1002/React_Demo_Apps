@@ -17,8 +17,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee, STATUSES } from "../../store/manageEmployeesSlice";
-// import { ToasterMessage } from "../../components/ToasterMessage";
-// import { Loader } from "../../components/Loader";
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
@@ -77,10 +75,10 @@ export const AddEmployee = (props) => {
 
   // date format
   function formatDate(timestamp) {
-    var x = new Date(timestamp);
-    var DD = x.getDate();
-    var MM = x.getMonth() + 1;
-    var YYYY = x.getFullYear();
+    let x = new Date(timestamp);
+    let DD = x.getDate();
+    let MM = x.getMonth() + 1;
+    let YYYY = x.getFullYear();
     return YYYY + "/" + MM + "/" + DD;
   }
 
@@ -109,9 +107,9 @@ export const AddEmployee = (props) => {
   };
 
   // Skillls Input filed condition
-  function skillCheck(e, skill) {
+  function skillCheck(skill) {
     let newSkills = [...selectedSkills];
-    var index = selectedSkills.findIndex((o) => o.id === skill.id);
+    let index = selectedSkills.findIndex((o) => o.id === skill.id);
     if (index === -1) {
       newSkills.push(skill);
     } else {
@@ -351,7 +349,7 @@ export const AddEmployee = (props) => {
                       id={skill.id}
                       name="skills"
                       value={skill}
-                      onChange={(e) => skillCheck(e, skill)}
+                      onChange={() => skillCheck(skill)}
                     />
                     <label className="form-check-label" htmlFor={skill.id}>
                       {skill.skill}

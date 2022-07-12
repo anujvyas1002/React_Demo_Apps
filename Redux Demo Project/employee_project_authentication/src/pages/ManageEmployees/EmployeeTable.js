@@ -2,10 +2,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEmployees, STATUSES } from "../../store/manageEmployeesSlice";
+import { fetchEmployees, STATUSES, skillsData, rolesData } from "../../store/manageEmployeesSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { skillsData, rolesData } from "../../store/manageEmployeesSlice";
 import { styled } from "@mui/material/styles";
 import {
   Dialog,
@@ -50,6 +49,8 @@ export const EmployeeTable = () => {
 
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  
 
   const dispatch = useDispatch();
   const { employees, status } = useSelector((state) => state.manageEmployees);
@@ -123,10 +124,10 @@ export const EmployeeTable = () => {
 
   // date format
   function formatDate(timestamp) {
-    var x = new Date(timestamp);
-    var DD = x.getDate();
-    var MM = x.getMonth() + 1;
-    var YYYY = x.getFullYear();
+    const x = new Date(timestamp);
+    const DD = x.getDate();
+    const MM = x.getMonth() + 1;
+    const YYYY = x.getFullYear();
     return DD + "/" + MM + "/" + YYYY;
   }
 

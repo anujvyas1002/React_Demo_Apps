@@ -71,10 +71,10 @@ export const UpdateEmployee = (props) => {
 
   // date format
   function formatDate(timestamp) {
-    var x = new Date(timestamp);
-    var DD = x.getDate();
-    var MM = x.getMonth() + 1;
-    var YYYY = x.getFullYear();
+    let x = new Date(timestamp);
+    let DD = x.getDate();
+    let MM = x.getMonth() + 1;
+    let YYYY = x.getFullYear();
     return YYYY + "/" + MM + "/" + DD;
   }
 
@@ -121,9 +121,9 @@ export const UpdateEmployee = (props) => {
   };
 
   // Skills input filed Condition
-  function skillCheck(e, skill) {
+  function skillCheck(skill) {
     let newSkills = [...selectedSkills];
-    var index = selectedSkills.findIndex((o) => o.id === skill.id);
+    let index = selectedSkills.findIndex((o) => o.id === skill.id);
     if (index === -1) {
       newSkills.push(skill);
     } else {
@@ -380,7 +380,7 @@ export const UpdateEmployee = (props) => {
                         selectedSkills.findIndex((o) => o.id === skill.id) !==
                         -1
                       }
-                      onChange={(e) => skillCheck(e, skill)}
+                      onChange={() => skillCheck(skill)}
                     />
                     <label className="form-check-label" htmlFor={skill.id}>
                       {skill.skill}
