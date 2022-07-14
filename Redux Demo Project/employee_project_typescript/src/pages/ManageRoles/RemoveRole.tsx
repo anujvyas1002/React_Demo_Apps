@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   DialogActions,
@@ -8,14 +8,19 @@ import {
 } from "@mui/material";
 import { removeRole, STATUSES } from "../../store/manageRolesSlice";
 
-export const RemoveRole = (props) => {
+type removeRoleProps = {
+  onClose: () => void;
+  onRemoveRole: () => void;
+};
+
+export const RemoveRole = (props: removeRoleProps): ReactElement => {
   const dispatch = useDispatch();
   const { status } = useSelector((state) => state.manageRoles);
 
   // Delete Employee Delete Api Call
   const deleteRole = (id) => {
     dispatch(removeRole(id));
-    props.onRemoveRole();
+    props.onRemoveRole(); 
   };
 
   if (status === STATUSES.LOADING) {

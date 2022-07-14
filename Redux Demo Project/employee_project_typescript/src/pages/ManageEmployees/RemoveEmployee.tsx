@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   DialogActions,
@@ -8,7 +8,13 @@ import {
 } from "@mui/material";
 import { removeEmployee, STATUSES } from "../../store/manageEmployeesSlice";
 
-const RemoveEmployee = (props) => {
+type removeEmployeeProps = {
+  onClose: () => void;
+  onRemoveEmployee: () => void;
+};
+
+
+const RemoveEmployee = (props:removeEmployeeProps):ReactElement => {
   const dispatch = useDispatch();
   const { status } = useSelector((state) => state.manageEmployees);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   DialogActions,
@@ -8,7 +8,12 @@ import {
 } from "@mui/material";
 import { removeSkills, STATUSES } from "../../store/manageSkillsSlice";
 
-export const RemoveSkill = (props) => {
+type removeSkillProps = {
+  onClose: () => void;
+  onRemoveSkill: () => void;
+};
+
+export const RemoveSkill = (props:removeSkillProps):ReactElement => {
   const dispatch = useDispatch();
   const { status } = useSelector((state) => state.manageSkills);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ReactElement} from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateRole, STATUSES } from "../../store/manageRolesSlice";
 
-const BootstrapDialogTitle = (props) => {
+const BootstrapDialogTitle = (props:any) => {
   const { children, onClose, ...other } = props;
 
   return (
@@ -42,7 +42,12 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export const UpdateRole = (props) => {
+type UpdateRoleProps = {
+  onClose: () => void;
+  onEditUpdateTable: () => void;
+};
+
+export const UpdateRole = (props: UpdateRoleProps) : ReactElement => {
   const {
     register,
     handleSubmit,

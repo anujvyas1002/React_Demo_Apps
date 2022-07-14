@@ -17,6 +17,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee, STATUSES } from "../../store/manageEmployeesSlice";
+import { AnyARecord } from "dns";
+
 
 const BootstrapDialogTitle = (props:any) => {
   const { children, onClose, ...other } = props;
@@ -67,10 +69,11 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
   const [selectedDate, setSelectedDate] = useState();
 
   const dispatch = useDispatch();
-  const { skills, roles, status } = useSelector(
-    (state) => state.manageEmployees
+  const { skills, roles, status} = useSelector(
+    (state:any) => state.manageEmployees
   );
 
+  
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;
   }
@@ -80,7 +83,7 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
   }
 
   // date format
-  function formatDate(timestamp: Date | null) {
+  function formatDate(timestamp:any) {
     let x = new Date(timestamp);
     let DD = x.getDate();
     let MM = x.getMonth() + 1;
@@ -92,7 +95,7 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
   let req;
 
   //from data
-  const onSubmit = (data) => {
+  const onSubmit = (data:object) => {
     req = {
       id: Date.now(),
       firstName: data.firstName,
@@ -113,7 +116,7 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
   };
 
   // Skillls Input filed condition
-  function skillCheck(skill) {
+  function skillCheck(skill:object) {
     let newSkills = [...selectedSkills];
     let index = selectedSkills.findIndex((o) => o.id === skill.id);
     if (index === -1) {

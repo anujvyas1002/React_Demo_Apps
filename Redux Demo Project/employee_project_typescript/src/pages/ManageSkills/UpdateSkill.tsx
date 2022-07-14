@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -42,7 +42,12 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export const UpdateSkill = (props) => {
+type UpdateSkillProps = {
+  onClose: () => void;
+  onEditUpdateTable: () => void;
+};
+
+export const UpdateSkill = (props:UpdateSkillProps):ReactElement => {
   const {
     register,
     handleSubmit,
