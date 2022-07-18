@@ -220,19 +220,14 @@
       },
       "skills": [
         {
-          "id": 1657259881848,
-          "skill": "Angular",
-          "description": "i am Angular developer"
+          "id": 1657259884548,
+          "skill": "React",
+          "description": "i am React developer"
         },
         {
           "id": 1657258011848,
           "skill": "NodeJS",
           "description": "i am NodeJs developer"
-        },
-        {
-          "id": 1657259884548,
-          "skill": "React",
-          "description": "i am React developer"
         }
       ]
     }

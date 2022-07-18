@@ -19,7 +19,10 @@ import {
   TablePagination,
   Grid,
   Button,
+  Input
 } from "@mui/material";
+
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { AddEmployee } from "./AddEmployee";
 import { UpdateEmployee } from "./UpdateEmployee";
 import RemoveEmployee from "./RemoveEmployee";
@@ -47,11 +50,18 @@ export const EmployeeTable = () => {
   //employee data
   const [employee, setEmployee] = useState([]);
 
+  const [employeesList,setEmployeesList]= useState([]);
+
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  
+ // handle for search Data 
+  const [searchApiData, setSearchApiData] = useState();
+
+ // handle for filter value
+  const [filterVal, setFilterVal] = useState();
 
   
-
   const dispatch = useDispatch();
   const { employees, status } = useSelector((state) => state.manageEmployees);
 
@@ -59,6 +69,8 @@ export const EmployeeTable = () => {
     dispatch(fetchEmployees());
     dispatch(rolesData());
     dispatch(skillsData());
+    setSearchApiData(employees);
+    setEmployeesList(employees);
   }, []);
 
   //on click of add employee
@@ -139,9 +151,49 @@ export const EmployeeTable = () => {
     return <h2>Something went wrong!</h2>;
   }
 
+   // Searching for skills condition
+   const filterSkills = (e, skills) => {
+    return skills.some((skill) => skill.skill.toLowerCase().includes(e));
+  };
+
+  // Searching for firstName , lastName, Roles condition and filterSkills function call. 
+  const handleFilter = (e) => {
+    if (e.target.value === "") {
+      setEmployeesList(employees);
+    } else {
+      const filterResult = employees.filter((item) => {
+        return (
+          item.firstName.toLowerCase().includes(e.target.value.toLowerCase()) ||
+          item.lastName.toLowerCase().includes(e.target.value.toLowerCase()) ||
+          filterSkills(e.target.value.toLowerCase(), item.skills) ||
+          item.role.role.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+      });
+      setEmployeesList(filterResult);
+      console.log(employeesList);
+    }
+    setFilterVal(e.target.value);
+  };
+
   return (
     <>
       <div>
+          {/* Searching input box */}
+          <Grid
+          container
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+        >
+          <Input
+            placeholder="Search"
+            value={filterVal || ""}
+            onChange={(e) => handleFilter(e)}
+          />
+          <Button>
+            <SearchOutlinedIcon />
+          </Button>
+          </Grid>
         <Grid
           container
           direction="row"
@@ -149,7 +201,7 @@ export const EmployeeTable = () => {
           alignItems="center"
         >
           <Button
-            sx={{ mt: "10px" }}
+            // sx={{ mt: "10px" }}
             variant="contained"
             onClick={openAddForm}
             color="primary"
@@ -259,7 +311,7 @@ export const EmployeeTable = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={employees.length}
+            count={employeesList.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
