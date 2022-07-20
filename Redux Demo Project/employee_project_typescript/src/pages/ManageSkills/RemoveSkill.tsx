@@ -9,21 +9,22 @@ import {
 import { removeSkills, STATUSES } from "../../store/manageSkillsSlice";
 
 type removeSkillProps = {
+  skill: any;
   onClose: () => void;
   onRemoveSkill: () => void;
 };
 
-export const RemoveSkill = (props:removeSkillProps):ReactElement => {
+export const RemoveSkill = (props: removeSkillProps): ReactElement => {
   const dispatch = useDispatch();
-  const { status } = useSelector((state) => state.manageSkills);
+  const { status } = useSelector((state: any) => state.manageSkills);
 
   // Close confirmBox
   const onClose = () => {
     props.onClose();
   };
-  
+
   // Delete Employee Delete Api Call
-  const deleteSkill = (id) => {
+  const deleteSkill = (id: number) => {
     dispatch(removeSkills(id));
     props.onRemoveSkill();
   };
@@ -49,7 +50,7 @@ export const RemoveSkill = (props:removeSkillProps):ReactElement => {
         <Button
           variant="contained"
           color="primary"
-          onClick={()=>deleteSkill(props.skill.id)}
+          onClick={() => deleteSkill(props.skill.id)}
           autoFocus
         >
           Ok

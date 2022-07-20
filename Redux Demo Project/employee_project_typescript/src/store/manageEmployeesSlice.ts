@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import EmployeeType from "../pages/ManageEmployees/AddEmployee";
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 export const STATUSES = Object.freeze({
@@ -16,65 +16,65 @@ const employeeSlice = createSlice({
     roles: [],
     skills: [],
   },
-  extraReducers: (builder) => {
+  extraReducers: (builder: { addCase: (arg0: any, arg1: (state: any) => void) => { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any, action: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any, action: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any, action: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any, action: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): { (): any; new(): any; addCase: { (arg0: any, arg1: (state: any) => void): void; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; new(): any; }; }; }) => {
     builder
-      .addCase(fetchEmployees.pending, (state, action) => {
+      .addCase(fetchEmployees.pending, (state) => {
         state.status = STATUSES.LOADING;
       })
       .addCase(fetchEmployees.fulfilled, (state, action) => {
         state.employees = action.payload;
         state.status = STATUSES.IDLE;
       })
-      .addCase(fetchEmployees.rejected, (state, action) => {
+      .addCase(fetchEmployees.rejected, (state) => {
         state.status = STATUSES.ERROR;
       })
-      .addCase(skillsData.pending, (state, action) => {
+      .addCase(skillsData.pending, (state) => {
         state.status = STATUSES.LOADING;
       })
       .addCase(skillsData.fulfilled, (state, action) => {
         state.skills = action.payload;
         state.status = STATUSES.IDLE;
       })
-      .addCase(skillsData.rejected, (state, action) => {
+      .addCase(skillsData.rejected, (state) => {
         state.status = STATUSES.ERROR;
       })
-      .addCase(rolesData.pending, (state, action) => {
+      .addCase(rolesData.pending, (state) => {
         state.status = STATUSES.LOADING;
       })
       .addCase(rolesData.fulfilled, (state, action) => {
         state.roles = action.payload;
         state.status = STATUSES.IDLE;
       })
-      .addCase(rolesData.rejected, (state, action) => {
+      .addCase(rolesData.rejected, (state) => {
         state.status = STATUSES.ERROR;
       })
 
-      .addCase(addEmployee.pending, (state, action) => {
+      .addCase(addEmployee.pending, (state) => {
         state.status = STATUSES.LOADING;
       })
       .addCase(addEmployee.fulfilled, (state, action) => {
         state.data = action.payload;
         state.status = STATUSES.IDLE;
       })
-      .addCase(addEmployee.rejected, (state, action) => {
+      .addCase(addEmployee.rejected, (state) => {
         state.status = STATUSES.ERROR;
       })
-      .addCase(updateEmployee.pending, (state, action) => {
+      .addCase(updateEmployee.pending, (state) => {
         state.status = STATUSES.LOADING;
       })
-      .addCase(updateEmployee.fulfilled, (state, action) => {
+      .addCase(updateEmployee.fulfilled, (state) => {
         state.status = STATUSES.IDLE;
       })
-      .addCase(updateEmployee.rejected, (state, action) => {
+      .addCase(updateEmployee.rejected, (state) => {
         state.status = STATUSES.ERROR;
       })
-      .addCase(removeEmployee.pending, (state, action) => {
+      .addCase(removeEmployee.pending, (state) => {
         state.status = STATUSES.LOADING;
       })
-      .addCase(removeEmployee.fulfilled, (state, action) => {
+      .addCase(removeEmployee.fulfilled, (state) => {
         state.status = STATUSES.IDLE;
       })
-      .addCase(removeEmployee.rejected, (state, action) => {
+      .addCase(removeEmployee.rejected, (state) => {
         state.status = STATUSES.ERROR;
       });
   },
@@ -89,31 +89,28 @@ export default employeeSlice.reducer;
 //  fetch Api All Employee Data
 export const fetchEmployees = createAsyncThunk("employees/fetch", async () => {
   const res = await axios.get(`http://localhost:3000/employees`);
-  const data = res.data;
-  return data;
+  return res.data;
 });
 
 // Add Employee Api Call
-export const addEmployee = createAsyncThunk("employees/add", async (req) => {
+export const addEmployee = createAsyncThunk("employees/add", async (req: EmployeeType) => {
   const res = await axios.post(`http://localhost:3000/employees`, req);
-  const data = res.data;
-  return data;
+  return res.data;
 });
 
 // Edit Employee Api Call
 export const updateEmployee = createAsyncThunk(
   "employees/update",
-  async (req) => {
-    const res = await axios.put(`http://localhost:3000/employees/${req.id}`,req);
-    const data = res.data;
-    return data;
+  async (req: EmployeeType) => {
+    const res = await axios.put(`http://localhost:3000/employees/${req.id}`, req);
+    return res.data;
   }
 );
 
 // Remove Employee Api Call
 export const removeEmployee = createAsyncThunk(
   "employees/remove",
-  async (id) => {
+  async (id: EmployeeType) => {
     const res = await axios.delete(`http://localhost:3000/employees/${id}`);
     const data = res.data;
     return data;

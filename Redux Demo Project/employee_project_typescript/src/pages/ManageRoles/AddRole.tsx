@@ -1,4 +1,4 @@
-import React ,{ReactElement}from "react";
+import React, { ReactElement } from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addRole, STATUSES } from "../../store/manageRolesSlice";
 
-const BootstrapDialogTitle = (props:any) => {
+const BootstrapDialogTitle = (props: any) => {
   const { children, onClose, ...other } = props;
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
@@ -46,17 +46,23 @@ type AddRoleProps = {
   onSaveUpdateTable: () => void;
 };
 
+export default interface RoleType {
+  id: number;
+  role: string;
+  description: string;
+}
+
 export const AddRole = (props: AddRoleProps): ReactElement => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<RoleType>({
     mode: "onTouched",
   });
 
   const dispatch = useDispatch();
-  const { status } = useSelector((state) => state.manageRoles);
+  const { status } = useSelector((state: any) => state.manageRoles);
 
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;
@@ -70,7 +76,7 @@ export const AddRole = (props: AddRoleProps): ReactElement => {
   let req;
 
   //from data
-  const onSubmit = (data) => {
+  const onSubmit = (data: RoleType) => {
     req = {
       id: Date.now(),
       role: data.role,
@@ -87,7 +93,7 @@ export const AddRole = (props: AddRoleProps): ReactElement => {
 
   return (
     <div>
-      <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
+      <BootstrapDialogTitle onClose={onClose}>
         Add New Role
       </BootstrapDialogTitle>
       <DialogContent dividers>

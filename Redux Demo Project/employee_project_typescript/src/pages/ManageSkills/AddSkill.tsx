@@ -1,4 +1,4 @@
-import React,{ReactElement} from "react";
+import React, { ReactElement } from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
 import { addSkills, STATUSES } from "../../store/manageSkillsSlice";
@@ -13,7 +13,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
-const BootstrapDialogTitle = (props:any) => {
+const BootstrapDialogTitle = (props: any) => {
   const { children, onClose, ...other } = props;
 
   return (
@@ -47,17 +47,23 @@ type AddSkillProps = {
   onSaveUpdateTable: () => void;
 };
 
+export default interface SkillType {
+  id: number;
+  skill: string;
+  description: string;
+}
+
 export const AddSkill = (props: AddSkillProps): ReactElement => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<SkillType>({
     mode: "onTouched",
   });
 
   const dispatch = useDispatch();
-  const { status } = useSelector((state) => state.manageSkills);
+  const { status } = useSelector((state: any) => state.manageSkills);
 
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;
@@ -71,7 +77,7 @@ export const AddSkill = (props: AddSkillProps): ReactElement => {
   let req;
 
   //from data
-  const onSubmit = (data) => {
+  const onSubmit = (data: SkillType) => {
     req = {
       id: Date.now(),
       skill: data.skill,
@@ -88,7 +94,7 @@ export const AddSkill = (props: AddSkillProps): ReactElement => {
 
   return (
     <div>
-      <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
+      <BootstrapDialogTitle onClose={onClose}>
         Add New Skills
       </BootstrapDialogTitle>
       <DialogContent dividers>

@@ -51,14 +51,14 @@ export const SkillTable = () => {
   const [skill, setSkill] = useState([]);
 
   const dispatch = useDispatch();
-  const { skillsData, status } = useSelector((state) => state.manageSkills);
+  const { skillsData, status } = useSelector((state: any) => state.manageSkills);
 
   useEffect(() => {
     dispatch(fetchSkills());
   }, []);
 
   // onClick open ConfirmBox
-  const openConfirmBox = (skill) => {
+  const openConfirmBox = (skill: React.SetStateAction<never[]>) => {
     setRemove(true);
     setSkill(skill);
   };
@@ -97,7 +97,7 @@ export const SkillTable = () => {
   };
 
   //on click of add Skill Dialog
-  const openEditForm = (skill) => {
+  const openEditForm = (skill: React.SetStateAction<never[]>) => {
     setEdit(true);
     setSkill(skill);
   };
@@ -108,12 +108,12 @@ export const SkillTable = () => {
   };
 
   // pagination set new Page
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event: any, newPage: React.SetStateAction<number>) => {
     setPage(newPage);
   };
 
   // handle Change Rows PerPage
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event: { target: { value: string; }; }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -200,7 +200,7 @@ export const SkillTable = () => {
               <TableBody>
                 {skillsData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((skills) => (
+                  .map((skills: any) => (
                     <TableRow
                       key={skills.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

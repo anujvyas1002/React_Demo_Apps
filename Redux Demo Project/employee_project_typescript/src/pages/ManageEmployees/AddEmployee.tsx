@@ -1,4 +1,4 @@
-import React, { useState ,ReactElement } from "react";
+import React, { useState, ReactElement } from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -17,10 +17,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import { addEmployee, STATUSES } from "../../store/manageEmployeesSlice";
-import { AnyARecord } from "dns";
 
 
-const BootstrapDialogTitle = (props:any) => {
+
+const BootstrapDialogTitle = (props: any) => {
   const { children, onClose, ...other } = props;
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
@@ -52,28 +52,42 @@ type AddEmployeeProps = {
   onSaveUpdateTable: () => void;
 };
 
+export default interface EmployeeType {
+  id: number
+  firstName: string;
+  lastName: string;
+  dob: Date | null;
+  employee_about: string | number;
+  gender: string;
+  role: any[];
+  skills: any[];
+  message: string;
+}
+
+
+
 
 export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<EmployeeType>({
     mode: "onTouched",
   });
 
   // selected Skill mantain state
-  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState<any[]>([]);
 
   // SelectedDate mantain
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState<Date | null>();
 
   const dispatch = useDispatch();
-  const { skills, roles, status} = useSelector(
-    (state:any) => state.manageEmployees
+  const { skills, roles, status } = useSelector(
+    (state: any) => state.manageEmployees
   );
 
-  
+
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;
   }
@@ -83,7 +97,7 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
   }
 
   // date format
-  function formatDate(timestamp:any) {
+  function formatDate(timestamp: any) {
     let x = new Date(timestamp);
     let DD = x.getDate();
     let MM = x.getMonth() + 1;
@@ -92,10 +106,10 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
   }
 
   //data send for object
-  let req;
+  let req: object;
 
   //from data
-  const onSubmit = (data:object) => {
+  const onSubmit = (data: EmployeeType) => {
     req = {
       id: Date.now(),
       firstName: data.firstName,
@@ -116,9 +130,9 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
   };
 
   // Skillls Input filed condition
-  function skillCheck(skill:object) {
+  function skillCheck(skill: any) {
     let newSkills = [...selectedSkills];
-    let index = selectedSkills.findIndex((o) => o.id === skill.id);
+    let index = selectedSkills.findIndex((o: any) => o.id === skill.id);
     if (index === -1) {
       newSkills.push(skill);
     } else {
@@ -131,7 +145,7 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
     <div>
       {/* <ToasterMessage/> */}
       {/* <Loader/> */}
-      <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
+      <BootstrapDialogTitle onClose={onClose}>
         Create New Empoyee
       </BootstrapDialogTitle>
       <DialogContent dividers>
@@ -273,7 +287,7 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
                   id="role"
                   {...register("role", { required: "Role is Required" })}
                 >
-                  {roles.map((role) => (
+                  {roles.map((role: { id: React.Key | null | undefined; role: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }) => (
                     <option key={role.id}>{role.role}</option>
                   ))}
                 </NativeSelect>
@@ -313,7 +327,6 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
                     type="radio"
                     id="female"
                     value="Female"
-                    name="gender"
                     {...register("gender", {
                       required: "Gender is Required",
                     })}
@@ -350,7 +363,7 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
             <Grid item xs={6}>
               <label htmlFor="skills">Skills</label>
               <div className="form-control">
-                {skills.map((skill) => (
+                {skills.map((skill: any) => (
                   <div className="form-check" key={skill.id}>
                     <input
                       type="Checkbox"

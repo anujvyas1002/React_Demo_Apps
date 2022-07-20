@@ -9,18 +9,19 @@ import {
 import { removeRole, STATUSES } from "../../store/manageRolesSlice";
 
 type removeRoleProps = {
+  role: any;
   onClose: () => void;
   onRemoveRole: () => void;
 };
 
 export const RemoveRole = (props: removeRoleProps): ReactElement => {
   const dispatch = useDispatch();
-  const { status } = useSelector((state) => state.manageRoles);
+  const { status } = useSelector((state: any) => state.manageRoles);
 
   // Delete Employee Delete Api Call
-  const deleteRole = (id) => {
+  const deleteRole = (id: number) => {
     dispatch(removeRole(id));
-    props.onRemoveRole(); 
+    props.onRemoveRole();
   };
 
   if (status === STATUSES.LOADING) {
@@ -49,7 +50,7 @@ export const RemoveRole = (props: removeRoleProps): ReactElement => {
         <Button
           variant="contained"
           color="primary"
-          onClick={()=>deleteRole(props.role.id)}
+          onClick={() => deleteRole(props.role.id)}
           autoFocus
         >
           Ok

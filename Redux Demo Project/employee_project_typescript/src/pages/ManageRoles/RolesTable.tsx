@@ -50,14 +50,14 @@ export const RolesTable = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const dispatch = useDispatch();
-  const { rolesData, status } = useSelector((state) => state.manageRoles);
+  const { rolesData, status } = useSelector((state: any) => state.manageRoles);
 
   useEffect(() => {
     dispatch(fetchRole());
   }, []);
 
   // onclick open confirmbox
-  const openConfirmBox = (role) => {
+  const openConfirmBox = (role: React.SetStateAction<never[]>) => {
     setRemove(true);
     setRole(role);
   };
@@ -96,7 +96,7 @@ export const RolesTable = () => {
   };
 
   //on click of add Role
-  const openEditForm = (role) => {
+  const openEditForm = (role: React.SetStateAction<never[]>) => {
     setEdit(true);
     setRole(role);
   };
@@ -107,12 +107,12 @@ export const RolesTable = () => {
   };
 
   // pagination set new Page
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event: any, newPage: React.SetStateAction<number>) => {
     setPage(newPage);
   };
 
   // handle Change Rows PerPage
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event: { target: { value: string; }; }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -199,7 +199,7 @@ export const RolesTable = () => {
               <TableBody>
                 {rolesData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((roles) => (
+                  .map((roles: any) => (
                     <TableRow
                       key={roles.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

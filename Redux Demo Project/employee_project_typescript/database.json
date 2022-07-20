@@ -225,6 +225,29 @@
           "description": "i am NodeJs developer"
         }
       ]
+    },
+    {
+      "id": 1658223170138,
+      "firstName": "shivani",
+      "lastName": "yadav",
+      "dob": "2021/7/19",
+      "employee_about": "i am shivani",
+      "gender": "Female",
+      "role": {
+        "role": "Manager"
+      },
+      "skills": [
+        {
+          "id": 1657259884548,
+          "skill": "React",
+          "description": "i am React developer"
+        },
+        {
+          "id": 1657343488482,
+          "skill": "bootstrap",
+          "description": "xyz"
+        }
+      ]
     }
   ],
   "roles": [

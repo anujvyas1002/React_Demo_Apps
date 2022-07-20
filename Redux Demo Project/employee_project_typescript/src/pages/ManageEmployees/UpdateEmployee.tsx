@@ -1,4 +1,4 @@
-import React, { useState,ReactElement } from "react";
+import React, { useState, ReactElement } from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -19,7 +19,9 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import { updateEmployee, STATUSES } from "../../store/manageEmployeesSlice";
 
-const BootstrapDialogTitle = (props:any) => {
+import EmployeeType from "./AddEmployee";
+
+const BootstrapDialogTitle = (props: any) => {
   const { children, onClose, ...other } = props;
 
   return (
@@ -49,17 +51,18 @@ BootstrapDialogTitle.propTypes = {
 };
 
 type UpdateEmployeeProps = {
+  employee: any;
   onClose: () => void;
   onEditUpdateTable: () => void;
 };
 
-export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
+export const UpdateEmployee = (props: UpdateEmployeeProps): ReactElement => {
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors, isDirty, isValid },
-  } = useForm({
+  } = useForm<EmployeeType>({
     mode: "onTouched",
   });
 
@@ -71,11 +74,11 @@ export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
 
   const dispatch = useDispatch();
   const { skills, roles, status } = useSelector(
-    (state) => state.manageEmployees
+    (state: any) => state.manageEmployees
   );
 
   // date format
-  function formatDate(timestamp) {
+  function formatDate(timestamp: any) {
     let x = new Date(timestamp);
     let DD = x.getDate();
     let MM = x.getMonth() + 1;
@@ -87,7 +90,7 @@ export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
   let req;
 
   //from data
-  const onSubmit = (data) => {
+  const onSubmit = (data: EmployeeType) => {
     req = {
       id: props.employee.id,
       firstName: data.firstName,
@@ -110,7 +113,7 @@ export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
   setValue("role", props.employee.role.role);
   setValue("gender", props.employee.gender);
   setValue("employee_about", props.employee.employee_about);
-  setValue("skill", props.employee.skills);
+  setValue("skills", props.employee.skills);
 
   if (status === STATUSES.LOADING) {
     return <h2>Loading....</h2>;
@@ -126,9 +129,9 @@ export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
   };
 
   // Skills input filed Condition
-  function skillCheck(skill) {
+  function skillCheck(skill: { id: any; }) {
     let newSkills = [...selectedSkills];
-    let index = selectedSkills.findIndex((o) => o.id === skill.id);
+    let index = selectedSkills.findIndex((o: any) => o.id === skill.id);
     if (index === -1) {
       newSkills.push(skill);
     } else {
@@ -139,7 +142,7 @@ export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
 
   return (
     <div>
-      <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
+      <BootstrapDialogTitle onClose={onClose}>
         {props.employee.firstName} {props.employee.lastName} Update
       </BootstrapDialogTitle>
       <DialogContent dividers>
@@ -282,7 +285,7 @@ export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
                   id="role"
                   {...register("role", { required: "Role is Required" })}
                 >
-                  {roles.map((role) => (
+                  {roles.map((role: any) => (
                     <option key={role.id}>{role.role}</option>
                   ))}
                 </NativeSelect>
@@ -336,7 +339,6 @@ export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
                     type="radio"
                     id="female"
                     value="Female"
-                    name="gender"
                     {...register("gender", {
                       required: "Gender is Required",
                     })}
@@ -373,7 +375,7 @@ export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
             <Grid item xs={6}>
               <label htmlFor="skills">Skills</label>
               <div className="form-control">
-                {skills.map((skill) => (
+                {skills.map((skill: any) => (
                   <div className="form-check" key={skill.id}>
                     <input
                       type="Checkbox"
@@ -382,7 +384,7 @@ export const UpdateEmployee = (props:UpdateEmployeeProps): ReactElement => {
                       name="skills"
                       value="skills"
                       checked={
-                        selectedSkills.findIndex((o) => o.id === skill.id) !==
+                        selectedSkills.findIndex((o: any) => o.id === skill.id) !==
                         -1
                       }
                       onChange={() => skillCheck(skill)}

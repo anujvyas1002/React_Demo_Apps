@@ -9,17 +9,18 @@ import {
 import { removeEmployee, STATUSES } from "../../store/manageEmployeesSlice";
 
 type removeEmployeeProps = {
+  employee: any;
   onClose: () => void;
   onRemoveEmployee: () => void;
 };
 
 
-const RemoveEmployee = (props:removeEmployeeProps):ReactElement => {
+const RemoveEmployee = (props: removeEmployeeProps): ReactElement => {
   const dispatch = useDispatch();
-  const { status } = useSelector((state) => state.manageEmployees);
+  const { status } = useSelector((state: any) => state.manageEmployees);
 
   // Delete Employee Delete Api Call
-  const deleteEmployee = (id) => {
+  const deleteEmployee = (id: number) => {
     dispatch(removeEmployee(id));
     props.onRemoveEmployee();
   };
@@ -53,7 +54,7 @@ const RemoveEmployee = (props:removeEmployeeProps):ReactElement => {
         <Button
           variant="contained"
           color="primary"
-          onClick={()=>deleteEmployee(props.employee.id)}
+          onClick={() => deleteEmployee(props.employee.id)}
           autoFocus
         >
           Ok

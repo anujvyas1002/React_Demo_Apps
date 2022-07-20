@@ -50,10 +50,10 @@ export const EmployeeTable = () => {
   // handle for tables rows
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  
+
 
   const dispatch = useDispatch();
-  const { employees, status } = useSelector((state) => state.manageEmployees);
+  const { employees, status } = useSelector((state: any) => state.manageEmployees);
 
   useEffect(() => {
     dispatch(fetchEmployees());
@@ -84,7 +84,7 @@ export const EmployeeTable = () => {
   };
 
   //on click of remove employee ConfirmBox open
-  const openConfirmBox = (employee) => {
+  const openConfirmBox = (employee: React.SetStateAction<never[]>) => {
     setRemove(true);
     setEmployee(employee);
   };
@@ -101,7 +101,7 @@ export const EmployeeTable = () => {
   };
 
   //on click of add Employee
-  const openEditForm = (employee) => {
+  const openEditForm = (employee: React.SetStateAction<never[]>) => {
     setEmployee(employee);
     setEdit(true);
   };
@@ -112,18 +112,18 @@ export const EmployeeTable = () => {
   };
 
   // pagination set new Page
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event: any, newPage: React.SetStateAction<number>) => {
     setPage(newPage);
   };
 
   // handle Change Rows PerPage
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event: { target: { value: string; }; }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   // date format
-  function formatDate(timestamp) {
+  function formatDate(timestamp: string | number | Date) {
     const x = new Date(timestamp);
     const DD = x.getDate();
     const MM = x.getMonth() + 1;
@@ -219,7 +219,7 @@ export const EmployeeTable = () => {
               <TableBody>
                 {employees
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((employee) => (
+                  .map((employee: any) => (
                     <TableRow
                       key={employee.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -230,7 +230,7 @@ export const EmployeeTable = () => {
                       <TableCell>{employee.gender}</TableCell>
                       <TableCell>{employee.role.role}</TableCell>
                       <TableCell>
-                        {employee.skills.map((skill, index) => (
+                        {employee.skills.map((skill: { skill: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }, index: React.Key | null | undefined) => (
                           <div key={index}>{skill.skill}</div>
                         ))}
                       </TableCell>
