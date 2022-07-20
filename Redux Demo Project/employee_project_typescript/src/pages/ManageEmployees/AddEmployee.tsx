@@ -11,6 +11,8 @@ import {
   TextField,
   Grid,
 } from "@mui/material";
+import SkillInterface from "../ManageSkills/AddSkill";
+import RoleInterface from "../ManageRoles/AddRole";
 import { useForm } from "react-hook-form";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -52,19 +54,17 @@ type AddEmployeeProps = {
   onSaveUpdateTable: () => void;
 };
 
-export default interface EmployeeType {
+export default interface EmployeeInterface {
   id: number
   firstName: string;
   lastName: string;
   dob: Date | null;
   employee_about: string | number;
   gender: string;
-  role: any[];
-  skills: any[];
+  role: RoleInterface;
+  skills: SkillInterface[];
   message: string;
 }
-
-
 
 
 export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
@@ -72,12 +72,12 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EmployeeType>({
+  } = useForm<EmployeeInterface>({
     mode: "onTouched",
   });
 
   // selected Skill mantain state
-  const [selectedSkills, setSelectedSkills] = useState<any[]>([]);
+  const [selectedSkills, setSelectedSkills] = useState<SkillInterface[]>([]);
 
   // SelectedDate mantain
   const [selectedDate, setSelectedDate] = useState<Date | null>();
@@ -109,7 +109,7 @@ export const AddEmployee = (props: AddEmployeeProps): ReactElement => {
   let req: object;
 
   //from data
-  const onSubmit = (data: EmployeeType) => {
+  const onSubmit = (data: EmployeeInterface) => {
     req = {
       id: Date.now(),
       firstName: data.firstName,

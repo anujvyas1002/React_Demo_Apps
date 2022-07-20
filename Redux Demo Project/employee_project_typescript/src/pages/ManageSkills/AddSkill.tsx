@@ -47,7 +47,7 @@ type AddSkillProps = {
   onSaveUpdateTable: () => void;
 };
 
-export default interface SkillType {
+export default interface SkillInterface {
   id: number;
   skill: string;
   description: string;
@@ -58,7 +58,7 @@ export const AddSkill = (props: AddSkillProps): ReactElement => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SkillType>({
+  } = useForm<SkillInterface>({
     mode: "onTouched",
   });
 
@@ -77,7 +77,7 @@ export const AddSkill = (props: AddSkillProps): ReactElement => {
   let req;
 
   //from data
-  const onSubmit = (data: SkillType) => {
+  const onSubmit = (data: SkillInterface) => {
     req = {
       id: Date.now(),
       skill: data.skill,

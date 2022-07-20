@@ -238,12 +238,10 @@ export const EmployeeTable = () => {
                       <TableCell>
                         {/* <IconButton color="primary"> */}
                         {/* <EditIcon /> */}
-
                         <Fab size="small" color="secondary" aria-label="edit">
                           <EditIcon onClick={() => openEditForm(employee)} />
                         </Fab>
                         {/* </IconButton> */}
-
                         <Fab size="small" color="error" aria-label="remove">
                           <DeleteIcon
                             onClick={() => openConfirmBox(employee)}

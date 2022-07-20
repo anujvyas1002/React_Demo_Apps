@@ -12,7 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateRole, STATUSES } from "../../store/manageRolesSlice";
-import RoleType from "./AddRole";
+import RoleInterface from "./AddRole";
 
 const BootstrapDialogTitle = (props: any) => {
   const { children, onClose, ...other } = props;
@@ -55,7 +55,7 @@ export const UpdateRole = (props: UpdateRoleProps): ReactElement => {
     handleSubmit,
     setValue,
     formState: { errors, isDirty, isValid },
-  } = useForm<RoleType>({
+  } = useForm<RoleInterface>({
     mode: "onTouched",
   });
 
@@ -66,7 +66,7 @@ export const UpdateRole = (props: UpdateRoleProps): ReactElement => {
   let req;
 
   //from data
-  const onSubmit = (data: RoleType) => {
+  const onSubmit = (data: RoleInterface) => {
     req = {
       id: props.role.id,
       role: data.role,

@@ -46,7 +46,7 @@ type AddRoleProps = {
   onSaveUpdateTable: () => void;
 };
 
-export default interface RoleType {
+export default interface RoleInterface {
   id: number;
   role: string;
   description: string;
@@ -57,7 +57,7 @@ export const AddRole = (props: AddRoleProps): ReactElement => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RoleType>({
+  } = useForm<RoleInterface>({
     mode: "onTouched",
   });
 
@@ -76,7 +76,7 @@ export const AddRole = (props: AddRoleProps): ReactElement => {
   let req;
 
   //from data
-  const onSubmit = (data: RoleType) => {
+  const onSubmit = (data: RoleInterface) => {
     req = {
       id: Date.now(),
       role: data.role,

@@ -1,5 +1,5 @@
 import axios from "axios";
-import RoleType from "../pages/ManageRoles/AddRole";
+import RoleInterface from "../pages/ManageRoles/AddRole";
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 export const STATUSES = Object.freeze({
@@ -103,21 +103,21 @@ export const fetchRole = createAsyncThunk("role/fetch", async () => {
 });
 
 // Add Role Api Call
-export const addRole = createAsyncThunk("role/add", async (req: RoleType) => {
+export const addRole = createAsyncThunk("role/add", async (req: RoleInterface) => {
   const res = await axios.post(`http://localhost:3000/rolesData`, req);
   const data = res.data;
   return data;
 });
 
 // Edit Role Api Call
-export const updateRole = createAsyncThunk("role/update", async (req: RoleType) => {
+export const updateRole = createAsyncThunk("role/update", async (req: RoleInterface) => {
   const res = await axios.put(`http://localhost:3000/rolesData/${req.id}`, req);
   const data = res.data;
   return data;
 });
 
 // Remove Role Api Call
-export const removeRole = createAsyncThunk("role/remove", async (id: RoleType) => {
+export const removeRole = createAsyncThunk("role/remove", async (id: RoleInterface) => {
   const res = await axios.delete(`http://localhost:3000/rolesData/${id}`);
   const data = res.data;
   return data;

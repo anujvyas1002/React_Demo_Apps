@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
-import SkillType from "./AddSkill";
+import SkillInterface from "./AddSkill";
 import {
   Button,
   TextField,
@@ -55,7 +55,7 @@ export const UpdateSkill = (props: UpdateSkillProps): ReactElement => {
     handleSubmit,
     setValue,
     formState: { errors, isDirty, isValid },
-  } = useForm<SkillType>({
+  } = useForm<SkillInterface>({
     mode: "onTouched",
   });
 
@@ -66,7 +66,7 @@ export const UpdateSkill = (props: UpdateSkillProps): ReactElement => {
   let req;
 
   //from data
-  const onSubmit = (data: SkillType) => {
+  const onSubmit = (data: SkillInterface) => {
     req = {
       id: props.skill.id,
       skill: data.skill,

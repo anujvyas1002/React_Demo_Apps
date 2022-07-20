@@ -1,5 +1,5 @@
 import axios from "axios";
-import EmployeeType from "../pages/ManageEmployees/AddEmployee";
+import EmployeeInterface from "../pages/ManageEmployees/AddEmployee";
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 export const STATUSES = Object.freeze({
@@ -93,7 +93,7 @@ export const fetchEmployees = createAsyncThunk("employees/fetch", async () => {
 });
 
 // Add Employee Api Call
-export const addEmployee = createAsyncThunk("employees/add", async (req: EmployeeType) => {
+export const addEmployee = createAsyncThunk("employees/add", async (req: EmployeeInterface) => {
   const res = await axios.post(`http://localhost:3000/employees`, req);
   return res.data;
 });
@@ -101,7 +101,7 @@ export const addEmployee = createAsyncThunk("employees/add", async (req: Employe
 // Edit Employee Api Call
 export const updateEmployee = createAsyncThunk(
   "employees/update",
-  async (req: EmployeeType) => {
+  async (req: EmployeeInterface) => {
     const res = await axios.put(`http://localhost:3000/employees/${req.id}`, req);
     return res.data;
   }
@@ -110,7 +110,7 @@ export const updateEmployee = createAsyncThunk(
 // Remove Employee Api Call
 export const removeEmployee = createAsyncThunk(
   "employees/remove",
-  async (id: EmployeeType) => {
+  async (id: EmployeeInterface) => {
     const res = await axios.delete(`http://localhost:3000/employees/${id}`);
     const data = res.data;
     return data;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import SkillType from "../pages/ManageSkills/AddSkill";
+import SkillInterface from "../pages/ManageSkills/AddSkill";
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 export const STATUSES = Object.freeze({
@@ -77,7 +77,7 @@ export const fetchSkills = createAsyncThunk("skills/fetch", async () => {
 });
 
 // Add Skill Api Call
-export const addSkills = createAsyncThunk("skills/add", async (req: SkillType) => {
+export const addSkills = createAsyncThunk("skills/add", async (req: SkillInterface) => {
   const res = await axios.post(`http://localhost:3000/skillsData`, req);
   const data = res.data;
   return data;
@@ -86,7 +86,7 @@ export const addSkills = createAsyncThunk("skills/add", async (req: SkillType) =
 // Edit Skill Api Call
 export const updateSkills = createAsyncThunk(
   "skills/update",
-  async (req: SkillType) => {
+  async (req: SkillInterface) => {
     const res = await axios.put(`http://localhost:3000/skillsData/${req.id}`, req);
     const data = res.data;
     return data;
@@ -94,7 +94,7 @@ export const updateSkills = createAsyncThunk(
 );
 
 // Remove Skill Api Call
-export const removeSkills = createAsyncThunk("skills/remove", async (id: SkillType) => {
+export const removeSkills = createAsyncThunk("skills/remove", async (id: SkillInterface) => {
   const res = await axios.delete(`http://localhost:3000/skillsData/${id}`);
   const data = res.data;
   return data;

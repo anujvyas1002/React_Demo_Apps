@@ -19,7 +19,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import { updateEmployee, STATUSES } from "../../store/manageEmployeesSlice";
 
-import EmployeeType from "./AddEmployee";
+import EmployeeInterface from "./AddEmployee";
 
 const BootstrapDialogTitle = (props: any) => {
   const { children, onClose, ...other } = props;
@@ -62,7 +62,7 @@ export const UpdateEmployee = (props: UpdateEmployeeProps): ReactElement => {
     handleSubmit,
     setValue,
     formState: { errors, isDirty, isValid },
-  } = useForm<EmployeeType>({
+  } = useForm<EmployeeInterface>({
     mode: "onTouched",
   });
 
@@ -78,7 +78,7 @@ export const UpdateEmployee = (props: UpdateEmployeeProps): ReactElement => {
   );
 
   // date format
-  function formatDate(timestamp: any) {
+  function formatDate(timestamp: string | number | Date) {
     let x = new Date(timestamp);
     let DD = x.getDate();
     let MM = x.getMonth() + 1;
@@ -90,7 +90,7 @@ export const UpdateEmployee = (props: UpdateEmployeeProps): ReactElement => {
   let req;
 
   //from data
-  const onSubmit = (data: EmployeeType) => {
+  const onSubmit = (data: EmployeeInterface) => {
     req = {
       id: props.employee.id,
       firstName: data.firstName,
